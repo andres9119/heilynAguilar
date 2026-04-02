@@ -1,0 +1,541 @@
+{
+  "Tallas": [
+    {
+      "id": 1,
+      "nombre": "s"
+    },
+    {
+      "id": 2,
+      "nombre": "xs"
+    },
+    {
+      "id": 3,
+      "nombre": "l"
+    },
+    {
+      "id": 4,
+      "nombre": "M"
+    },
+    {
+      "id": 5,
+      "nombre": "S"
+    }
+  ],
+  "Colores": [
+    {
+      "id": 1,
+      "nombre": "verde",
+      "codigo_hex": "#00FF00"
+    },
+    {
+      "id": 2,
+      "nombre": "azul",
+      "codigo_hex": "#0000FF"
+    },
+    {
+      "id": 3,
+      "nombre": "Negro",
+      "codigo_hex": "#000000"
+    },
+    {
+      "id": 4,
+      "nombre": "Amarillo",
+      "codigo_hex": "#FFFF00"
+    },
+    {
+      "id": 5,
+      "nombre": "Caf\u00e9",
+      "codigo_hex": "#000000"
+    },
+    {
+      "id": 6,
+      "nombre": "Blanco",
+      "codigo_hex": "#FFFFFF"
+    },
+    {
+      "id": 7,
+      "nombre": "Rojo",
+      "codigo_hex": "#FF0000"
+    },
+    {
+      "id": 8,
+      "nombre": "Naranja",
+      "codigo_hex": "#FFA500"
+    },
+    {
+      "id": 9,
+      "nombre": "Morado",
+      "codigo_hex": "#800080"
+    },
+    {
+      "id": 10,
+      "nombre": "Rosado",
+      "codigo_hex": "#FFC0CB"
+    },
+    {
+      "id": 11,
+      "nombre": "Marr\u00f3n",
+      "codigo_hex": "#A52A2A"
+    },
+    {
+      "id": 12,
+      "nombre": "Gris",
+      "codigo_hex": "#808080"
+    },
+    {
+      "id": 13,
+      "nombre": "Plata",
+      "codigo_hex": "#C0C0C0"
+    },
+    {
+      "id": 14,
+      "nombre": "Dorado",
+      "codigo_hex": "#FFD700"
+    },
+    {
+      "id": 15,
+      "nombre": "Cian",
+      "codigo_hex": "#00FFFF"
+    },
+    {
+      "id": 16,
+      "nombre": "Verde azulado",
+      "codigo_hex": "#008080"
+    },
+    {
+      "id": 17,
+      "nombre": "Azul marino",
+      "codigo_hex": "#000080"
+    },
+    {
+      "id": 18,
+      "nombre": "Blanco humo",
+      "codigo_hex": "#F5F5F5"
+    },
+    {
+      "id": 19,
+      "nombre": "Gris claro",
+      "codigo_hex": "#D3D3D3"
+    },
+    {
+      "id": 20,
+      "nombre": "Gris oscuro",
+      "codigo_hex": "#A9A9A9"
+    },
+    {
+      "id": 21,
+      "nombre": "Gris pizarra oscuro",
+      "codigo_hex": "#2F4F4F"
+    },
+    {
+      "id": 22,
+      "nombre": "Gris pizarra",
+      "codigo_hex": "#708090"
+    },
+    {
+      "id": 23,
+      "nombre": "Azul acero claro",
+      "codigo_hex": "#B0C4DE"
+    },
+    {
+      "id": 24,
+      "nombre": "Azul acero",
+      "codigo_hex": "#4682B4"
+    },
+    {
+      "id": 25,
+      "nombre": "Azul cadete",
+      "codigo_hex": "#5F9EA0"
+    },
+    {
+      "id": 26,
+      "nombre": "Azul ma\u00edz",
+      "codigo_hex": "#6495ED"
+    },
+    {
+      "id": 27,
+      "nombre": "Azul dodger",
+      "codigo_hex": "#1E90FF"
+    },
+    {
+      "id": 28,
+      "nombre": "Azul claro",
+      "codigo_hex": "#ADD8E6"
+    },
+    {
+      "id": 29,
+      "nombre": "Azul cielo",
+      "codigo_hex": "#87CEEB"
+    },
+    {
+      "id": 30,
+      "nombre": "Azul cielo claro",
+      "codigo_hex": "#87CEFA"
+    },
+    {
+      "id": 31,
+      "nombre": "Azul medianoche",
+      "codigo_hex": "#191970"
+    },
+    {
+      "id": 32,
+      "nombre": "Azul pizarra medio",
+      "codigo_hex": "#7B68EE"
+    },
+    {
+      "id": 33,
+      "nombre": "Azul pizarra",
+      "codigo_hex": "#6A5ACD"
+    },
+    {
+      "id": 34,
+      "nombre": "Azul pizarra oscuro",
+      "codigo_hex": "#483D8B"
+    },
+    {
+      "id": 35,
+      "nombre": "Azul real",
+      "codigo_hex": "#4169E1"
+    },
+    {
+      "id": 36,
+      "nombre": "Azul violeta",
+      "codigo_hex": "#8A2BE2"
+    },
+    {
+      "id": 37,
+      "nombre": "Orqu\u00eddea oscura",
+      "codigo_hex": "#9932CC"
+    },
+    {
+      "id": 38,
+      "nombre": "Orqu\u00eddea media",
+      "codigo_hex": "#BA55D3"
+    },
+    {
+      "id": 39,
+      "nombre": "Orqu\u00eddea",
+      "codigo_hex": "#DA70D6"
+    },
+    {
+      "id": 40,
+      "nombre": "Violeta",
+      "codigo_hex": "#EE82EE"
+    },
+    {
+      "id": 41,
+      "nombre": "Magenta",
+      "codigo_hex": "#FF00FF"
+    },
+    {
+      "id": 42,
+      "nombre": "Rojo violeta medio",
+      "codigo_hex": "#C71585"
+    },
+    {
+      "id": 43,
+      "nombre": "Rojo violeta p\u00e1lido",
+      "codigo_hex": "#DB7093"
+    },
+    {
+      "id": 44,
+      "nombre": "Rosa profundo",
+      "codigo_hex": "#FF1493"
+    },
+    {
+      "id": 45,
+      "nombre": "Rosa fuerte",
+      "codigo_hex": "#FF69B4"
+    },
+    {
+      "id": 46,
+      "nombre": "Rosa claro",
+      "codigo_hex": "#FFB6C1"
+    },
+    {
+      "id": 47,
+      "nombre": "Salm\u00f3n",
+      "codigo_hex": "#FA8072"
+    },
+    {
+      "id": 48,
+      "nombre": "Salm\u00f3n oscuro",
+      "codigo_hex": "#E9967A"
+    },
+    {
+      "id": 49,
+      "nombre": "Coral claro",
+      "codigo_hex": "#F08080"
+    },
+    {
+      "id": 50,
+      "nombre": "Rojo indio",
+      "codigo_hex": "#CD5C5C"
+    },
+    {
+      "id": 51,
+      "nombre": "Carmes\u00ed",
+      "codigo_hex": "#DC143C"
+    },
+    {
+      "id": 52,
+      "nombre": "Rojo fuego",
+      "codigo_hex": "#B22222"
+    },
+    {
+      "id": 53,
+      "nombre": "Rojo oscuro",
+      "codigo_hex": "#8B0000"
+    },
+    {
+      "id": 54,
+      "nombre": "Tomate",
+      "codigo_hex": "#FF6347"
+    },
+    {
+      "id": 55,
+      "nombre": "Naranja rojo",
+      "codigo_hex": "#FF4500"
+    },
+    {
+      "id": 56,
+      "nombre": "Naranja oscuro",
+      "codigo_hex": "#FF8C00"
+    },
+    {
+      "id": 57,
+      "nombre": "Durazno",
+      "codigo_hex": "#FFDAB9"
+    },
+    {
+      "id": 58,
+      "nombre": "Mocas\u00edn",
+      "codigo_hex": "#FFE4B5"
+    },
+    {
+      "id": 59,
+      "nombre": "Papaya whip",
+      "codigo_hex": "#FFEFD5"
+    },
+    {
+      "id": 60,
+      "nombre": "Ma\u00edz",
+      "codigo_hex": "#FFF8DC"
+    },
+    {
+      "id": 61,
+      "nombre": "Lim\u00f3n claro",
+      "codigo_hex": "#FFFACD"
+    },
+    {
+      "id": 62,
+      "nombre": "Amarillo claro",
+      "codigo_hex": "#FAFAD2"
+    },
+    {
+      "id": 63,
+      "nombre": "Amarillo p\u00e1lido",
+      "codigo_hex": "#FFFFE0"
+    },
+    {
+      "id": 64,
+      "nombre": "Caqui oscuro",
+      "codigo_hex": "#BDB76B"
+    },
+    {
+      "id": 65,
+      "nombre": "Caqui p\u00e1lido",
+      "codigo_hex": "#EEE8AA"
+    },
+    {
+      "id": 66,
+      "nombre": "Caqui",
+      "codigo_hex": "#F0E68C"
+    },
+    {
+      "id": 67,
+      "nombre": "Vara de oro",
+      "codigo_hex": "#DAA520"
+    },
+    {
+      "id": 68,
+      "nombre": "Dorado oscuro",
+      "codigo_hex": "#B8860B"
+    },
+    {
+      "id": 69,
+      "nombre": "Per\u00fa",
+      "codigo_hex": "#CD853F"
+    },
+    {
+      "id": 70,
+      "nombre": "Chocolate",
+      "codigo_hex": "#D2691E"
+    },
+    {
+      "id": 71,
+      "nombre": "Marr\u00f3n silla",
+      "codigo_hex": "#8B4513"
+    },
+    {
+      "id": 72,
+      "nombre": "Siena",
+      "codigo_hex": "#A0522D"
+    },
+    {
+      "id": 73,
+      "nombre": "Madera clara",
+      "codigo_hex": "#DEB887"
+    },
+    {
+      "id": 74,
+      "nombre": "Trigo",
+      "codigo_hex": "#F5DEB3"
+    },
+    {
+      "id": 75,
+      "nombre": "Concha de mar",
+      "codigo_hex": "#FFF5EE"
+    },
+    {
+      "id": 76,
+      "nombre": "Lino viejo",
+      "codigo_hex": "#FDF5E6"
+    },
+    {
+      "id": 77,
+      "nombre": "Lino",
+      "codigo_hex": "#FAF0E6"
+    },
+    {
+      "id": 78,
+      "nombre": "Blanco antiguo",
+      "codigo_hex": "#FAEBD7"
+    },
+    {
+      "id": 79,
+      "nombre": "Bisque",
+      "codigo_hex": "#FFE4C4"
+    },
+    {
+      "id": 80,
+      "nombre": "Almendra blanqueada",
+      "codigo_hex": "#FFEBCD"
+    },
+    {
+      "id": 81,
+      "nombre": "Rosa niebla",
+      "codigo_hex": "#FFE4E1"
+    },
+    {
+      "id": 82,
+      "nombre": "Lavanda rubor",
+      "codigo_hex": "#FFF0F5"
+    },
+    {
+      "id": 83,
+      "nombre": "Lavanda",
+      "codigo_hex": "#E6E6FA"
+    },
+    {
+      "id": 84,
+      "nombre": "Cardo",
+      "codigo_hex": "#D8BFD8"
+    },
+    {
+      "id": 85,
+      "nombre": "Ciruela",
+      "codigo_hex": "#DDA0DD"
+    },
+    {
+      "id": 86,
+      "nombre": "Verde p\u00e1lido",
+      "codigo_hex": "#98FB98"
+    },
+    {
+      "id": 87,
+      "nombre": "Verde claro",
+      "codigo_hex": "#90EE90"
+    },
+    {
+      "id": 88,
+      "nombre": "Verde primavera medio",
+      "codigo_hex": "#00FA9A"
+    },
+    {
+      "id": 89,
+      "nombre": "Verde primavera",
+      "codigo_hex": "#00FF7F"
+    },
+    {
+      "id": 90,
+      "nombre": "Verde mar medio",
+      "codigo_hex": "#3CB371"
+    },
+    {
+      "id": 91,
+      "nombre": "Verde mar",
+      "codigo_hex": "#2E8B57"
+    },
+    {
+      "id": 92,
+      "nombre": "Verde bosque",
+      "codigo_hex": "#228B22"
+    },
+    {
+      "id": 93,
+      "nombre": "Verde oscuro",
+      "codigo_hex": "#006400"
+    },
+    {
+      "id": 94,
+      "nombre": "Chartreuse",
+      "codigo_hex": "#7FFF00"
+    },
+    {
+      "id": 95,
+      "nombre": "Verde c\u00e9sped",
+      "codigo_hex": "#7CFC00"
+    },
+    {
+      "id": 96,
+      "nombre": "Verde amarillo",
+      "codigo_hex": "#ADFF2F"
+    },
+    {
+      "id": 97,
+      "nombre": "Oliva oscuro",
+      "codigo_hex": "#556B2F"
+    },
+    {
+      "id": 98,
+      "nombre": "Oliva",
+      "codigo_hex": "#6B8E23"
+    },
+    {
+      "id": 99,
+      "nombre": "Oliva puro",
+      "codigo_hex": "#808000"
+    },
+    {
+      "id": 100,
+      "nombre": "Verde amarillo medio",
+      "codigo_hex": "#9ACD32"
+    },
+    {
+      "id": 101,
+      "nombre": "Verde lima",
+      "codigo_hex": "#32CD32"
+    },
+    {
+      "id": 102,
+      "nombre": "Lima",
+      "codigo_hex": "#00FF00"
+    },
+    {
+      "id": 103,
+      "nombre": "Verde oscuro 2",
+      "codigo_hex": "#008000"
+    }
+  ]
+}

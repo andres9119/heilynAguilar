@@ -1,0 +1,18 @@
+# Core Django
+Django>=4.2,<6.0
+asgiref
+sqlparse
+tzdata
+
+# Manejo de Imágenes (miniaturas, fotos de ropa)
+Pillow
+
+# ==== VPS PRODUCCIÓN ====
+# Servidor de Producción (WSGI)
+gunicorn
+
+# Base de Datos PostgreSQL
+psycopg2-binary
+
+# Variables de Entorno y Seguridad
+python-dotenv

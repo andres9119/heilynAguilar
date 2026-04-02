@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /tienda/actualizar_cantidad/
+Disallow: /tienda/carrito/
+Disallow: /tienda/bolsa/
+
+# Bloquear parámetros de filtro del índice para evitar contenido duplicado
+Disallow: /?categoria=
+Disallow: /?talla=
+Disallow: /?precio_max=
+
+Sitemap: {{ request.scheme }}://{{ request.get_host }}/sitemap.xml

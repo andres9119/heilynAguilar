@@ -1,0 +1,8 @@
+[Unit]
+Description=gunicorn socket for tienda_heilyn
+
+[Socket]
+ListenStream=/run/gunicorn-tienda.sock
+
+[Install]
+WantedBy=sockets.target

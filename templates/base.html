@@ -1,0 +1,499 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Principal -->
+    <title>{% block title %}Heilyn Aguilar | Ropa para Dama en Cúcuta{% endblock %}</title>
+    <meta name="description"
+        content="{% block meta_description %}Heilyn Aguilar - Ropa premium para dama en Cúcuta. Blusas, denim, tops y accesorios. Envíos a todo Colombia.{% endblock %}">
+    <meta name="keywords"
+        content="ropa para dama cucuta, tienda de ropa femenina cucuta, moda mujer cucuta, blusas cucuta, denim cucuta, ropa femenina norte de santander, heilyn aguilar, moda cucuta, ropa online cucuta">
+    <meta name="author" content="Heilyn Aguilar Store">
+    <meta name="robots" content="index, follow">
+    <meta name="geo.region" content="CO-NSA">
+    <meta name="geo.placename" content="Cúcuta">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{% block canonical %}{{ request.build_absolute_uri }}{% endblock %}">
+
+    <!-- Open Graph (Facebook, WhatsApp, Instagram preview) -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_CO">
+    <meta property="og:site_name" content="Heilyn Aguilar Store">
+    <meta property="og:title" content="{% block og_title %}Heilyn Aguilar | Ropa para Dama en Cúcuta{% endblock %}">
+    <meta property="og:description"
+        content="{% block og_description %}La mejor tienda de ropa femenina en Cúcuta. Envíos a todo Colombia.{% endblock %}">
+    <meta property="og:image"
+        content="{% block og_image %}{% load static %}{% static 'img/productos/logo-lg.webp' %}{% endblock %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title"
+        content="{% block twitter_title %}Heilyn Aguilar | Ropa para Dama en Cúcuta{% endblock %}">
+    <meta name="twitter:description" content="La mejor tienda de ropa femenina en Cúcuta. Envíos a todo Colombia.">
+    <meta name="twitter:image" content="{% load static %}{% static 'img/productos/logo-lg.webp' %}">
+
+    <!-- ============================================================
+         GOOGLE SEARCH CONSOLE — VERIFICACIÓN
+         Cuando tengas tu dominio, reemplaza "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+         con tu código de verificación de Search Console (opción "Etiqueta HTML")
+         ============================================================
+    <meta name="google-site-verification" content="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX">
+    -->
+
+    <!-- ============================================================
+         GOOGLE ANALYTICS 4
+         Cuando tengas tu Measurement ID (formato G-XXXXXXXXXX),
+         reemplaza G-XXXXXXXXXX por tu ID real y descomenta las 2 líneas
+         ============================================================
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    -->
+
+    <!-- Bloque extra para metas específicas por página -->
+    {% block meta_extra %}{% endblock %}
+
+
+    <!-- JSON-LD para SEO Local -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ClothingStore",
+      "name": "Heilyn Aguilar Store",
+      "image": "{% static 'img/productos/logo-lg.webp' %}",
+      "@id": "",
+      "url": "{{ request.build_absolute_uri }}",
+      "telephone": "+573227746794",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Cúcuta, Norte de Santander",
+        "addressLocality": "Cúcuta",
+        "addressRegion": "Norte de Santander",
+        "postalCode": "540001",
+        "addressCountry": "CO"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 7.8939,
+        "longitude": -72.5078
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "08:00",
+        "closes": "19:00"
+      },
+      "sameAs": [
+        "https://www.facebook.com/heilynaguilar",
+        "https://www.instagram.com/heilynaguilar"
+      ]
+    }
+    </script>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="{% static 'img/productos/logo-marca.png' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/productos/logo-marca.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/productos/logo-lg.webp' %}">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <!-- CSS personalizado -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tienda.css' %}">
+
+    <style>
+        /* Loader Styles */
+        #page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loader-content {
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
+
+        .loader-logo {
+            height: 60px;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .loader-spinner {
+            width: 30px;
+            height: 30px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Bag Sidebar */
+        #bag-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 350px;
+            height: 100%;
+            background: #fff;
+            z-index: 1050;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+            transition: var(--transition-premium);
+            display: flex;
+            flex-direction: column;
+        }
+
+        #bag-sidebar.active {
+            right: 0;
+        }
+
+        .bag-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bag-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .bag-footer {
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .bag-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1045;
+            display: none;
+            backdrop-filter: blur(5px);
+        }
+
+        .bag-overlay.active {
+            display: block;
+        }
+
+        .bag-count-badge {
+            position: absolute;
+            top: -5px;
+            right: -8px;
+            background: var(--accent-pink);
+            color: #fff;
+            font-size: 0.6rem;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body class="loading">
+    <!-- Page Loader -->
+    <div id="page-loader">
+        <div class="loader-content">
+            <img src="{% static 'img/productos/logo-sm.webp' %}" alt="Logo" class="loader-logo">
+            <div class="loader-spinner"></div>
+        </div>
+    </div>
+    <!-- Top Bar -->
+    <div class="top-bar py-1 text-center bg-dark text-white" style="font-size: 0.75rem; letter-spacing: 1px;">
+        ENVÍOS NACIONALES | <a href="https://wa.me/573123080861" class="text-white text-decoration-none">ESCRIBENOS <i
+                class="fab fa-whatsapp"></i></a>
+    </div>
+
+    <!-- ... rest of navbar ... -->
+    <!-- (I'll keep the rest as is but focus on the end) -->
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/573123080861" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'inicio' %}">
+                <img src="{% static 'img/productos/logo-sm.webp' %}" alt="Logo" height="40"
+                    class="d-inline-block align-top">
+                <span>By: Heilyn Aguilar</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'inicio' %}">INICIO</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'inicio' %}?categoria=Bodys#tienda">BODYS</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link"
+                            href="{% url 'inicio' %}?categoria=Corset#tienda">CORSET</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'inicio' %}?categoria=Top#tienda">TOP</a></li>
+                    <li class="nav-item"><a class="nav-link"
+                            href="{% url 'inicio' %}?categoria=Shorts#tienda">SHORTS</a></li>
+                    <li class="nav-item"><a class="nav-link"
+                            href="{% url 'inicio' %}?categoria=Faldas#tienda">FALDAS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'inicio' %}?categoria=Denim#tienda">DENIM</a>
+                    </li>
+                </ul>
+
+                <div class="navbar-icons d-flex align-items-center justify-content-center gap-3">
+                    <div class="search-wrapper d-none d-lg-block">
+                        <form action="{% url 'inicio' %}" method="get" style="position: relative;">
+                            <input type="text" name="q" class="search-input" placeholder="¿Qué estás buscando?"
+                                value="{{ request.GET.q|default:'' }}">
+                            <button type="submit" class="p-0 border-0 bg-transparent"
+                                style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #999;">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <a href="javascript:void(0)" class="nav-icon position-relative" id="open-bag">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="bag-count-badge" id="bag-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer Estructurado -->
+    <footer class="footer-fds">
+        <div class="container">
+
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="footer-heading">¿NECESITAS AYUDA?</h6>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'politicas' %}">Políticas de privacidad</a></li>
+                        <li><a href="{% url 'terminos' %}">T&C - Servicio General</a></li>
+                        <li><a href="{% url 'faq' %}">Preguntas Frecuentes</a></li>
+                        <li><a href="{% url 'devoluciones' %}">Devoluciones</a></li>
+                    </ul>
+                </div>
+                <!-- Columna 2: Sobre Nosotros -->
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="footer-heading mb-3">SOBRE NOSOTROS</h6>
+                    <p class="small text-muted mb-4">HEILYN AGUILAR es una marca dedicada a la mujer moderna, ofreciendo
+                        las últimas tendencias en moda con calidad y elegancia.</p>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'nosotros' %}">¿Quiénes somos?</a></li>
+                        <li><a href="{% url 'beneficios' %}">Beneficios por tus compras</a></li>
+                        <li><a href="{% url 'tallas' %}">Guía de tallas</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="footer-heading">NUESTRAS CATEGORÍAS</h6>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'inicio' %}?categoria=Bodys#tienda">Bodys</a></li>
+                        <li><a href="{% url 'inicio' %}?categoria=Corset#tienda">Corset</a></li>
+                        <li><a href="{% url 'inicio' %}?categoria=Top#tienda">Top</a></li>
+                        <li><a href="{% url 'inicio' %}?categoria=Shorts#tienda">Shorts</a></li>
+                        <li><a href="{% url 'inicio' %}?categoria=Faldas#tienda">Faldas</a></li>
+                        <li><a href="{% url 'inicio' %}?categoria=Denim#tienda">Denim</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="footer-heading">SÍGUENOS</h6>
+                    <div class="social-icons d-flex gap-4 mb-4">
+                        <a href="https://www.instagram.com/byheilynaguilar?igsh=ZHlydmE0ZGh3cDgz&utm_source=qr"
+                            target="_blank" class="fs-4" title="Síguenos en Instagram"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/573123080861" target="_blank" class="fs-4"
+                            title="Escríbenos por WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="javascript:void(0)" class="fs-4 opacity-50" title="Próximamente"
+                            style="cursor: default;"><i class="fab fa-tiktok"></i></a>
+                        <a href="javascript:void(0)" class="fs-4 opacity-50" title="Próximamente"
+                            style="cursor: default;"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="footer-logo-small mt-2">
+                        <img src="{% static 'img/productos/logo-md.webp' %}" alt="Logo Footer" height="80"
+                            class="opacity-75">
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom mt-5 pt-4 border-top text-center text-muted small">
+                <p>&copy; 2024 HEILYN AGUILAR. Todos los derechos reservados. | Cúcuta, Colombia</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Bag Sidebar -->
+    <div class="bag-overlay" id="bag-overlay"></div>
+    <div id="bag-sidebar">
+        <div class="bag-header">
+            <h6 class="mb-0 fw-bold" style="letter-spacing: 2px;">MI SELECCIÓN</h6>
+            <button class="btn-close" id="close-sidebar"></button>
+        </div>
+        <div class="bag-items" id="bag-items-container">
+            <!-- Items populated by JS -->
+            <div class="text-center py-5 text-muted small">Tu bolsa está vacía</div>
+        </div>
+        <div class="bag-footer border-top pt-3">
+            <div class="d-flex justify-content-between mb-3 fw-bold align-items-center">
+                <span style="font-size: 0.85rem;">TOTAL A PAGAR:</span>
+                <span id="bag-total" class="fs-5">$0</span>
+            </div>
+
+            <!-- Bloque de Pago Nequi -->
+            <div class="payment-instructions p-3 mb-3 bg-light border border-secondary-subtle rounded text-center">
+                <p class="mb-2 fw-bold small text-dark d-flex align-items-center justify-content-center gap-2">
+                    <span
+                        style="display:inline-block; width:8px; height:8px; background:#e84393; border-radius:50%;"></span>
+                    Pago por Nequi
+                </p>
+                <div class="d-flex align-items-center justify-content-center mb-2">
+                    <h5 class="mb-0 fw-bold" style="letter-spacing: 1px;">312 308 0861</h5>
+                </div>
+                <p class="mb-0 text-muted" style="font-size: 0.7rem; line-height: 1.3;">
+                    Transfiere el valor total y dale clic al botón para enviarnos el comprobante y coordinar tu envío.
+                </p>
+            </div>
+
+            <button
+                class="btn btn-dark w-100 rounded-0 py-3 mb-2 d-flex align-items-center justify-content-center gap-2 shadow-sm"
+                id="whatsapp-checkout">
+                <i class="fab fa-whatsapp fs-5"></i> ENVIAR MI PEDIDO Y RECIBO
+            </button>
+            <button class="btn btn-link text-muted w-100 py-2 small text-decoration-none shadow-none" id="clear-bag"
+                style="font-size: 0.7rem;">Vaciar toda la bolsa</button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bolsa JS -->
+    <script src="{% static 'js/bolsa.js' %}"></script>
+
+    <!-- Scripts adicionales -->
+    <script>
+        // Loader handling
+        window.addEventListener('load', function () {
+            const loader = document.getElementById('page-loader');
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.visibility = 'hidden';
+                document.body.classList.remove('loading');
+            }, 500);
+        });
+
+        // Validación de formularios
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function () {
+            const nav = document.querySelector('.navbar');
+            if (nav) {
+                if (window.scrollY > 50) {
+                    nav.classList.add('navbar-scrolled');
+                } else {
+                    nav.classList.remove('navbar-scrolled');
+                }
+            }
+        });
+
+        // Initialize any animations or intersections
+        function initAnimations() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 50) {
+                    el.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', initAnimations);
+        window.addEventListener('load', initAnimations);
+
+        // Smooth scroll para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+# Python / Django
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entorno Virtual
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# SQLite de Desarrollo
+db.sqlite3
+db.sqlite3-journal
+
+# Archivos estáticos recolectados (producción)
+/staticfiles/
+staticfiles.json
+
+# Archivos subidos por el usuario
+/media/
+/media_cdn/
+
+# Logs
+*.log
+logs/
+
+# Secrets / Env vars
+.env
+.env.local
+.DS_Store
+.idea/
+.vscode/

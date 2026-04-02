@@ -1,0 +1,18 @@
+[Unit]
+Description=gunicorn daemon for tienda_heilyn
+Requires=gunicorn-tienda.socket
+After=network.target
+
+[Service]
+User=root
+# Cambia 'root' por tu usuario real en el servidor (ej: ubuntu, deploy, heilyn) si no usas root
+Group=www-data
+WorkingDirectory=/var/www/tienda_heilyn
+ExecStart=/var/www/tienda_heilyn/venv/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/gunicorn-tienda.sock \
+          salonweb.wsgi:application
+
+[Install]
+WantedBy=multi-user.target

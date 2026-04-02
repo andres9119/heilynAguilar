@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Servicios - Spa de Uñas{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <h1 class="display-4">💅 Nuestros Servicios</h1>
+        <p class="lead">Descubre todos los tratamientos que ofrecemos</p>
+    </div>
+</section>
+
+<!-- Servicios de Manicure -->
+<section>
+    <div class="container">
+        <h2 class="text-center mb-5">Servicios de Manicure</h2>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img src="{% static 'images/servicios/manicure/manicure-clasica.webp' %}" 
+                         class="card-img-top" 
+                         alt="Manicure Clásica"
+                         style="height: 250px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Manicure Clásica</h5>
+                        <p class="card-text">Cuidado completo de uñas con limado, cutícula y esmaltado tradicional.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="h5 text-primary mb-0">$25.000</span>
+                            <small class="text-muted">45 min</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img src="{% static 'images/servicios/manicure/manicure-gel.webp' %}" 
+                         class="card-img-top" 
+                         alt="Manicure en Gel"
+                         style="height: 250px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Manicure en Gel</h5>
+                        <p class="card-text">Esmaltado semipermanente que dura hasta 3 semanas con brillo perfecto.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="h5 text-primary mb-0">$35.000</span>
+                            <small class="text-muted">60 min</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img src="{% static 'images/servicios/manicure/nail-art.webp' %}" 
+                         class="card-img-top" 
+                         alt="Nail Art"
+                         style="height: 250px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Nail Art</h5>
+                        <p class="card-text">Diseños artísticos personalizados para ocasiones especiales.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="h5 text-primary mb-0">$45.000</span>
+                            <small class="text-muted">90 min</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Servicios de Pedicure -->
+<section style="background: var(--neutral-light);">
+    <div class="container">
+        <h2 class="text-center mb-5">Servicios de Pedicure</h2>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img src="{% static 'images/servicios/pedicure/pedicure-spa.webp' %}" 
+                         class="card-img-top" 
+                         alt="Pedicure Spa"
+                         style="height: 250px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Pedicure Spa</h5>
+                        <p class="card-text">Tratamiento relajante completo con exfoliación, masaje y hidratación profunda.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="h5 text-primary mb-0">$40.000</span>
+                            <small class="text-muted">75 min</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img src="{% static 'images/servicios/pedicure/pedicure-gel.webp' %}" 
+                         class="card-img-top" 
+                         alt="Pedicure en Gel"
+                         style="height: 250px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Pedicure en Gel</h5>
+                        <p class="card-text">Pedicure con esmaltado semipermanente para pies perfectos por semanas.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="h5 text-primary mb-0">$50.000</span>
+                            <small class="text-muted">90 min</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Tratamientos Especiales -->
+<section>
+    <div class="container">
+        <h2 class="text-center mb-5">Tratamientos Especiales</h2>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img src="{% static 'images/servicios/tratamientos/tratamiento-parafina.webp' %}" 
+                         class="card-img-top" 
+                         alt="Tratamiento de Parafina"
+                         style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Tratamiento de Parafina</h5>
+                        <p class="card-text">Hidratación profunda para manos y pies con cera de parafina.</p>
+                        <span class="h6 text-primary">$20.000</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img src="{% static 'images/servicios/tratamientos/masaje-manos.webp' %}" 
+                         class="card-img-top" 
+                         alt="Masaje de Manos"
+                         style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Masaje de Manos</h5>
+                        <p class="card-text">Relajante masaje con aceites esenciales para suavizar la piel.</p>
+                        <span class="h6 text-primary">$15.000</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img src="{% static 'images/servicios/tratamientos/cuidado-cuticulas.webp' %}" 
+                         class="card-img-top" 
+                         alt="Cuidado de Cutículas"
+                         style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Cuidado de Cutículas</h5>
+                        <p class="card-text">Tratamiento especializado para cutículas saludables y bien cuidadas.</p>
+                        <span class="h6 text-primary">$12.000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

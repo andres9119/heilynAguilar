@@ -1,0 +1,309 @@
+{% extends "base.html" %}
+{% load static humanize %}
+
+{% block title %}Heilyn Aguilar - Nueva Colección{% endblock %}
+
+{% block content %}
+<!-- Hero Carousel -->
+<div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+    </div>
+    <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2000" class="d-block w-100" alt="Moda Femenina Cúcuta">
+                    <div class="carousel-caption d-md-block" style="z-index: 2;">
+                        <h2 class="display-2 fw-bold mb-3">NUEVA COLECCIÓN</h2>
+                        <p class="lead mb-4">Descubre las últimas tendencias en moda. Tu estilo y sofisticación nos inspira.</p>
+                        <a href="#tienda" rel="nofollow" class="btn btn-light btn-lg rounded-0 px-5 py-3 shadow-sm">VER COLECCIÓN</a>
+                    </div>
+                </div>
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070" class="d-block w-100" alt="Denim Essentials">
+            <div class="carousel-caption d-none d-md-block" style="z-index: 2;">
+                <p class="text-uppercase mb-2" style="letter-spacing: 3px; font-size: 0.8rem; color: #555;">MUST HAVE</p>
+                <h2 class="display-3 fw-bold mb-4">DENIM <br> <span class="font-elegant fw-normal">Essentials</span></h2>
+                <a href="?categoria=Shorts#tienda" rel="nofollow" class="btn btn-light px-5 py-3 rounded-0 shadow-sm">VER MÁS</a>
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="https://images.unsplash.com/photo-1576053139778-7e32f2ae3cfd?q=80&w=2070" class="d-block w-100" alt="Accessories">
+            <div class="carousel-caption d-none d-md-block" style="z-index: 2;">
+                <p class="text-uppercase mb-2" style="letter-spacing: 3px; font-size: 0.8rem; color: #555;\">COMPLEMENTOS</p>
+                <h2 class="display-3 fw-bold mb-4">ACCESORIOS <br> <span class="font-elegant fw-normal">& More</span></h2>
+                <a href="#tienda" rel="nofollow" class="btn btn-light px-5 py-3 rounded-0 shadow-sm">DESCUBRIR</a>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
+<!-- Sección Informativa - SEO -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-5 mb-4">Bienvenido a Heilyn Aguilar Store</h1>
+                <p class="lead mb-3">
+                    En Heilyn Aguilar Store, nos apasiona ofrecer la mejor moda femenina en Cúcuta. Somos una tienda especializada en ropa premium para dama, donde encontrarás blusas elegantes, denim de calidad, tops versátiles y accesorios que complementan tu estilo personal. Nuestra colección está cuidadosamente seleccionada para destacar la sofisticación y elegancia de nuestras clientas.
+                </p>
+                <p class="mb-3">
+                    Ubicados en el corazón comercial de Cúcuta, Norte de Santander, ofrecemos envíos a todo Colombia con la mejor atención al cliente. Cada prenda en nuestra tienda de ropa femenina es elegida pensando en la calidad, el diseño y la tendencia actual de la moda. Ya sea que busques blusas elegantes para ocasiones especiales, denim cómodo para el día a día, o accesorios que destaquen tu look, en Heilyn Aguilar encontrarás exactamente lo que necesitas.
+                </p>
+                <p class="mb-4">
+                    Nos comprometemos a brindarte una experiencia de compra excepcional con una amplia variedad de tallas, colores y estilos disponibles. Si eres de Cúcuta o de cualquier parte de Colombia, accede a nuestro catálogo en línea y disfruta de la moda premium con envíos rápidos y seguros a tu domicilio.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Filtros y Título -->
+<section id="tienda" class="py-5 mt-4">
+    <div class="container">
+        <div class="row align-items-end mb-5">
+            <div class="col-md-6">
+                <h2 class="display-6 mb-0">Nuestros Productos</h2>
+                <p class="text-muted mb-0">{% if productos %}{{ productos.count }}{% else %}0{% endif %} artículos encontrados</p>
+            </div>
+            <div class="col-md-6 mt-4 mt-md-0">
+                <form id="filterForm" method="get" class="row g-2 justify-content-md-end">
+                    <div class="col-auto">
+                        <select name="categoria" class="form-select form-select-sm rounded-0 border-0 border-bottom">
+                            <option value="">Categoría</option>
+                            {% for cat in categorias %}
+                            <option value="{{ cat }}" {% if request.GET.categoria == cat %}selected{% endif %}>{{ cat }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select name="talla" class="form-select rounded-0 border-0 bg-light">
+                            <option value="">TODAS LAS TALLAS</option>
+                            {% for talla in tallas_list %}
+                            <option value="{{ talla.id }}" {% if request.GET.talla == talla.id|stringformat:"i" %}selected{% endif %}>{{ talla.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <select name="precio_max" class="form-select form-select-sm rounded-0 border-0 border-bottom">
+                            <option value="">Precio</option>
+                            <option value="50000" {% if request.GET.precio_max == "50000" %}selected{% endif %}>Hasta $50k</option>
+                            <option value="100000" {% if request.GET.precio_max == "100000" %}selected{% endif %}>Hasta $100k</option>
+                            <option value="200000" {% if request.GET.precio_max == "200000" %}selected{% endif %}>Hasta $200k</option>
+                        </select>
+                    </div>
+                    {% if request.GET.talla or request.GET.categoria or request.GET.precio_max %}
+                    <div class="col-auto">
+                        <a href="{% url 'inicio' %}" class="btn btn-link btn-sm text-muted text-decoration-none">Limpiar</a>
+                    </div>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+
+        <!-- Grid de Productos (con ID para AJAX) -->
+        <div id="product-grid-container">
+            <div class="row g-4" id="product-grid">
+            {% for producto in productos %}
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <a href="{% url 'detalle_producto' producto.pk %}">
+                            {% if producto.imagen %}
+                            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="product-image">
+                            {% else %}
+                            <div class="w-100 h-100 d-flex align-items-center justify-content-center bg-light">
+                                <i class="fas fa-image text-muted opacity-25" style="font-size: 3rem;"></i>
+                            </div>
+                            {% endif %}
+                        </a>
+                        
+                        {% if producto.stock_total > 0 %}
+                        <div class="product-badge-new">NUEVO</div>
+                        <button class="bag-floating-btn add-to-bag" 
+                                data-id="{{ producto.pk }}" 
+                                data-name="{{ producto.nombre }}" 
+                                data-price="{{ producto.precio|stringformat:'f' }}" 
+                                data-image="{% if producto.imagen %}{{ producto.imagen.url }}{% endif %}">
+                            <i class="fas fa-shopping-bag"></i> Añadir a la bolsa
+                        </button>
+                        {% else %}
+                        <div class="product-badge-new bg-secondary">AGOTADO</div>
+                        {% endif %}
+                    </div>
+                    <div class="product-info">
+                        <a href="{% url 'detalle_producto' producto.pk %}" class="product-title text-uppercase">{{ producto.nombre }}</a>
+                        
+                        <!-- Mini Tallas Refined -->
+                        <div class="product-sizes mb-2 d-flex flex-wrap gap-1" style="font-size: 0.7rem; letter-spacing: 0.5px;">
+                            {% regroup producto.variaciones.all|dictsort:"talla.orden" by talla as variaciones_por_talla %}
+                            {% for talla_group in variaciones_por_talla %}
+                                <span class="badge border border-secondary-subtle text-muted fw-normal px-2 py-1 rounded-1" style="background-color: #fcfcfc;">{{ talla_group.grouper.nombre }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="price-container">
+                            <span class="price-current fw-bold text-dark">${{ producto.precio|floatformat:0|intcomma }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <p class="lead font-elegant italic">No encontramos prendas con esos filtros.</p>
+                <a href="{% url 'inicio' %}" class="btn btn-dark rounded-0 px-4">Ver todo</a>
+            </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterForm = document.getElementById('filterForm');
+    const gridContainer = document.getElementById('product-grid-container');
+
+    if (filterForm && gridContainer) {
+        const selects = filterForm.querySelectorAll('select');
+        
+        selects.forEach(select => {
+            select.onchange = null; // Quitar el submit automático anterior
+            select.addEventListener('change', function() {
+                updateFilters();
+            });
+        });
+
+        function updateFilters() {
+            const formData = new FormData(filterForm);
+            const params = new URLSearchParams(formData).toString();
+            const url = `${window.location.pathname}?${params}`;
+
+            // Añadir clase de carga (opcional)
+            gridContainer.style.opacity = '0.5';
+            gridContainer.style.transition = 'opacity 0.3s ease';
+
+            fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const newGrid = doc.getElementById('product-grid-container').innerHTML;
+                
+                gridContainer.innerHTML = newGrid;
+                gridContainer.style.opacity = '1';
+
+                // Actualizar la URL sin recargar para que el usuario pueda compartir
+                window.history.pushState({}, '', url);
+                
+                // Re-inicializar animaciones (si existen)
+                if (typeof initAnimations === 'function') initAnimations();
+            })
+            .catch(error => {
+                console.error('Error fetching filtered products:', error);
+                gridContainer.style.opacity = '1';
+            });
+        }
+    }
+});
+</script>
+
+<!-- Explora por Categorías -->
+<div class="py-5">
+    <div class="container">
+        <div class="row g-3">
+            <div class="col-12 col-md-6">
+                <a href="?categoria=Shorts#tienda" class="category-banner w-100">
+                    <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=1000" alt="Denim" loading="lazy">
+                    <div class="category-content">
+                        <h2 class="display-5 fw-bold text-white">DENIM</h2>
+                        <span class="text-white text-uppercase" style="letter-spacing: 2px;">Ver Colección</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-md-6">
+                <a href="?categoria=Top#tienda" class="category-banner w-100">
+                    <img src="https://images.unsplash.com/photo-1565084888279-aca607ecce0c?q=80&w=1000" alt="Blusas" loading="lazy">
+                    <div class="category-content">
+                        <h2 class="display-5 fw-bold text-white">BLUSAS</h2>
+                        <span class="text-white text-uppercase" style="letter-spacing: 2px;">Nuevos Ingresos</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Nuestra Comunidad -->
+<section class="py-5 bg-accent-soft">
+    <div class="container">
+        <div class="text-center mb-5">
+            <p class="text-uppercase mb-2" style="letter-spacing: 3px; font-size: 0.7rem;">INSTAGRAM</p>
+            <h2 class="display-6 fw-bold">NUESTRA COMUNIDAD</h2>
+            <p class="text-muted">Suscríbete y etiqueta @HeilynAguilarStore para aparecer aquí.</p>
+        </div>
+        <div class="row g-2">
+            <div class="col-md-3 col-6">
+                <div class="instagram-item aspect-square overflow-hidden" style="aspect-ratio: 1/1;">
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600&auto=format&fit=crop" class="w-100 h-100 border" style="object-fit: cover;" alt="Cliente satisfecha 1">
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="instagram-item aspect-square overflow-hidden" style="aspect-ratio: 1/1;">
+                    <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=600&auto=format&fit=crop" class="w-100 h-100 border" style="object-fit: cover;" alt="Cliente satisfecha 2">
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="instagram-item aspect-square overflow-hidden" style="aspect-ratio: 1/1;">
+                    <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=600&auto=format&fit=crop" class="w-100 h-100 border" style="object-fit: cover;" alt="Cliente satisfecha 3">
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="instagram-item aspect-square overflow-hidden" style="aspect-ratio: 1/1;">
+                    <img src="https://images.unsplash.com/photo-1618932260643-eee4a2f652a6?q=80&w=600&auto=format&fit=crop" class="w-100 h-100 border" style="object-fit: cover;" alt="Cliente satisfecha 4">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sección Beneficios Minimalista Refined -->
+<section class="py-5 bg-light">
+    <div class="container py-4">
+        <div class="row g-4 text-center">
+            <div class="col-lg-4 col-md-4 col-12">
+                <div class="feature-card">
+                    <i class="fas fa-truck feature-icon"></i>
+                    <h6 class="feature-title">ENVÍOS NACIONALES</h6>
+                    <p class="feature-text">Contamos con cobertura en todo el país a través de las mejores transportadoras.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt feature-icon"></i>
+                    <h6 class="feature-title">COMPRA SEGURA</h6>
+                    <p class="feature-text">Tus transacciones están protegidas. Recibimos todos los medios de pago.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <div class="feature-card">
+                    <i class="fab fa-whatsapp feature-icon"></i>
+                    <h6 class="feature-title">ATENCIÓN WHATSAPP</h6>
+                    <p class="feature-text">¿Dudas con tu talla? Nuestras asesoras están listas para ayudarte en línea de inmediato.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

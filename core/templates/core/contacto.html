@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+
+{% block title %}Contacto - Spa de Uñas{% endblock %}
+
+{% block content %}
+<!-- Hero Banner -->
+<section class="contact-hero-banner">
+    <div class="hero-overlay">
+        <div class="container">
+            <div class="row align-items-center min-vh-50">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="display-3 fw-bold text-white mb-4">📞 Contáctanos</h1>
+                    <p class="lead text-white mb-4">Estamos aquí para atenderte y resolver todas tus dudas</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Información de Contacto -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">💬 Información de Contacto</h2>
+            <p class="lead text-muted">Múltiples formas de comunicarte con nosotras</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="contact-card h-100">
+                    <div class="contact-icon">📞</div>
+                    <h5 class="contact-title">Teléfono</h5>
+                    <p class="contact-description">Llámanos directamente</p>
+                    <p class="contact-info">+57 322 7746794</p>
+                    <a href="tel:+573227746794" class="btn btn-outline-primary">Llamar</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="contact-card h-100">
+                    <div class="contact-icon whatsapp-icon">📱</div>
+                    <h5 class="contact-title">WhatsApp</h5>
+                    <p class="contact-description">Chatea con nosotras</p>
+                    <p class="contact-info">+57 312 3080861</p>
+                    <a href="https://wa.me/573123080861" target="_blank" class="btn btn-whatsapp">Chatear</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="contact-card h-100">
+                    <div class="contact-icon location-icon">📍</div>
+                    <h5 class="contact-title">Dirección</h5>
+                    <p class="contact-description">Ven a visitarnos</p>
+                    <p class="contact-info">Calle 123 #45-67<br>Bogotá, Colombia</p>
+                    <a href="https://maps.google.com" target="_blank" class="btn btn-outline-primary">Ver en Maps</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="contact-card h-100">
+                    <div class="contact-icon schedule-icon">🕒</div>
+                    <h5 class="contact-title">Horarios</h5>
+                    <p class="contact-description">Estamos abiertas</p>
+                    <p class="contact-info">
+                        Lunes - Viernes<br>9:00 AM - 7:00 PM<br><br>
+                        Sábados<br>9:00 AM - 6:00 PM<br><br>
+                        Domingos: Cerrado
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mapa y Ubicación -->
+<section class="location-section py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">🗺️ Nuestra Ubicación</h2>
+            <p class="lead text-muted">Fácil de encontrar, fácil de llegar</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="location-card">
+                    <div class="location-placeholder">
+                        <div class="text-center">
+                            <span style="font-size: 4rem;">🗺️</span>
+                            <h5 class="mt-3 mb-3">Mapa Interactivo</h5>
+                            <p class="text-muted mb-4">Calle 123 #45-67, Bogotá, Colombia</p>
+                            <a href="https://maps.google.com" target="_blank" class="btn btn-primary btn-lg px-4">Abrir en Google Maps</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">❓ Preguntas Frecuentes</h2>
+            <p class="lead text-muted">Resolvemos las dudas más comunes</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="accordion faq-accordion" id="faqAccordion">
+                    <div class="accordion-item faq-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                ¿Necesito reservar cita con anticipación?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Sí, recomendamos reservar con al menos 24 horas de anticipación para garantizar disponibilidad, especialmente los fines de semana.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item faq-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                ¿Qué métodos de pago aceptan?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Aceptamos efectivo, tarjetas de crédito/débito, transferencias bancarias y pagos por Nequi y Daviplata.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item faq-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                ¿Cuánto tiempo duran los tratamientos?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Los tiempos varían según el servicio: Manicure (45 min), Pedicure (60 min), Uñas Acrílicas (90 min), Nail Art (30-60 min adicionales).
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Final -->
+<section class="cta-section py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold text-white mb-3">💬 ¿Tienes alguna pregunta?</h2>
+            <p class="lead text-white opacity-90">No dudes en contactarnos, estamos aquí para ayudarte</p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-4 col-md-6">
+                <div class="cta-card h-100">
+                    <div class="cta-icon">📱</div>
+                    <h5 class="cta-title">WhatsApp</h5>
+                    <p class="cta-description">Respuesta inmediata</p>
+                    <a href="https://wa.me/573001234567" target="_blank" class="btn btn-whatsapp w-100">Chatear Ahora</a>
+                </div>
+            </div>
+            {% if user.is_superuser %}
+            <div class="col-lg-4 col-md-6">
+                <div class="cta-card h-100">
+                    <div class="cta-icon">📅</div>
+                    <h5 class="cta-title">Agendar Cita</h5>
+                    <p class="cta-description">Reserva tu espacio</p>
+                    <a href="{% url 'agendar_cita' %}" class="btn btn-light w-100">Agendar Ahora</a>
+                </div>
+            </div>
+            {% endif %}
+            <div class="col-lg-4 col-md-6">
+                <div class="cta-card h-100">
+                    <div class="cta-icon">💅</div>
+                    <h5 class="cta-title">Ver Servicios</h5>
+                    <p class="cta-description">Conoce nuestros tratamientos</p>
+                    <a href="{% url 'servicios' %}" class="btn btn-outline-light w-100">Explorar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}Eliminar Producto - Spa de Uñas{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); color: white;">
+    <div class="container">
+        <h1 class="display-4">🗑️ Eliminar Producto</h1>
+        <p class="lead">Confirma la eliminación del producto del inventario</p>
+    </div>
+</section>
+
+<!-- Confirmación de Eliminación -->
+<section>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card border-danger">
+                    <div class="card-header bg-danger text-white text-center">
+                        <h3 class="mb-0">⚠️ Confirmar Eliminación</h3>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="mb-4">
+                            <span style="font-size: 4rem;">🗑️</span>
+                        </div>
+                        <h4 class="text-danger mb-3">¿Estás segura de eliminar este producto?</h4>
+                        
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ producto.nombre }}</h5>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p class="mb-1"><strong>Cantidad:</strong></p>
+                                        <p class="text-muted">{{ producto.cantidad }} unidades</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="mb-1"><strong>Precio:</strong></p>
+                                        <p class="text-muted">${{ producto.precio|floatformat:0|intcomma }}</p>
+                                    </div>
+                                </div>
+                                {% if producto.descripcion %}
+                                <p class="text-muted mt-2">{{ producto.descripcion|truncatewords:20 }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-warning" role="alert">
+                            <strong>⚠️ Advertencia:</strong> Esta acción no se puede deshacer. El producto será eliminado permanentemente del inventario.
+                        </div>
+                        
+                        <form method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-lg me-3">
+                                <span>🗑️</span> Sí, Eliminar
+                            </button>
+                        </form>
+                        <a href="{% url 'lista_productos' %}" class="btn btn-outline-secondary btn-lg">
+                            <span>⬅</span> Cancelar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Información Adicional -->
+<section style="background: var(--neutral-light);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <span style="font-size: 3rem;">💾</span>
+                        <h5 class="card-title mt-3">Respaldo</h5>
+                        <p class="card-text">
+                            Considera hacer un respaldo de la información antes de eliminar.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <span style="font-size: 3rem;">📊</span>
+                        <h5 class="card-title mt-3">Reportes</h5>
+                        <p class="card-text">
+                            Los reportes históricos mantendrán la información del producto.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <span style="font-size: 3rem;">🔄</span>
+                        <h5 class="card-title mt-3">Reversibilidad</h5>
+                        <p class="card-text">
+                            Si cambias de opinión, puedes volver a agregar el producto.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}Guía de Tallas | Heilyn Aguilar{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <h1 class="display-4 font-elegant mb-4 text-center">Guía de Tallas</h1>
+            
+            <div class="bg-white p-4 p-md-5 shadow-sm rounded mb-5">
+                <p class="lead text-center text-muted mb-5">Asegúrate de escoger la talla correcta guiándote por nuestra tabla oficial de medidas femeninas (estándar Colombia). Toma tus medidas con una cinta métrica flexible rodeando tu cuerpo sin apretar.</p>
+                
+                <div class="table-responsive">
+                    <table class="table table-hover text-center align-middle border">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="py-3">Talla (Nacional)</th>
+                                <th class="py-3">Busto (cm)</th>
+                                <th class="py-3">Cintura (cm)</th>
+                                <th class="py-3">Cadera (cm)</th>
+                                <th class="py-3">Largo Tiro (Shorts/Bodys)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-muted">
+                            <tr>
+                                <td class="fw-bold text-dark py-3">XS (Extra-Pequeña)</td>
+                                <td>82 - 86</td>
+                                <td>60 - 64</td>
+                                <td>88 - 92</td>
+                                <td>Normal - Ajustado</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold text-dark py-3">S (Pequeña)</td>
+                                <td>86 - 90</td>
+                                <td>64 - 68</td>
+                                <td>92 - 96</td>
+                                <td>Normal</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold text-dark py-3">M (Mediana)</td>
+                                <td>90 - 94</td>
+                                <td>68 - 72</td>
+                                <td>96 - 100</td>
+                                <td>Normal</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold text-dark py-3">L (Grande)</td>
+                                <td>94 - 98</td>
+                                <td>72 - 76</td>
+                                <td>100 - 104</td>
+                                <td>Holgado</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold text-dark py-3">XL (Extra-Grande)</td>
+                                <td>98 - 102</td>
+                                <td>76 - 80</td>
+                                <td>104 - 108</td>
+                                <td>Holgado</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="alert alert-secondary border-0 shadow-sm d-flex align-items-center" role="alert">
+                <i class="fas fa-info-circle fa-2x me-3 text-muted"></i>
+                <div class="small text-muted">
+                    <strong>Importante:</strong> Las medidas en Denim (jeans y faldas) suelen ceder entre 1 y 2 centímetros tras el uso diario gracias a los componentes de elastano. En el caso de corsets restrictivos, recomendamos siempre priorizar la medida de la cintura.
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+
+{% block title %}Servicios - Spa de Uñas{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <h1 class="display-4">Nuestros Servicios</h1>
+        <p class="lead">Descubre nuestra amplia gama de tratamientos para el cuidado y embellecimiento de tus uñas</p>
+    </div>
+</section>
+
+<!-- Servicios Principales -->
+<section>
+    <div class="container">
+      <h2 class="mb-5 text-center">Tratamientos Principales</h2>
+      <div class="row g-4"> <!-- g-4 agrega espacio entre columnas -->
+        
+        <!-- CARD 1 -->
+        <div class="col-lg-4 d-flex align-items-stretch">
+          <div class="card h-100">
+            <img src="/static/images/servicios/acrilicas/acrilicas1.jpg" class="card-img-top img-ajustada" alt="uñas acrilicas">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">💅 Uñas Acrílicas</h5>
+              <p class="card-text">Tratamiento completo que incluye limpieza, corte, limado, cutículas y esmaltado. Perfecto para mantener tus uñas siempre impecables.</p>
+              <ul class="list-unstyled">
+                <li>✓ Limpieza profunda</li>
+                <li>✓ Corte y limado</li>
+                <li>✓ Tratamiento de cutículas</li>
+                <li>✓ Esmaltado profesional</li>
+              </ul>
+              <div class="mt-auto d-flex justify-content-between align-items-center">
+                <span class="h4 text-primary mb-0">$25.000</span>
+                {% if user.is_superuser %}
+                <a href="{% url 'agendar_cita' %}" class="btn btn-primary">Reservar</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- CARD 2 -->
+        <div class="col-lg-4 d-flex align-items-stretch">
+          <div class="card h-100">
+            <img src="/static/images/servicios/manicure/manicura1.jpg" class="card-img-top img-ajustada" alt="Manicure">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">💅 Manicure Deluxe</h5>
+              <p class="card-text">Incluye exfoliación y masaje hidratante para manos, además de esmaltado profesional.</p>
+              <ul class="list-unstyled">
+                <li>✓ Exfoliación suave</li>
+                <li>✓ Masaje hidratante</li>
+                <li>✓ Tratamiento de cutículas</li>
+                <li>✓ Esmaltado premium</li>
+              </ul>
+              <div class="mt-auto d-flex justify-content-between align-items-center">
+                <span class="h4 text-primary mb-0">$30.000</span>
+                {% if user.is_superuser %}
+                <a href="{% url 'agendar_cita' %}" class="btn btn-primary">Reservar</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- CARD 3 -->
+        <div class="col-lg-4 d-flex align-items-stretch">
+          <div class="card h-100">
+            <img src="/static/images/servicios/pedicure/pedicure1.jpg" class="card-img-top img-ajustada" alt="Pedicure">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">🦶 Pedicure Spa</h5>
+              <p class="card-text">Relajación total para tus pies con exfoliación, masaje y esmaltado. Ideal para consentirte y renovar la piel de tus pies.</p>
+              <ul class="list-unstyled">
+                <li>✓ Exfoliación suave</li>
+                <li>✓ Masaje relajante</li>
+                <li>✓ Corte y limado</li>
+                <li>✓ Esmaltado duradero</li>
+              </ul>
+              <div class="mt-auto d-flex justify-content-between align-items-center">
+                <span class="h4 text-primary mb-0">$35.000</span>
+                {% if user.is_superuser %}
+                <a href="{% url 'agendar_cita' %}" class="btn btn-primary">Reservar</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+  
+
+<!-- Servicios Especializados -->
+<section style="background: var(--neutral-light);">
+    <div class="container">
+        <h2 class="mb-5 text-center">Servicios Especializados</h2>
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <span style="font-size: 3rem;">✨</span>
+                        </div>
+                        <h5 class="card-title">Uñas Acrílicas</h5>
+                        <p class="card-text">Extensión y fortalecimiento con acrílico para uñas más largas y resistentes.</p>
+                        <div class="mb-3">
+                            <span class="h5 text-primary">$45.000</span>
+                        </div>
+                        {% if user.is_superuser %}
+                        <a href="{% url 'agendar_cita' %}" class="btn btn-outline-primary">Reservar</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <span style="font-size: 3rem;">🎨</span>
+                        </div>
+                        <h5 class="card-title">Nail Art</h5>
+                        <p class="card-text">Diseños únicos y creativos para expresar tu personalidad y estilo.</p>
+                        <div class="mb-3">
+                            <span class="h5 text-primary">Desde $15.000</span>
+                        </div>
+                        {% if user.is_superuser %}
+                        <a href="{% url 'agendar_cita' %}" class="btn btn-outline-primary">Reservar</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <span style="font-size: 3rem;">💎</span>
+                        </div>
+                        <h5 class="card-title">Gel Polish</h5>
+                        <p class="card-text">Esmaltado semipermanente que dura hasta 3 semanas sin descascararse.</p>
+                        <div class="mb-3">
+                            <span class="h5 text-primary">$30.000</span>
+                        </div>
+                        {% if user.is_superuser %}
+                        <a href="{% url 'agendar_cita' %}" class="btn btn-outline-primary">Reservar</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Combos y Promociones -->
+<section>
+    <div class="container">
+        <h2 class="mb-5 text-center">Combos Especiales</h2>
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 border-primary">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h5 class="mb-0">Combo Relax</h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <h3 class="text-primary mb-3">$50.000</h3>
+                        <ul class="list-unstyled">
+                            <li>✓ Manicure Clásico</li>
+                            <li>✓ Pedicure Spa</li>
+                            <li>✓ Bebida de cortesía</li>
+                        </ul>
+                        <p class="text-muted">Ahorra $10.000</p>
+                        {% if user.is_superuser %}
+                        <a href="{% url 'agendar_cita' %}" class="btn btn-primary">Reservar Combo</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 border-warning">
+                    <div class="card-header bg-warning text-dark text-center">
+                        <h5 class="mb-0">Combo Premium</h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <h3 class="text-warning mb-3">$75.000</h3>
+                        <ul class="list-unstyled">
+                            <li>✓ Manicure + Gel Polish</li>
+                            <li>✓ Pedicure Spa</li>
+                            <li>✓ Nail Art básico</li>
+                            <li>✓ Snack de cortesía</li>
+                        </ul>
+                        <p class="text-muted">Ahorra $20.000</p>
+                        {% if user.is_superuser %}
+                        <a href="{% url 'agendar_cita' %}" class="btn btn-warning">Reservar Combo</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 border-success">
+                    <div class="card-header bg-success text-white text-center">
+                        <h5 class="mb-0">Combo VIP</h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <h3 class="text-success mb-3">$120.000</h3>
+                        <ul class="list-unstyled">
+                            <li>✓ Uñas Acrílicas</li>
+                            <li>✓ Pedicure Spa</li>
+                            <li>✓ Nail Art Premium</li>
+                            <li>✓ Masaje de manos</li>
+                            <li>✓ Brunch de cortesía</li>
+                        </ul>
+                        <p class="text-muted">Ahorra $35.000</p>
+                        {% if user.is_superuser %}
+                        <a href="{% url 'agendar_cita' %}" class="btn btn-success">Reservar Combo</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Final -->
+<section style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: white;">
+    <div class="container text-center">
+        <h2>¿Lista para consentirte?</h2>
+        <p class="lead">Reserva tu cita ahora y disfruta de la mejor experiencia en cuidado de uñas</p>
+        {% if user.is_superuser %}
+        <a href="{% url 'agendar_cita' %}" class="btn btn-light btn-lg mt-3">Agendar Cita</a>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
