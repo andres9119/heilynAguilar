@@ -76,7 +76,8 @@
             <div class="col-md-6 mt-4 mt-md-0">
                 <form id="filterForm" method="get" class="row g-2 justify-content-md-end">
                     <div class="col-auto">
-                        <select name="categoria" class="form-select form-select-sm rounded-0 border-0 border-bottom">
+                        <label for="cat-select" class="visually-hidden">Filtrar por categoría</label>
+                        <select id="cat-select" name="categoria" class="form-select form-select-sm rounded-0 border-0 border-bottom" aria-label="Seleccionar categoría de producto">
                             <option value="">Categoría</option>
                             {% for cat in categorias %}
                             <option value="{{ cat }}" {% if request.GET.categoria == cat %}selected{% endif %}>{{ cat }}</option>
@@ -84,7 +85,8 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select name="talla" class="form-select rounded-0 border-0 bg-light">
+                        <label for="size-select" class="visually-hidden">Filtrar por talla</label>
+                        <select id="size-select" name="talla" class="form-select rounded-0 border-0 bg-light" aria-label="Seleccionar talla disponible">
                             <option value="">TODAS LAS TALLAS</option>
                             {% for talla in tallas_list %}
                             <option value="{{ talla.id }}" {% if request.GET.talla == talla.id|stringformat:"i" %}selected{% endif %}>{{ talla.nombre }}</option>
@@ -92,7 +94,8 @@
                         </select>
                     </div>
                     <div class="col-auto">
-                        <select name="precio_max" class="form-select form-select-sm rounded-0 border-0 border-bottom">
+                        <label for="price-select" class="visually-hidden">Filtrar por precio</label>
+                        <select id="price-select" name="precio_max" class="form-select form-select-sm rounded-0 border-0 border-bottom" aria-label="Seleccionar rango de precio">
                             <option value="">Precio</option>
                             <option value="50000" {% if request.GET.precio_max == "50000" %}selected{% endif %}>Hasta $50k</option>
                             <option value="100000" {% if request.GET.precio_max == "100000" %}selected{% endif %}>Hasta $100k</option>
@@ -225,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="row g-3">
             <div class="col-12 col-md-6">
                 <a href="?categoria=Shorts#tienda" class="category-banner w-100">
-                    <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=1000" alt="Denim" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=700&auto=webp" alt="Denim" loading="lazy" width="700" height="440">
                     <div class="category-content">
                         <h2 class="display-5 fw-bold text-white">DENIM</h2>
                         <span class="text-white text-uppercase" style="letter-spacing: 2px;">Ver Colección</span>
@@ -234,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             <div class="col-12 col-md-6">
                 <a href="?categoria=Top#tienda" class="category-banner w-100">
-                    <img src="https://images.unsplash.com/photo-1565084888279-aca607ecce0c?q=80&w=1000" alt="Blusas" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1565084888279-aca607ecce0c?q=80&w=700&auto=webp" alt="Blusas" loading="lazy" width="700" height="440">
                     <div class="category-content">
                         <h2 class="display-5 fw-bold text-white">BLUSAS</h2>
                         <span class="text-white text-uppercase" style="letter-spacing: 2px;">Nuevos Ingresos</span>
@@ -256,22 +259,22 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="row g-2">
             <div class="col-md-3 col-6">
                 <div class="instagram-item aspect-square overflow-hidden" style="aspect-ratio: 1/1;">
-                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600&auto=format&fit=crop" class="w-100 h-100 border" style="object-fit: cover;" alt="Cliente satisfecha 1">
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=400&auto=webp&fit=crop" class="w-100 h-100 border" style="object-fit: cover;" alt="Cliente satisfecha con estilo streetwear" width="400" height="400">
                 </div>
             </div>
             <div class="col-md-3 col-6">
                 <div class="instagram-item aspect-square overflow-hidden" style="aspect-ratio: 1/1;">
-                    <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=600&auto=format&fit=crop" class="w-100 h-100 border" style="object-fit: cover;" alt="Cliente satisfecha 2">
+                    <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=400&auto=webp&fit=crop" class="w-100 h-100 border" style="object-fit: cover;" alt="Cliente satisfecha con ropa elegante" width="400" height="400">
                 </div>
             </div>
             <div class="col-md-3 col-6">
                 <div class="instagram-item aspect-square overflow-hidden" style="aspect-ratio: 1/1;">
-                    <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=600&auto=format&fit=crop" class="w-100 h-100 border" style="object-fit: cover;" alt="Cliente satisfecha 3">
+                    <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=400&auto=webp&fit=crop" class="w-100 h-100 border" style="object-fit: cover;" alt="Cliente satisfecha con top casual" width="400" height="400">
                 </div>
             </div>
             <div class="col-md-3 col-6">
                 <div class="instagram-item aspect-square overflow-hidden" style="aspect-ratio: 1/1;">
-                    <img src="https://images.unsplash.com/photo-1618932260643-eee4a2f652a6?q=80&w=600&auto=format&fit=crop" class="w-100 h-100 border" style="object-fit: cover;" alt="Cliente satisfecha 4">
+                    <img src="https://images.unsplash.com/photo-1618932260643-eee4a2f652a6?q=80&w=400&auto=webp&fit=crop" class="w-100 h-100 border" style="object-fit: cover;" alt="Cliente satisfecha con atuendo deportivo" width="400" height="400">
                 </div>
             </div>
         </div>
@@ -286,21 +289,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="feature-card">
                     <i class="fas fa-truck feature-icon"></i>
                     <h6 class="feature-title">ENVÍOS NACIONALES</h6>
-                    <p class="feature-text">Contamos con cobertura en todo el país a través de las mejores transportadoras.</p>
+                    <p class="feature-text" style="color: #555;">Contamos con cobertura en todo el país a través de las mejores transportadoras.</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-12">
                 <div class="feature-card">
                     <i class="fas fa-shield-alt feature-icon"></i>
                     <h6 class="feature-title">COMPRA SEGURA</h6>
-                    <p class="feature-text">Tus transacciones están protegidas. Recibimos todos los medios de pago.</p>
+                    <p class="feature-text" style="color: #555;">Tus transacciones están protegidas. Recibimos todos los medios de pago.</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-12">
                 <div class="feature-card">
                     <i class="fab fa-whatsapp feature-icon"></i>
                     <h6 class="feature-title">ATENCIÓN WHATSAPP</h6>
-                    <p class="feature-text">¿Dudas con tu talla? Nuestras asesoras están listas para ayudarte en línea de inmediato.</p>
+                    <p class="feature-text" style="color: #555;">¿Dudas con tu talla? Nuestras asesoras están listas para ayudarte en línea de inmediato.</p>
                 </div>
             </div>
         </div>
