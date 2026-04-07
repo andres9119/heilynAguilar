@@ -1,0 +1,113 @@
+{% extends 'dashboard_base.html' %}
+
+{% block extra_css %}
+<style>
+    .inventory-tools { display: flex; gap: 1rem; margin-bottom: 2rem; align-items: center; }
+    .search-input { padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 8px; width: 320px; font-size: 0.9rem; }
+    .select-input { padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; background: #fff; }
+
+    .table-inventory { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); font-size: 0.9rem; }
+    .table-inventory th { text-align: left; background: #f8fafc; padding: 1rem; color: var(--text-muted); font-weight: 600; border-bottom: 2px solid var(--border); }
+    .table-inventory td { padding: 1rem; border-bottom: 1px solid var(--border); }
+    .table-inventory tr:hover { background: #f9fafb; }
+
+    .stock-badge { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 700; min-width: 40px; text-align: center; }
+    .stock-low { background: #fee2e2; color: #ef4444; }
+    .stock-ok { background: #dcfce7; color: #166534; }
+
+    /* Modal / Adjustment Form */
+    .ajust-form { display: flex; gap: 0.5rem; align-items: center; }
+    .ajust-input { width: 60px; padding: 0.4rem; border: 1px solid var(--border); border-radius: 6px; }
+    .ajust-select { padding: 0.4rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.8rem; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Gestión de Inventario Real</h1>
+    <div class="header-actions">
+        <a href="{% url 'admin:inventario_producto_add' %}" target="_blank" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Nuevo Producto
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <form method="GET" class="inventory-tools">
+        <input type="text" name="q" value="{{ query }}" placeholder="Buscar por nombre o descripción..." class="search-input">
+        <select name="categoria" class="select-input" onchange="this.form.submit()">
+            <option value="">Todas las categorías</option>
+            {% for cat_slug, cat_name in categorias %}
+            <option value="{{ cat_slug }}" {% if categoria_filtro == cat_slug %}selected{% endif %}>{{ cat_name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-outline">Filtrar</button>
+        {% if query or categoria_filtro %}
+        <a href="{% url 'inventory_manager' %}" style="font-size: 0.85rem; color: var(--text-muted);">Limpiar filtros</a>
+        {% endif %}
+    </form>
+
+    <table class="table-inventory">
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Producto / Variación</th>
+                <th>Talla</th>
+                <th>Color</th>
+                <th>Stock Actual</th>
+                <th>Acción Rápida (Ingreso/Egreso)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for var in variaciones %}
+            <tr>
+                <td>
+                    {% if var.producto.imagen %}
+                    <img src="{{ var.producto.imagen.url }}" width="45" height="45" style="object-fit: cover; border-radius: 6px;">
+                    {% else %}
+                    <div style="width: 45px; height: 45px; background: #f1f5f9; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-image" style="color: #cbd5e1;"></i>
+                    </div>
+                    {% endif %}
+                </td>
+                <td>
+                    <strong>{{ var.producto.nombre }}</strong><br>
+                    <small style="color: var(--text-muted);">{{ var.producto.categoria }}</small>
+                </td>
+                <td>{{ var.talla }}</td>
+                <td>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <div style="width: 12px; height: 12px; border-radius: 50%; background: {{ var.color.codigo_hex }}; border: 1px solid #ddd;"></div>
+                        {{ var.color }}
+                    </div>
+                </td>
+                <td>
+                    <span class="stock-badge {% if var.stock < 3 %}stock-low{% else %}stock-ok{% endif %}">
+                        {{ var.stock }}
+                    </span>
+                </td>
+                <td>
+                    <form action="{% url 'ajust_stock' var.pk %}" method="POST" class="ajust-form">
+                        {% csrf_token %}
+                        <select name="tipo" class="ajust-select">
+                            <option value="INGRESO">+ Ingreso</option>
+                            <option value="EGRESO">- Egreso</option>
+                        </select>
+                        <input type="number" name="cantidad" value="1" min="1" class="ajust-input">
+                        <button type="submit" class="btn btn-primary" style="padding: 0.4rem 0.6rem;" title="Guardar ajuste">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                    No se encontraron productos con los filtros aplicados.
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

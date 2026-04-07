@@ -14,6 +14,7 @@ sitemaps = {
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('gestion/', include('inventario.urls_admin')), # Administración personalizada
     path('', include('core.urls')),          # páginas públicas
     path('tienda/', include('inventario.urls')), # renamed inventario to tienda in URL
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),

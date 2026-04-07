@@ -108,3 +108,23 @@ class ImagenProducto(models.Model):
             self.imagen.save(name, ContentFile(output.read()), save=False)
             
         super().save(*args, **kwargs)
+
+class MovimientoStock(models.Model):
+    TIPO_CHOICES = [
+        ('INGRESO', 'Ingreso'),
+        ('EGRESO', 'Egreso'),
+    ]
+    variacion = models.ForeignKey(Variacion, related_name='movimientos', on_delete=models.CASCADE)
+    tipo = models.CharField(max_length=10, choices=TIPO_CHOICES)
+    cantidad = models.PositiveIntegerField()
+    motivo = models.CharField(max_length=255, help_text="Ej: Compra, Venta, Ajuste de inventario, Daño")
+    fecha = models.DateTimeField(auto_now_add=True)
+    usuario = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True, blank=True)
+
+    class Meta:
+        verbose_name = "Movimiento de Stock"
+        verbose_name_plural = "Movimientos de Stock"
+        ordering = ['-fecha']
+
+    def __str__(self):
+        return f"{self.tipo} - {self.variacion} - {self.cantidad}"

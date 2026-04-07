@@ -1,0 +1,74 @@
+{% extends 'dashboard_base.html' %}
+
+{% block extra_css %}
+<style>
+    .log-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; border: 1px solid var(--border); overflow: hidden; }
+    .log-table th { background: #f8fafc; padding: 1rem; text-align: left; border-bottom: 2px solid var(--border); color: var(--text-muted); font-size: 0.85rem; font-weight: 600; }
+    .log-table td { padding: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    
+    .type-badge { padding: 0.35rem 0.6rem; border-radius: 6px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+    .type-ingreso { background: #dcfce7; color: #166534; }
+    .type-egreso { background: #fee2e2; color: #991b1b; }
+
+    .user-info { font-size: 0.8rem; color: var(--text-muted); }
+    .product-info a { text-decoration: none; color: var(--primary); font-weight: 500; }
+    .product-info a:hover { color: var(--accent); }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Historial de Movimientos</h1>
+    <div class="header-actions">
+        <p style="color: var(--text-muted); font-size: 0.85rem;">Mostrando todos los registros de entrada y salida.</p>
+    </div>
+</div>
+
+<div class="card" style="padding: 0;">
+    <table class="log-table">
+        <thead>
+            <tr>
+                <th>Fecha y Hora</th>
+                <th>Tipo</th>
+                <th>Producto / Variación</th>
+                <th>Cantidad</th>
+                <th>Motivo / Comentario</th>
+                <th>Usuario</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mov in movimientos %}
+            <tr>
+                <td>{{ mov.fecha|date:"d/m/Y H:i" }}</td>
+                <td>
+                    <span class="type-badge type-{{ mov.tipo|lower }}">
+                        <i class="fas fa-{% if mov.tipo == 'INGRESO' %}arrow-down{% else %}arrow-up{% endif %}"></i>
+                        {{ mov.tipo }}
+                    </span>
+                </td>
+                <td class="product-info">
+                    <strong>{{ mov.variacion.producto.nombre }}</strong><br>
+                    <small>{{ mov.variacion.talla }} - {{ mov.variacion.color }}</small>
+                </td>
+                <td>
+                    <strong style="font-size: 1.1rem;">{{ mov.cantidad }}</strong> uds.
+                </td>
+                <td style="color: var(--text-main);">{{ mov.motivo }}</td>
+                <td class="user-info">
+                    <i class="fas fa-user-circle"></i> 
+                    {% if mov.usuario %}{{ mov.usuario.get_full_name|default:mov.usuario.username }}{% else %}Sistema{% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" style="text-align: center; padding: 4rem; color: var(--text-muted);">
+                    <i class="fas fa-history" style="font-size: 3rem; margin-bottom: 1rem; display: block; opacity: 0.3;"></i>
+                    No hay registros de movimientos aún.
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
