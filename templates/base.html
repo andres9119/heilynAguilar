@@ -273,8 +273,8 @@
     <nav class="navbar navbar-expand-lg navbar-light sticky-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'inicio' %}">
-                <img src="{% static 'img/productos/logo-sm.webp' %}" alt="Logo" height="40" width="40"
-                    class="d-inline-block align-top">
+                <img src="{% static 'img/productos/logo-sm.webp' %}" alt="Logo" height="40" width="120"
+                    class="d-inline-block align-top" style="height: 40px; width: auto;">
                 <span>By: Heilyn Aguilar</span>
             </a>
 
@@ -374,8 +374,8 @@
                             style="cursor: default;"><i class="fab fa-facebook"></i></a>
                     </div>
                     <div class="footer-logo-small mt-2">
-                        <img src="{% static 'img/productos/logo-md.webp' %}" alt="Logo Footer" height="80" width="80"
-                            class="opacity-75">
+                        <img src="{% static 'img/productos/logo-md.webp' %}" alt="Logo Footer" height="240" width="240"
+                            class="opacity-75" style="height: 80px; width: 80px;">
                     </div>
                 </div>
             </div>
@@ -389,7 +389,7 @@
     <div class="bag-overlay" id="bag-overlay"></div>
     <div id="bag-sidebar">
         <div class="bag-header">
-            <h6 class="mb-0 fw-bold" style="letter-spacing: 2px;">MI SELECCIÓN</h6>
+            <h2 class="mb-0 fw-bold fs-6" style="letter-spacing: 2px;">MI SELECCIÓN</h2>
             <button class="btn-close" id="close-sidebar" aria-label="Cerrar bolsa de compra"></button>
         </div>
         <div class="bag-items" id="bag-items-container">
@@ -419,11 +419,11 @@
 
             <button
                 class="btn btn-dark w-100 rounded-0 py-3 mb-2 d-flex align-items-center justify-content-center gap-2 shadow-sm"
-                id="whatsapp-checkout">
+                id="whatsapp-checkout" aria-label="Enviar pedido por WhatsApp">
                 <i class="fab fa-whatsapp fs-5"></i> ENVIAR MI PEDIDO Y RECIBO
             </button>
             <button class="btn btn-link text-muted w-100 py-2 small text-decoration-none shadow-none" id="clear-bag"
-                style="font-size: 0.7rem;">Vaciar toda la bolsa</button>
+                style="font-size: 0.7rem;" aria-label="Vaciar toda la bolsa de compras">Vaciar toda la bolsa</button>
         </div>
     </div>
 
