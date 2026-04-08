@@ -115,7 +115,7 @@
             <div class="col-lg-3 col-md-4 col-6">
                 <div class="product-card">
                     <div class="product-image-container">
-                        <a href="{% url 'detalle_producto' producto.pk %}">
+                        <a href="{% url 'detalle_producto' producto.slug %}">
                             {% if producto.imagen %}
                             <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="product-image">
                             {% else %}
@@ -139,7 +139,7 @@
                         {% endif %}
                     </div>
                     <div class="product-info">
-                        <a href="{% url 'detalle_producto' producto.pk %}" class="product-title text-uppercase">{{ producto.nombre }}</a>
+                        <a href="{% url 'detalle_producto' producto.slug %}" class="product-title text-uppercase">{{ producto.nombre }}</a>
                         
                         <!-- Mini Tallas Refined -->
                         <div class="product-sizes mb-2 d-flex flex-wrap gap-1" style="font-size: 0.7rem; letter-spacing: 0.5px;">

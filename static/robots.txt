@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /tienda/actualizar_cantidad/
 
-Sitemap: {{ request.build_absolute_uri }}/sitemap.xml
+Sitemap: https://byheilynaguilar.com/sitemap.xml

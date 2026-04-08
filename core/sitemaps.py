@@ -31,4 +31,4 @@ class ProductSitemap(Sitemap):
         return obj.fecha_ingreso
 
     def location(self, obj):
-        return reverse('detalle_producto', args=[obj.pk])
+        return reverse('detalle_producto', args=[obj.slug])

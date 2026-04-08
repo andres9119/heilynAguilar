@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Contacto - Spa de Uñas{% endblock %}
+{% block title %}Contacto - Heilyn Aguilar Store{% endblock %}
 
 {% block content %}
 <!-- Hero Banner -->
@@ -48,8 +48,8 @@
                     <div class="contact-icon location-icon">📍</div>
                     <h5 class="contact-title">Dirección</h5>
                     <p class="contact-description">Ven a visitarnos</p>
-                    <p class="contact-info">Calle 123 #45-67<br>Bogotá, Colombia</p>
-                    <a href="https://maps.google.com" target="_blank" class="btn btn-outline-primary">Ver en Maps</a>
+                    <p class="contact-info">Cúcuta, Norte de Santander<br>Colombia</p>
+                    <a href="https://maps.google.com" target="_blank" class="btn btn-outline-primary">Ver Ubicación</a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
@@ -105,12 +105,12 @@
                     <div class="accordion-item faq-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                ¿Necesito reservar cita con anticipación?
+                                ¿Hacen envíos a todo Colombia?
                             </button>
                         </h2>
                         <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                Sí, recomendamos reservar con al menos 24 horas de anticipación para garantizar disponibilidad, especialmente los fines de semana.
+                                Sí, realizamos envíos nacionales a todas las ciudades del país a través de las principales transportadoras.
                             </div>
                         </div>
                     </div>
@@ -122,19 +122,19 @@
                         </h2>
                         <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                Aceptamos efectivo, tarjetas de crédito/débito, transferencias bancarias y pagos por Nequi y Daviplata.
+                                Aceptamos transferencias por Nequi, Daviplata, Bancolombia y pagos con tarjeta de crédito/débito.
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item faq-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                                ¿Cuánto tiempo duran los tratamientos?
+                                ¿Cómo puedo saber mi talla?
                             </button>
                         </h2>
                         <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                Los tiempos varían según el servicio: Manicure (45 min), Pedicure (60 min), Uñas Acrílicas (90 min), Nail Art (30-60 min adicionales).
+                                Puedes consultar nuestra Guía de Tallas en el menú inferior o escribirnos por WhatsApp para una asesoría personalizada.
                             </div>
                         </div>
                     </div>
@@ -160,22 +160,12 @@
                     <a href="https://wa.me/573001234567" target="_blank" class="btn btn-whatsapp w-100">Chatear Ahora</a>
                 </div>
             </div>
-            {% if user.is_superuser %}
             <div class="col-lg-4 col-md-6">
                 <div class="cta-card h-100">
-                    <div class="cta-icon">📅</div>
-                    <h5 class="cta-title">Agendar Cita</h5>
-                    <p class="cta-description">Reserva tu espacio</p>
-                    <a href="{% url 'agendar_cita' %}" class="btn btn-light w-100">Agendar Ahora</a>
-                </div>
-            </div>
-            {% endif %}
-            <div class="col-lg-4 col-md-6">
-                <div class="cta-card h-100">
-                    <div class="cta-icon">💅</div>
-                    <h5 class="cta-title">Ver Servicios</h5>
-                    <p class="cta-description">Conoce nuestros tratamientos</p>
-                    <a href="{% url 'servicios' %}" class="btn btn-outline-light w-100">Explorar</a>
+                    <div class="cta-icon">👗</div>
+                    <h5 class="cta-title">Ver Colección</h5>
+                    <p class="cta-description">Explora nuestra nueva temporada</p>
+                    <a href="{% url 'inicio' %}" class="btn btn-outline-light w-100">Ver Catálogo</a>
                 </div>
             </div>
         </div>

@@ -28,8 +28,8 @@ def inicio(request):
         'categorias': categorias,
         'tallas_list': tallas_list
     })
-def detalle_producto(request, pk):
-    producto = get_object_or_404(Producto, pk=pk, activo=True)
+def detalle_producto(request, slug):
+    producto = get_object_or_404(Producto, slug=slug, activo=True)
     return render(request, 'core/detalle_producto.html', {'producto': producto})
 
 def contacto(request):

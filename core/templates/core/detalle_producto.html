@@ -6,7 +6,7 @@
 {% block og_title %}{{ producto.nombre }} | Heilyn Aguilar Store{% endblock %}
 {% block og_description %}{{ producto.descripcion|default:"Moda femenina premium en Cúcuta" }} | ${{ producto.precio|floatformat:0|intcomma }} COP - Envíos a todo Colombia.{% endblock %}
 {% if producto.imagen %}{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{{ producto.imagen.url }}{% endblock %}{% endif %}
-{% block canonical %}{{ request.scheme }}://{{ request.get_host }}{% url 'detalle_producto' producto.pk %}{% endblock %}
+{% block canonical %}{{ request.scheme }}://{{ request.get_host }}{% url 'detalle_producto' producto.slug %}{% endblock %}
 
 
 {% block content %}

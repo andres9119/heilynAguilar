@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.files.base import ContentFile
+from django.utils.text import slugify
 import os
 from PIL import Image
 from io import BytesIO
@@ -35,6 +36,7 @@ class Producto(models.Model):
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     categoria = models.CharField(max_length=50, choices=CATEGORIAS, blank=True, null=True)
     imagen = models.ImageField(upload_to='productos/', blank=True, null=True, help_text="Imagen principal")
+    slug = models.SlugField(max_length=200, unique=True, blank=True, null=True)
     fecha_ingreso = models.DateField(auto_now_add=True)
     activo = models.BooleanField(default=True)
 
@@ -62,6 +64,15 @@ class Producto(models.Model):
                 name = os.path.splitext(self.imagen.name)[0] + ".webp"
                 self.imagen.save(name, ContentFile(output.read()), save=False)
             
+        if not self.slug:
+            base_slug = slugify(self.nombre)
+            slug = base_slug
+            counter = 1
+            while Producto.objects.filter(slug=slug).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+            self.slug = slug
+
         super().save(*args, **kwargs)
 
     @property
