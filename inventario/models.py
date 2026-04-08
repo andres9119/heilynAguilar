@@ -51,8 +51,8 @@ class Producto(models.Model):
                     img = img.convert("RGB")
                 
                 # Redimensionar solo si excede el ancho deseado
-                if img.width > 1200:
-                    output_size = (1200, int((1200 * img.height) / img.width))
+                if img.width > 800:
+                    output_size = (800, int((800 * img.height) / img.width))
                     img.thumbnail(output_size, Image.LANCZOS)
                 
                 output = BytesIO()
@@ -96,8 +96,8 @@ class ImagenProducto(models.Model):
             if img.mode in ("RGBA", "P"):
                 img = img.convert("RGB")
             
-            if img.width > 1200:
-                output_size = (1200, int((1200 * img.height) / img.width))
+            if img.width > 800:
+                output_size = (800, int((800 * img.height) / img.width))
                 img.thumbnail(output_size, Image.LANCZOS)
                 
             output = BytesIO()

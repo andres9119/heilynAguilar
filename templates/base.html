@@ -57,7 +57,6 @@
       gtag('js', new Date());
       gtag('config', 'G-TCS3JX9RV7');
     </script>
-    -->
 
     <!-- Bloque extra para metas específicas por página -->
     {% block meta_extra %}{% endblock %}
@@ -120,7 +119,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/api/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
     <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
@@ -331,7 +330,7 @@
 
             <div class="row g-4">
                 <div class="col-lg-3 col-md-6">
-                    <h6 class="footer-heading">¿NECESITAS AYUDA?</h6>
+                    <h3 class="footer-heading h6">¿NECESITAS AYUDA?</h3>
                     <ul class="footer-links">
                         <li><a href="{% url 'politicas' %}">Políticas de privacidad</a></li>
                         <li><a href="{% url 'terminos' %}">T&C - Servicio General</a></li>
@@ -341,7 +340,7 @@
                 </div>
                 <!-- Columna 2: Sobre Nosotros -->
                 <div class="col-lg-3 col-md-6">
-                    <h6 class="footer-heading mb-3">SOBRE NOSOTROS</h6>
+                    <h3 class="footer-heading h6 mb-3">SOBRE NOSOTROS</h3>
                     <p class="small text-muted mb-4">HEILYN AGUILAR es una marca dedicada a la mujer moderna, ofreciendo
                         las últimas tendencias en moda con calidad y elegancia.</p>
                     <ul class="footer-links">
@@ -351,7 +350,7 @@
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h6 class="footer-heading">NUESTRAS CATEGORÍAS</h6>
+                    <h3 class="footer-heading h6">NUESTRAS CATEGORÍAS</h3>
                     <ul class="footer-links">
                         <li><a href="{% url 'inicio' %}?categoria=Bodys#tienda">Bodys</a></li>
                         <li><a href="{% url 'inicio' %}?categoria=Corset#tienda">Corset</a></li>
@@ -362,7 +361,7 @@
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h6 class="footer-heading">SÍGUENOS</h6>
+                    <h3 class="footer-heading h6">SÍGUENOS</h3>
                     <div class="social-icons d-flex gap-4 mb-4">
                         <a href="https://www.instagram.com/byheilynaguilar?igsh=ZHlydmE0ZGh3cDgz&utm_source=qr"
                             target="_blank" class="fs-4" aria-label="Síguenos en Instagram" title="Síguenos en Instagram"><i
@@ -375,7 +374,7 @@
                             style="cursor: default;"><i class="fab fa-facebook"></i></a>
                     </div>
                     <div class="footer-logo-small mt-2">
-                        <img src="{% static 'img/productos/logo-md.webp' %}" alt="Logo Footer" height="80" width="160"
+                        <img src="{% static 'img/productos/logo-md.webp' %}" alt="Logo Footer" height="80" width="80"
                             class="opacity-75">
                     </div>
                 </div>
