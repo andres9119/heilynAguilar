@@ -111,10 +111,16 @@
     <link rel="shortcut icon" type="image/png" href="{% static 'img/productos/logo-marca.png' %}">
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/productos/logo-lg.webp' %}">
 
+    <!-- CDNs Preconnect -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/api/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
     <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
@@ -246,7 +252,7 @@
     <!-- Page Loader -->
     <div id="page-loader">
         <div class="loader-content">
-            <img src="{% static 'img/productos/logo-sm.webp' %}" alt="Logo" class="loader-logo">
+            <img src="{% static 'img/productos/logo-sm.webp' %}" alt="Logo" class="loader-logo" width="60" height="60">
             <div class="loader-spinner"></div>
         </div>
     </div>
@@ -260,7 +266,7 @@
     <!-- (I'll keep the rest as is but focus on the end) -->
 
     <!-- Floating WhatsApp -->
-    <a href="https://wa.me/573123080861" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/573123080861" class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -268,7 +274,7 @@
     <nav class="navbar navbar-expand-lg navbar-light sticky-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'inicio' %}">
-                <img src="{% static 'img/productos/logo-sm.webp' %}" alt="Logo" height="40"
+                <img src="{% static 'img/productos/logo-sm.webp' %}" alt="Logo" height="40" width="40"
                     class="d-inline-block align-top">
                 <span>By: Heilyn Aguilar</span>
             </a>
@@ -359,17 +365,17 @@
                     <h6 class="footer-heading">SÍGUENOS</h6>
                     <div class="social-icons d-flex gap-4 mb-4">
                         <a href="https://www.instagram.com/byheilynaguilar?igsh=ZHlydmE0ZGh3cDgz&utm_source=qr"
-                            target="_blank" class="fs-4" title="Síguenos en Instagram"><i
+                            target="_blank" class="fs-4" aria-label="Síguenos en Instagram" title="Síguenos en Instagram"><i
                                 class="fab fa-instagram"></i></a>
                         <a href="https://wa.me/573123080861" target="_blank" class="fs-4"
-                            title="Escríbenos por WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                        <a href="javascript:void(0)" class="fs-4 opacity-50" title="Próximamente"
+                            aria-label="Escríbenos por WhatsApp" title="Escríbenos por WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="fs-4 opacity-50" aria-label="Tiktok - Próximamente" title="Próximamente"
                             style="cursor: default;"><i class="fab fa-tiktok"></i></a>
-                        <a href="javascript:void(0)" class="fs-4 opacity-50" title="Próximamente"
+                        <a href="#" class="fs-4 opacity-50" aria-label="Facebook - Próximamente" title="Próximamente"
                             style="cursor: default;"><i class="fab fa-facebook"></i></a>
                     </div>
                     <div class="footer-logo-small mt-2">
-                        <img src="{% static 'img/productos/logo-md.webp' %}" alt="Logo Footer" height="80"
+                        <img src="{% static 'img/productos/logo-md.webp' %}" alt="Logo Footer" height="80" width="160"
                             class="opacity-75">
                     </div>
                 </div>

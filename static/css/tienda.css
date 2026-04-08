@@ -237,7 +237,7 @@ h1, h2, h3, .navbar-brand, .footer-heading {
     position: absolute;
     top: 15px;
     left: 15px;
-    background: var(--accent-pink); /* Usar el rosa del logo */
+    background: #8e6a89; /* Tono de rosa más oscuro para cumplimiento WCAG (Contraste 4.5+) */
     color: #fff;
     padding: 4px 12px;
     font-size: 0.65rem;

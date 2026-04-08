@@ -6,7 +6,7 @@ class StaticViewSitemap(Sitemap):
     changefreq = 'daily'
 
     def items(self):
-        return ['inicio', 'contacto']
+        return ['inicio', 'contacto', 'politicas', 'terminos', 'faq', 'devoluciones', 'nosotros', 'beneficios', 'tallas']
 
     def location(self, item):
         return reverse(item)
@@ -15,8 +15,10 @@ class StaticViewSitemap(Sitemap):
         priorities = {
             'inicio': 1.0,
             'contacto': 0.5,
+            'nosotros': 0.7,
+            'beneficios': 0.7,
         }
-        return priorities.get(item, 0.6)
+        return priorities.get(item, 0.4)
 
 class ProductSitemap(Sitemap):
     changefreq = "daily"
