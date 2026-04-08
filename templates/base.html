@@ -52,10 +52,10 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TCS3JX9RV7"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-TCS3JX9RV7');
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-TCS3JX9RV7');
     </script>
 
     <!-- Bloque extra para metas específicas por página -->
@@ -119,7 +119,8 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"
+        media="print" onload="this.media='all'">
     <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
@@ -303,15 +304,16 @@
                     <div class="search-wrapper d-none d-lg-block">
                         <form action="{% url 'inicio' %}" method="get" style="position: relative;">
                             <label for="search-input" class="visually-hidden">Buscar productos</label>
-                            <input type="text" id="search-input" name="q" class="search-input" placeholder="¿Qué estás buscando?"
-                                value="{{ request.GET.q|default:'' }}">
+                            <input type="text" id="search-input" name="q" class="search-input"
+                                placeholder="¿Qué estás buscando?" value="{{ request.GET.q|default:'' }}">
                             <button type="submit" class="p-0 border-0 bg-transparent" aria-label="Buscar"
                                 style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #999;">
                                 <i class="fas fa-search"></i>
                             </button>
                         </form>
                     </div>
-                    <button type="button" class="nav-icon position-relative border-0 bg-transparent p-0" id="open-bag" aria-label="Abrir bolsa de compra" aria-haspopup="dialog">
+                    <button type="button" class="nav-icon position-relative border-0 bg-transparent p-0" id="open-bag"
+                        aria-label="Abrir bolsa de compra" aria-haspopup="dialog">
                         <i class="fas fa-shopping-bag"></i>
                         <span class="bag-count-badge" id="bag-count">0</span>
                     </button>
@@ -365,12 +367,14 @@
                     <h3 class="footer-heading h6">SÍGUENOS</h3>
                     <div class="social-icons d-flex gap-4 mb-4">
                         <a href="https://www.instagram.com/byheilynaguilar?igsh=ZHlydmE0ZGh3cDgz&utm_source=qr"
-                            target="_blank" class="fs-4" aria-label="Síguenos en Instagram" title="Síguenos en Instagram"><i
-                                class="fab fa-instagram"></i></a>
+                            target="_blank" class="fs-4" aria-label="Síguenos en Instagram"
+                            title="Síguenos en Instagram"><i class="fab fa-instagram"></i></a>
                         <a href="https://wa.me/573123080861" target="_blank" class="fs-4"
-                            aria-label="Escríbenos por WhatsApp" title="Escríbenos por WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#" class="fs-4 opacity-50" aria-label="Tiktok - Próximamente" title="Próximamente"
-                            style="cursor: default;"><i class="fab fa-tiktok"></i></a>
+                            aria-label="Escríbenos por WhatsApp" title="Escríbenos por WhatsApp"><i
+                                class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.tiktok.com/@byheilynaguilar?_r=1&_t=ZS-95NIDpg1AEE" class="fs-4 opacity-50"
+                            aria-label="Tiktok - Próximamente" title="Próximamente" style="cursor: default;"><i
+                                class="fab fa-tiktok"></i></a>
                         <a href="#" class="fs-4 opacity-50" aria-label="Facebook - Próximamente" title="Próximamente"
                             style="cursor: default;"><i class="fab fa-facebook"></i></a>
                     </div>
@@ -381,7 +385,7 @@
                 </div>
             </div>
             <div class="footer-bottom mt-5 pt-4 border-top text-center text-muted small">
-                <p>&copy; 2024 HEILYN AGUILAR. Todos los derechos reservados. | Cúcuta, Colombia</p>
+                <p>&copy; 2026 HEILYN AGUILAR. Todos los derechos reservados. | Cúcuta, Colombia</p>
             </div>
         </div>
     </footer>
