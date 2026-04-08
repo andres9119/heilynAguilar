@@ -6,4 +6,5 @@ urlpatterns = [
     path('inventario/', views_admin.inventory_manager, name='inventory_manager'),
     path('ajustar-stock/<int:pk>/', views_admin.ajust_stock, name='ajust_stock'),
     path('movimientos/', views_admin.movements_log, name='movements_log'),
+    path('registrar-venta/', views_admin.registrar_venta, name='registrar_venta'),
 ]

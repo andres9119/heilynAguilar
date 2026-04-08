@@ -19,6 +19,15 @@
     .ajust-form { display: flex; gap: 0.5rem; align-items: center; }
     .ajust-input { width: 60px; padding: 0.4rem; border: 1px solid var(--border); border-radius: 6px; }
     .ajust-select { padding: 0.4rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.8rem; }
+    .cost-input { width: 100px; padding: 0.4rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.85rem; }
+
+    /* Modal Venta */
+    .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+    .modal-content { background: #fff; margin: 10% auto; padding: 2rem; border-radius: 12px; width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-size: 0.85rem; color: var(--text-muted); }
+    .form-control { width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; }
 </style>
 {% endblock %}
 
@@ -54,8 +63,9 @@
                 <th>Producto / Variación</th>
                 <th>Talla</th>
                 <th>Color</th>
+                <th>Precio / Costo</th>
                 <th>Stock Actual</th>
-                <th>Acción Rápida (Ingreso/Egreso)</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -82,22 +92,36 @@
                     </div>
                 </td>
                 <td>
+                    <div style="font-weight: 600;">P: ${{ var.producto.precio|floatformat:0 }}</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">C: ${{ var.producto.precio_costo|floatformat:0 }}</div>
+                </td>
+                <td>
                     <span class="stock-badge {% if var.stock < 3 %}stock-low{% else %}stock-ok{% endif %}">
                         {{ var.stock }}
                     </span>
                 </td>
                 <td>
-                    <form action="{% url 'ajust_stock' var.pk %}" method="POST" class="ajust-form">
-                        {% csrf_token %}
-                        <select name="tipo" class="ajust-select">
-                            <option value="INGRESO">+ Ingreso</option>
-                            <option value="EGRESO">- Egreso</option>
-                        </select>
-                        <input type="number" name="cantidad" value="1" min="1" class="ajust-input">
-                        <button type="submit" class="btn btn-primary" style="padding: 0.4rem 0.6rem;" title="Guardar ajuste">
-                            <i class="fas fa-check"></i>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <!-- Ajuste Rápido -->
+                        <form action="{% url 'ajust_stock' var.pk %}" method="POST" class="ajust-form">
+                            {% csrf_token %}
+                            <select name="tipo" class="ajust-select" onchange="toggleCostInput(this, 'cost-{{ var.pk }}')">
+                                <option value="INGRESO">+ Ingreso</option>
+                                <option value="EGRESO">- Egreso / Pérdida</option>
+                            </select>
+                            <input type="number" name="cantidad" value="1" min="1" class="ajust-input">
+                            <input type="number" name="precio_costo" id="cost-{{ var.pk }}" placeholder="Costo" class="cost-input" value="{{ var.producto.precio_costo|floatformat:0 }}">
+                            <button type="submit" class="btn btn-primary" style="padding: 0.4rem 0.6rem;" title="Guardar ajuste">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </form>
+                        
+                        <!-- Botón Venta -->
+                        <button class="btn btn-outline" style="width: 100%; border-color: #10b981; color: #10b981; padding: 0.4rem;" 
+                                onclick="openSaleModal('{{ var.pk }}', '{{ var.producto.nombre }} ({{ var.talla }} - {{ var.color }})', '{{ var.producto.precio|floatformat:0 }}', '{{ var.stock }}')">
+                            <i class="fas fa-cart-shopping me-1"></i> Registrar Venta
                         </button>
-                    </form>
+                    </div>
                 </td>
             </tr>
             {% empty %}
@@ -110,4 +134,68 @@
         </tbody>
     </table>
 </div>
+
+<!-- Modal Venta -->
+<div id="saleModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalTitle" style="font-size: 1.1rem; margin: 0;">Registrar Venta</h2>
+            <button class="btn-close" onclick="closeSaleModal()"></button>
+        </div>
+        <form action="{% url 'registrar_venta' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="variacion_id" id="modalVariacionId">
+            
+            <div class="form-group">
+                <label>Cantidad (Disp: <span id="modalStock"></span>)</label>
+                <input type="number" name="cantidad" value="1" min="1" class="form-control" id="modalQty" onchange="validateQty()">
+            </div>
+            
+            <div class="form-group">
+                <label>Precio de Venta ($)</label>
+                <input type="number" name="precio_venta" id="modalPrice" class="form-control">
+            </div>
+
+            <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                <button type="button" class="btn btn-outline w-100" onclick="closeSaleModal()">Cancelar</button>
+                <button type="submit" class="btn btn-primary w-100" style="background: #10b981; border: none;">Confirmar Venta</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function toggleCostInput(select, inputId) {
+        const input = document.getElementById(inputId);
+        // El costo solo es editable en ingreso? No, el usuario dijo "considerarse perdida" en egreso,
+        // así que el costo es necesario en ambos para registrar el valor de la inversión o pérdida.
+        // Lo dejamos visible siempre para dar flexibilidad.
+    }
+
+    function openSaleModal(pk, title, price, stock) {
+        document.getElementById('modalVariacionId').value = pk;
+        document.getElementById('modalTitle').innerText = 'Vender: ' + title;
+        document.getElementById('modalPrice').value = price;
+        document.getElementById('modalStock').innerText = stock;
+        document.getElementById('modalQty').max = stock;
+        document.getElementById('saleModal').style.display = 'block';
+    }
+
+    function closeSaleModal() {
+        document.getElementById('saleModal').style.display = 'none';
+    }
+
+    function validateQty() {
+        const qty = document.getElementById('modalQty');
+        const max = parseInt(document.getElementById('modalStock').innerText);
+        if (qty.value > max) qty.value = max;
+    }
+
+    window.onclick = function(event) {
+        const modal = document.getElementById('saleModal');
+        if (event.target == modal) closeSaleModal();
+    }
+</script>
 {% endblock %}

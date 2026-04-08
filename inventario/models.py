@@ -34,6 +34,7 @@ class Producto(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField(blank=True, null=True)
     precio = models.DecimalField(max_digits=10, decimal_places=2)
+    precio_costo = models.DecimalField(max_digits=10, decimal_places=2, default=0, help_text="Costo de compra predeterminado")
     categoria = models.CharField(max_length=50, choices=CATEGORIAS, blank=True, null=True)
     imagen = models.ImageField(upload_to='productos/', blank=True, null=True, help_text="Imagen principal")
     slug = models.SlugField(max_length=200, unique=True, blank=True, null=True)
@@ -128,6 +129,7 @@ class MovimientoStock(models.Model):
     variacion = models.ForeignKey(Variacion, related_name='movimientos', on_delete=models.CASCADE)
     tipo = models.CharField(max_length=10, choices=TIPO_CHOICES)
     cantidad = models.PositiveIntegerField()
+    precio_costo_unitario = models.DecimalField(max_digits=10, decimal_places=2, default=0, help_text="Costo unitario al momento del movimiento")
     motivo = models.CharField(max_length=255, help_text="Ej: Compra, Venta, Ajuste de inventario, Daño")
     fecha = models.DateTimeField(auto_now_add=True)
     usuario = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True, blank=True)
@@ -139,3 +141,31 @@ class MovimientoStock(models.Model):
 
     def __str__(self):
         return f"{self.tipo} - {self.variacion} - {self.cantidad}"
+
+class Venta(models.Model):
+    variacion = models.ForeignKey(Variacion, related_name='ventas', on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField()
+    precio_venta = models.DecimalField(max_digits=10, decimal_places=2)
+    precio_costo = models.DecimalField(max_digits=10, decimal_places=2, help_text="Costo unitario al momento de la venta")
+    fecha = models.DateTimeField(auto_now_add=True)
+    usuario = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True, blank=True)
+
+    class Meta:
+        verbose_name = "Venta"
+        verbose_name_plural = "Ventas"
+        ordering = ['-fecha']
+
+    def __str__(self):
+        return f"Venta {self.id} - {self.variacion.producto.nombre}"
+
+    @property
+    def total_venta(self):
+        return self.cantidad * self.precio_venta
+
+    @property
+    def total_costo(self):
+        return self.cantidad * self.precio_costo
+
+    @property
+    def ganancia(self):
+        return self.total_venta - self.total_costo

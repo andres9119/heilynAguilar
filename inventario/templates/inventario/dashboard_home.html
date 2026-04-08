@@ -1,4 +1,5 @@
 {% extends 'dashboard_base.html' %}
+{% load humanize %}
 
 {% block extra_css %}
 <style>
@@ -29,6 +30,8 @@
     .bg-blue { background: #eff6ff; color: #3b82f6; }
     .bg-green { background: #ecfdf5; color: #10b981; }
     .bg-orange { background: #fff7ed; color: #f97316; }
+    .bg-purple { background: #f5f3ff; color: #8b5cf6; }
+    .bg-red { background: #fef2f2; color: #ef4444; }
 
     .stat-info h3 { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
     .stat-info p { font-size: 1.5rem; font-weight: 600; color: var(--primary); margin-top: 0.25rem; }
@@ -58,18 +61,12 @@
 </div>
 
 <div class="grid-stats">
+    <!-- Fila 1: Inventario -->
     <div class="stat-card">
         <div class="stat-icon bg-blue"><i class="fas fa-tshirt"></i></div>
         <div class="stat-info">
-            <h3>Productos Unicos</h3>
+            <h3>Productos</h3>
             <p>{{ total_productos }}</p>
-        </div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-icon bg-green"><i class="fas fa-boxes-stacked"></i></div>
-        <div class="stat-info">
-            <h3>Stock Total</h3>
-            <p>{{ total_stock }}</p>
         </div>
     </div>
     <div class="stat-card">
@@ -77,6 +74,39 @@
         <div class="stat-info">
             <h3>Stock Bajo</h3>
             <p>{{ cantidad_stock_bajo }}</p>
+        </div>
+    </div>
+</div>
+
+<h2 style="font-size: 1rem; margin-bottom: 1rem; color: var(--text-muted); text-transform: uppercase;">Balance del Mes Actual</h2>
+<div class="grid-stats">
+    <!-- Fila 2: Finanzas -->
+    <div class="stat-card">
+        <div class="stat-icon bg-green"><i class="fas fa-hand-holding-dollar"></i></div>
+        <div class="stat-info">
+            <h3>Recogido (Ventas)</h3>
+            <p>${{ total_recogido|floatformat:0|intcomma }}</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon bg-purple"><i class="fas fa-cart-shopping"></i></div>
+        <div class="stat-info">
+            <h3>Gastado (Inversión)</h3>
+            <p>${{ total_gastado|floatformat:0|intcomma }}</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon bg-red"><i class="fas fa-trash-can"></i></div>
+        <div class="stat-info">
+            <h3>Pérdidas</h3>
+            <p>${{ total_perdidas|floatformat:0|intcomma }}</p>
+        </div>
+    </div>
+    <div class="stat-card" style="border: 2px solid #10b981;">
+        <div class="stat-icon" style="background: #10b981; color: #fff;"><i class="fas fa-chart-line"></i></div>
+        <div class="stat-info">
+            <h3>Ganancia Neta</h3>
+            <p style="color: #10b981;">${{ ganancia_neta|floatformat:0|intcomma }}</p>
         </div>
     </div>
 </div>
@@ -108,6 +138,13 @@
         {% else %}
         <p style="color: var(--text-muted); font-size: 0.9rem;">Todo el inventario está en niveles óptimos.</p>
         {% endif %}
+    </div>
+
+    <div class="card">
+        <h2 style="font-size: 1.1rem; margin-bottom: 1rem;">Tendencia de Ventas (15 días)</h2>
+        <div class="chart-container">
+            <canvas id="salesChart"></canvas>
+        </div>
     </div>
 
     <div class="card">
@@ -156,26 +193,48 @@
 {% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const ctx = document.getElementById('categoryChart').getContext('2d');
-    const data = {
+    // Gráfico de Categorías
+    const ctxCat = document.getElementById('categoryChart').getContext('2d');
+    const dataCat = {
         labels: [{% for item in stock_por_categoria %}'{{ item.nombre }}',{% endfor %}],
         datasets: [{
             data: [{% for item in stock_por_categoria %}{{ item.total }},{% endfor %}],
-            backgroundColor: [
-                '#1e293b', '#334155', '#475569', '#64748b', '#94a3b8', '#cbd5e1'
-            ],
+            backgroundColor: ['#1e293b', '#334155', '#475569', '#64748b', '#94a3b8', '#cbd5e1'],
             borderWidth: 0
         }]
     };
-    new Chart(ctx, {
+    new Chart(ctxCat, {
         type: 'doughnut',
-        data: data,
+        data: dataCat,
         options: {
             maintainAspectRatio: false,
-            plugins: {
-                legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } }
-            },
+            plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } } },
             cutout: '70%'
+        }
+    });
+
+    // Gráfico de Ventas Diarias
+    const ctxSales = document.getElementById('salesChart').getContext('2d');
+    new Chart(ctxSales, {
+        type: 'line',
+        data: {
+            labels: [{% for item in ventas_diarias %}'{{ item.dia|date:"d M" }}',{% endfor %}],
+            datasets: [{
+                label: 'Ventas ($)',
+                data: [{% for item in ventas_diarias %}{{ item.total }},{% endfor %}],
+                borderColor: '#10b981',
+                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true, grid: { display: false } },
+                x: { grid: { display: false } }
+            }
         }
     });
 </script>
