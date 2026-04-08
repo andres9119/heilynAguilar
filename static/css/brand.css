@@ -1,20 +1,20 @@
 :root {
-    --primary-color: #ff4d8d; /* Rosa Logo */
-    --primary-light: #ff80ab;
-    --primary-dark: #c2185b;
-    --secondary-color: #fce4ec;
-    --accent-color: #ffcc00; /* Amarillo Marca */
-    --brand-pink: #ff4d8d;
-    --brand-yellow: #ffcc00;
+    --primary-color: #ffb2cc; /* Rosa Pastel suave */
+    --primary-light: #ffd1df;
+    --primary-dark: #e597af;
+    --secondary-color: #fff0f5;
+    --accent-color: #fff9c4; /* Amarillo Pastel suave */
+    --brand-pink: #ffb2cc;
+    --brand-yellow: #fff59d;
     --neutral-light: #ffffff;
-    --neutral-grey: #f8f9fa;
+    --neutral-grey: #fdfafb;
     --neutral-dark: #1a1a1a;
     --text-primary: #1a1a1a;
     --text-secondary: #666666;
     --glass-bg: rgba(255, 255, 255, 0.7);
     --glass-border: rgba(255, 255, 255, 0.3);
     --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
-    --shadow-premium: 0 20px 40px rgba(233, 30, 99, 0.15);
+    --shadow-premium: 0 20px 40px rgba(255, 178, 204, 0.2);
     --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
