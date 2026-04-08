@@ -6,37 +6,43 @@
 {% block content %}
 <!-- Hero Carousel -->
 <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    {% if banners %}
     <div class="carousel-indicators">
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-label="Ir a diapositiva 1" aria-current="true"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Ir a diapositiva 2"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Ir a diapositiva 3"></button>
+        {% for banner in banners %}
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
+        {% endfor %}
     </div>
     <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=60&w=1200&auto=format&fit=crop" class="d-block w-100" alt="Moda Femenina Cúcuta" fetchpriority="high" width="1200" height="800">
-                    <div class="carousel-caption d-md-block" style="z-index: 2;">
-                        <h2 class="display-2 fw-bold mb-3">NUEVA COLECCIÓN</h2>
-                        <p class="lead mb-4">Descubre las últimas tendencias en moda. Tu estilo y sofisticación nos inspira.</p>
-                        <a href="#tienda" rel="nofollow" class="btn btn-light btn-lg rounded-0 px-5 py-3 shadow-sm">VER COLECCIÓN</a>
-                    </div>
-                </div>
-        <div class="carousel-item" data-bs-interval="5000">
-            <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=60&w=1200&auto=format&fit=crop" class="d-block w-100" alt="Denim Essentials" loading="lazy" width="1200" height="800">
-            <div class="carousel-caption d-none d-md-block" style="z-index: 2;">
-                <p class="text-uppercase mb-2" style="letter-spacing: 3px; font-size: 0.8rem; color: #555;">TIENDA DE MODA</p>
-                <h2 class="display-3 fw-bold mb-4">DENIM <br> <span class="font-elegant fw-normal">Essentials</span></h2>
-                <a href="?categoria=Shorts#tienda" rel="nofollow" class="btn btn-light px-5 py-3 rounded-0 shadow-sm">VER COLECCIÓN DENIM</a>
+        {% for banner in banners %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="5000">
+            <img src="{{ banner.imagen.url }}" class="d-block w-100" alt="{{ banner.titulo|default:'Moda Heilyn Aguilar' }}" {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %} width="1200" height="800">
+            <div class="carousel-caption d-md-block" style="z-index: 2;">
+                {% if banner.titulo %}
+                <h2 class="display-2 fw-bold mb-3 text-uppercase">{{ banner.titulo }}</h2>
+                {% endif %}
+                {% if banner.subtitulo %}
+                <p class="lead mb-4">{{ banner.subtitulo }}</p>
+                {% endif %}
+                <a href="{{ banner.enlace_boton }}" rel="nofollow" class="btn btn-banner btn-lg rounded-0 px-5 py-3 shadow-sm">
+                    {{ banner.texto_boton }}
+                </a>
             </div>
         </div>
-        <div class="carousel-item" data-bs-interval="5000">
-            <img src="https://images.unsplash.com/photo-1576053139778-7e32f2ae3cfd?q=60&w=1200&auto=format&fit=crop" class="d-block w-100" alt="Accessories" loading="lazy" width="1200" height="800">
-            <div class="carousel-caption d-none d-md-block" style="z-index: 2;">
-                <p class="text-uppercase mb-2" style="letter-spacing: 3px; font-size: 0.8rem; color: #555;">COMPLEMENTOS</p>
-                <h2 class="display-3 fw-bold mb-4">ACCESORIOS <br> <span class="font-elegant fw-normal">& More</span></h2>
-                <a href="?categoria=Accesorios#tienda" rel="nofollow" class="btn btn-light px-5 py-3 rounded-0 shadow-sm">VER ACCESORIOS</a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <!-- Banner por defecto si no hay administrados -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=60&w=1200&auto=format&fit=crop" class="d-block w-100" alt="Moda Femenina Cúcuta" fetchpriority="high" width="1200" height="800">
+            <div class="carousel-caption d-md-block" style="z-index: 2;">
+                <h2 class="display-2 fw-bold mb-3">NUEVA COLECCIÓN</h2>
+                <a href="#tienda" rel="nofollow" class="btn btn-banner btn-lg rounded-0 px-5 py-3 shadow-sm">VER COLECCIÓN</a>
             </div>
         </div>
     </div>
+    {% endif %}
+    
     <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev" aria-label="Anterior">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     </button>
@@ -127,7 +133,7 @@
                         
                         {% if producto.stock_total > 0 %}
                         <div class="product-badge-new">NUEVO</div>
-                        <button class="bag-floating-btn add-to-bag" 
+                        <button class="bag-floating-btn btn-add-to-bag add-to-bag" 
                                 data-id="{{ producto.pk }}" 
                                 data-name="{{ producto.nombre }}" 
                                 data-price="{{ producto.precio|stringformat:'f' }}" 
@@ -253,27 +259,27 @@ document.addEventListener('DOMContentLoaded', function() {
             <h2 class="display-6 fw-bold">NUESTRA COMUNIDAD</h2>
             <p class="text-muted">Suscríbete y etiqueta @HeilynAguilarStore para aparecer aquí.</p>
         </div>
-        <div class="row g-2">
+        <div class="row g-3">
+            {% for testimonio in testimonios %}
             <div class="col-md-3 col-6">
-                <div class="instagram-item aspect-square overflow-hidden" style="aspect-ratio: 1/1;">
-                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=400&auto=webp&fit=crop" class="w-100 h-100 border" style="object-fit: cover;" alt="Cliente satisfecha con estilo streetwear" width="400" height="400">
+                <div class="instagram-item aspect-square overflow-hidden bg-white shadow-sm" style="aspect-ratio: 1/1; border-radius: 12px; position: relative; group">
+                    <img src="{{ testimonio.imagen.url }}" class="w-100 h-100" style="object-fit: cover; transition: transform 0.5s ease;" alt="Cliente {{ testimonio.nombre_cliente }}" width="400" height="400">
+                    <div class="community-overlay" style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 15px; color: white; transform: translateY(100%); transition: transform 0.3s ease;">
+                        <p class="small mb-0 fw-bold">{{ testimonio.nombre_cliente }}</p>
+                        {% if testimonio.comentario %}
+                        <p style="font-size: 0.65rem; opacity: 0.9; margin: 0; line-height: 1.2;">{{ testimonio.comentario }}</p>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
+            {% empty %}
+            <!-- Fallback estático si no hay testimonios -->
             <div class="col-md-3 col-6">
                 <div class="instagram-item aspect-square overflow-hidden" style="aspect-ratio: 1/1;">
-                    <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=400&auto=webp&fit=crop" class="w-100 h-100 border" style="object-fit: cover;" alt="Cliente satisfecha con ropa elegante" width="400" height="400">
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=400&auto=webp&fit=crop" class="w-100 h-100 border" style="object-fit: cover;" alt="Cliente" width="400" height="400">
                 </div>
             </div>
-            <div class="col-md-3 col-6">
-                <div class="instagram-item aspect-square overflow-hidden" style="aspect-ratio: 1/1;">
-                    <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=400&auto=webp&fit=crop" class="w-100 h-100 border" style="object-fit: cover;" alt="Cliente satisfecha con top casual" width="400" height="400">
-                </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="instagram-item aspect-square overflow-hidden" style="aspect-ratio: 1/1;">
-                    <img src="https://images.unsplash.com/photo-1618932260643-eee4a2f652a6?q=80&w=400&auto=webp&fit=crop" class="w-100 h-100 border" style="object-fit: cover;" alt="Cliente satisfecha con atuendo deportivo" width="400" height="400">
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>

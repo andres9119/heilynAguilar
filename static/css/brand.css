@@ -1,0 +1,73 @@
+:root {
+    --primary-color: #ff4d8d; /* Rosa Logo */
+    --primary-light: #ff80ab;
+    --primary-dark: #c2185b;
+    --secondary-color: #fce4ec;
+    --accent-color: #ffcc00; /* Amarillo Marca */
+    --brand-pink: #ff4d8d;
+    --brand-yellow: #ffcc00;
+    --neutral-light: #ffffff;
+    --neutral-grey: #f8f9fa;
+    --neutral-dark: #1a1a1a;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --shadow-premium: 0 20px 40px rgba(233, 30, 99, 0.15);
+    --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Colores de marca en componentes globales */
+.navbar {
+    border-bottom: 2px solid var(--brand-pink) !important;
+}
+
+/* Botones del Banner - ROSA */
+.btn-banner {
+    background: var(--brand-pink) !important;
+    color: white !important;
+    border: none !important;
+    transition: var(--transition-smooth) !important;
+}
+
+.btn-banner:hover {
+    background: var(--primary-dark) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 20px rgba(255, 77, 141, 0.3) !important;
+}
+
+/* Botones de Productos - AMARILLO */
+.btn-add-to-bag, .bag-floating-btn {
+    background: var(--brand-yellow) !important;
+    color: #000 !important;
+    font-weight: 700 !important;
+    border: none !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    transition: var(--transition-smooth) !important;
+}
+
+.btn-add-to-bag:hover, .bag-floating-btn:hover {
+    background: #e6b800 !important;
+    transform: scale(1.05) !important;
+    box-shadow: 0 5px 15px rgba(255, 204, 0, 0.4) !important;
+}
+
+/* Badges de productos */
+.product-badge-new {
+    background: var(--brand-pink) !important;
+}
+
+/* Sección Comunidad - Hover Effect */
+.instagram-item:hover .community-overlay {
+    transform: translateY(0) !important;
+}
+
+.instagram-item:hover img {
+    transform: scale(1.1);
+}
+
+.community-overlay {
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
