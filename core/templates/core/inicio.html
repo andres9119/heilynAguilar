@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static humanize %}
 
-{% block title %}Heilyn Aguilar - Nueva Colección{% endblock %}
+{% block title %}Ropa para Dama en Cúcuta | Tienda Virtual Heilyn Aguilar{% endblock %}
 
 {% block content %}
 <!-- Hero Carousel -->
@@ -15,7 +15,7 @@
     <div class="carousel-inner">
         {% for banner in banners %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="5000">
-            <img src="{{ banner.imagen.url }}" class="d-block w-100" alt="{{ banner.titulo|default:'Moda Heilyn Aguilar' }}" {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %} width="1200" height="800">
+            <img src="{{ banner.imagen.url }}" class="d-block w-100" alt="{{ banner.titulo|default:'Moda para dama en Cúcuta - Heilyn Aguilar Store' }}" {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %} width="1200" height="800">
             <div class="carousel-caption d-md-block" style="z-index: 2;">
                 {% if banner.titulo %}
                 <h2 class="display-2 fw-bold mb-3 text-uppercase">{{ banner.titulo }}</h2>
@@ -34,7 +34,7 @@
     <!-- Banner por defecto si no hay administrados -->
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=60&w=1200&auto=format&fit=crop" class="d-block w-100" alt="Moda Femenina Cúcuta" fetchpriority="high" width="1200" height="800">
+            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=60&w=1200&auto=format&fit=crop" class="d-block w-100" alt="Tienda Virtual de Ropa para Dama en Cúcuta" fetchpriority="high" width="1200" height="800">
             <div class="carousel-caption d-md-block" style="z-index: 2;">
                 <h2 class="display-2 fw-bold mb-3">NUEVA COLECCIÓN</h2>
                 <a href="#tienda" rel="nofollow" class="btn btn-banner btn-lg rounded-0 px-5 py-3 shadow-sm">VER COLECCIÓN</a>
@@ -54,8 +54,8 @@
 <section class="bg-white border-bottom" style="margin-top: -30px; position: relative; z-index: 10;">
     <div class="container-fluid px-3 px-lg-5 py-5">
         <div class="text-center mb-5">
-            <h1 class="display-3 fw-bold mb-0" style="letter-spacing: -2px; color: #1a1a1a; line-height: 1;">Heilyn Aguilar</h1>
-            <p class="text-uppercase text-muted mt-3 mb-0" style="letter-spacing: 10px; font-size: 0.85rem;">Moda Premium para Dama</p>
+            <h1 class="display-3 fw-bold mb-0" style="letter-spacing: -2px; color: #1a1a1a; line-height: 1;">Ropa para Dama en Cúcuta</h1>
+            <p class="text-uppercase text-muted mt-3 mb-0" style="letter-spacing: 10px; font-size: 0.85rem;">Heilyn Aguilar - Moda Premium Virtual</p>
         </div>
         
         <div class="row justify-content-center">
@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="row g-3">
             <div class="col-12 col-md-6">
                 <a href="?categoria=Shorts#tienda" rel="nofollow" class="category-banner w-100">
-                    <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=700&auto=webp" alt="Denim" loading="lazy" width="700" height="440">
+                    <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=700&auto=webp" alt="Pantalones Denim y Jeans para mujer en Cúcuta" loading="lazy" width="700" height="440">
                     <div class="category-content">
                         <h2 class="display-5 fw-bold text-white">DENIM</h2>
                         <span class="text-white text-uppercase" style="letter-spacing: 2px;">Comprar Denim</span>
@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             <div class="col-12 col-md-6">
                 <a href="?categoria=Top#tienda" rel="nofollow" class="category-banner w-100">
-                    <img src="https://images.unsplash.com/photo-1565084888279-aca607ecce0c?q=80&w=700&auto=webp" alt="Blusas" loading="lazy" width="700" height="440">
+                    <img src="https://images.unsplash.com/photo-1565084888279-aca607ecce0c?q=80&w=700&auto=webp" alt="Blusas y Tops - Moda para dama en Cúcuta" loading="lazy" width="700" height="440">
                     <div class="category-content">
                         <h2 class="display-5 fw-bold text-white">BLUSAS</h2>
                         <span class="text-white text-uppercase" style="letter-spacing: 2px;">Comprar Blusas</span>
@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="row g-3">
             {% for testimonio in testimonios %}
             <div class="col-md-3 col-6">
-                <div class="instagram-item aspect-square overflow-hidden bg-white shadow-sm" style="aspect-ratio: 1/1; border-radius: 12px; position: relative; group">
+                <div class="instagram-item aspect-square overflow-hidden bg-white shadow-sm group" style="aspect-ratio: 1/1; border-radius: 12px; position: relative;">
                     <img src="{{ testimonio.imagen.url }}" class="w-100 h-100" style="object-fit: cover; transition: transform 0.5s ease;" alt="Cliente {{ testimonio.nombre_cliente }}" width="400" height="400">
                     <div class="community-overlay" style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 15px; color: white; transform: translateY(100%); transition: transform 0.3s ease;">
                         <p class="small mb-0 fw-bold">{{ testimonio.nombre_cliente }}</p>
@@ -318,9 +318,9 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="container-fluid px-3 px-lg-5">
         <div class="row justify-content-center">
             <div class="col-lg-11 text-center">
-                <p class="text-muted mb-0 mx-auto" style="font-size: 1.25rem; line-height: 1.8; max-width: 1400px;">
-                    Ubicados estratégicamente en Cúcuta, nos hemos consolidado como un referente de estilo y calidad. Desde blusas elegantes hasta nuestra línea de denim premium, cada pieza seleccionada bajo los más altos estándares de diseño para nuestras clientas en todo Colombia. 
-                    <span class="d-block mt-3">Disfruta de envíos rápidos y seguros a nivel nacional con la garantía de una marca líder en el sector de la moda colombiana.</span>
+                <h2 class="h5 fw-bold mb-4">Tu mejor opción en Moda para Dama en Cúcuta</h2>
+                <p class="text-muted mb-0 mx-auto" style="font-size: 1.1rem; line-height: 1.8; max-width: 1000px;">
+                    En <strong>Heilyn Aguilar Store</strong>, entendemos que buscas el mejor <strong>outfit para mujer en Cúcuta</strong>. Somos una <strong>tienda virtual</strong> comprometida con la elegancia y la modernidad. Nuestra colección de <strong>moda para dama en Cúcuta</strong> incluye desde blusas sofisticadas hasta jeans denim premium, diseñados para resaltar tu estilo único. Disfruta de la comodidad de comprar online con envíos rápidos a todo Colombia y la seguridad que solo una marca líder te puede ofrecer.
                 </p>
             </div>
         </div>

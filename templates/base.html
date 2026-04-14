@@ -11,11 +11,12 @@
     <meta name="description"
         content="{% block meta_description %}Heilyn Aguilar - Ropa premium para dama en Cúcuta. Blusas, denim, tops y accesorios. Envíos a todo Colombia.{% endblock %}">
     <meta name="keywords"
-        content="ropa para dama cucuta, tienda de ropa femenina cucuta, moda mujer cucuta, blusas cucuta, denim cucuta, ropa femenina norte de santander, heilyn aguilar, moda cucuta, ropa online cucuta">
+        content="ropa para dama cucuta, tienda virtual de ropa cucuta, moda femenina cucuta, comprar ropa mujer cucuta, outfit mujer cucuta, blusas en cucuta, denim cucuta, heilyn aguilar, moda colombiana, tienda online ropa femenina">
     <meta name="author" content="Heilyn Aguilar Store">
     <meta name="robots" content="index, follow">
     <meta name="geo.region" content="CO-NSA">
     <meta name="geo.placename" content="Cúcuta">
+    <meta name="description" content="Heilyn Aguilar Store - Tienda virtual de ropa premium para dama en Cúcuta. Encuentra blusas, denim, tops y outfits exclusivos. Envíos nacionales.">
 
     <!-- Canonical URL -->
     <link rel="canonical" href="{% block canonical %}{{ request.build_absolute_uri }}{% endblock %}">
@@ -62,45 +63,47 @@
     {% block meta_extra %}{% endblock %}
 
 
-    <!-- JSON-LD para SEO Local -->
+    <!-- JSON-LD para SEO Local y E-commerce -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "ClothingStore",
       "name": "Heilyn Aguilar Store",
+      "description": "Tienda virtual de ropa para dama en Cúcuta. Especialistas en moda femenina, blusas y denim de alta calidad con envíos a nivel nacional.",
       "image": "{% static 'img/productos/logo-lg.webp' %}",
-      "@id": "",
+      "@id": "{{ request.build_absolute_uri }}",
       "url": "{{ request.build_absolute_uri }}",
       "telephone": "+573227746794",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Cúcuta, Norte de Santander",
         "addressLocality": "Cúcuta",
         "addressRegion": "Norte de Santander",
-        "postalCode": "540001",
-        "addressCountry": "CO"
+        "addressCountry": "CO",
+        "description": "Tienda Virtual con base en Cúcuta"
       },
       "geo": {
         "@type": "GeoCoordinates",
         "latitude": 7.8939,
         "longitude": -72.5078
       },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday"
-        ],
-        "opens": "08:00",
-        "closes": "19:00"
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Catálogo de Moda Femenina",
+        "itemListElement": [
+          {
+            "@type": "OfferCatalog",
+            "name": "Blusas y Tops"
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Denim y Jeans"
+          }
+        ]
       },
       "sameAs": [
+        "https://www.instagram.com/byheilynaguilar",
         "https://www.facebook.com/heilynaguilar",
-        "https://www.instagram.com/heilynaguilar"
+        "https://www.tiktok.com/@byheilynaguilar"
       ]
     }
     </script>
