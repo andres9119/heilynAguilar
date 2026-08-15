@@ -59,9 +59,10 @@
                     </ol>
                 </nav>
 
-                <h1 class="display-5 fw-bold mb-3">{{ producto.nombre }}</h1>
+                <h1 class="display-5 fw-bold mb-3" style="font-family:var(--ha-serif);">{{ producto.nombre }}</h1>
                 <div class="price-detail mb-4">
                     <span class="fs-3 fw-bold">${{ producto.precio|floatformat:0|intcomma }}</span>
+                    <span class="ms-2" style="font-size:12px; color:var(--ha-gold);">3 cuotas sin interés</span>
                 </div>
 
                 <div class="product-description text-muted mb-5">
@@ -99,18 +100,18 @@
                         </div>
                     </div>
                     
-                    <a href="#" class="small text-muted text-decoration-underline d-inline-block">Guía de tallas</a>
+                    <a href="#" class="small text-muted text-decoration-underline d-inline-block" id="open-talla-guide">Guía de tallas</a>
                 </div>
 
                 <!-- CTA Añadir a la Bolsa -->
                 <div class="d-grid gap-3">
-                    <button class="btn btn-dark btn-lg rounded-0 py-3 shadow-sm d-flex align-items-center justify-content-center gap-2 add-to-bag"
+                    <button class="ha-btn ha-btn-dark ha-btn-block add-to-bag p-0" style="height:52px; align-self:stretch; width:100%; border-radius:999px;"
                             data-id="{{ producto.pk }}" 
                             data-name="{{ producto.nombre }}" 
                             data-price="{{ producto.precio|stringformat:'f' }}" 
                             data-image="{% if producto.imagen %}{{ producto.imagen.url }}{% endif %}"
                             id="btn-add-detail">
-                        <i class="fas fa-shopping-bag fs-4"></i> AÑADIR A LA BOLSA
+                        <i class="fas fa-shopping-bag"></i> AÑADIR A LA BOLSA
                     </button>
                 </div>
 
@@ -139,18 +140,23 @@
 <!-- Estilos específicos para esta página -->
 <style>
     .talla-badge {
-        width: 45px;
+        min-width: 45px;
         height: 45px;
-        border: 1px solid #333;
+        border-radius: 999px;
+        border: 1px solid rgba(0,0,0,0.2);
         display: flex;
         align-items: center;
         justify-content: center;
         font-weight: 600;
         font-size: 0.9rem;
+        cursor: pointer;
+        font-family: var(--ha-sans);
+        transition: all 0.2s ease;
     }
     .talla-badge.active {
-        background: #333;
+        background: var(--ha-ink);
         color: #fff;
+        border-color: var(--ha-ink);
     }
     .color-circle {
         width: 30px;
@@ -206,6 +212,13 @@
                 this.classList.add('active');
                 if (btnAdd) btnAdd.dataset.color = this.dataset.value;
             });
+        });
+
+        // Abrir guía de tallas (modal del layout base)
+        const tallaGuide = document.getElementById('open-talla-guide');
+        if (tallaGuide) tallaGuide.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (typeof openModal === 'function') openModal();
         });
     });
 </script>

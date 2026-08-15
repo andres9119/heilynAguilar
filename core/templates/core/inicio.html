@@ -4,171 +4,350 @@
 {% block title %}Ropa para Dama en Cúcuta | Tienda Virtual Heilyn Aguilar{% endblock %}
 
 {% block content %}
-<!-- Hero Carousel -->
-<div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-    {% if banners %}
-    <div class="carousel-indicators">
-        {% for banner in banners %}
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
-        {% endfor %}
-    </div>
-    <div class="carousel-inner">
-        {% for banner in banners %}
-        <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="5000">
-            <img src="{{ banner.imagen.url }}" class="d-block w-100" alt="{{ banner.titulo|default:'Moda para dama en Cúcuta - Heilyn Aguilar Store' }}" {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %} width="1200" height="800">
-            <div class="carousel-caption d-md-block" style="z-index: 2;">
-                {% if banner.titulo %}
-                <h2 class="display-2 fw-bold mb-3 text-uppercase">{{ banner.titulo }}</h2>
-                {% endif %}
-                {% if banner.subtitulo %}
-                <p class="lead mb-4">{{ banner.subtitulo }}</p>
-                {% endif %}
-                <a href="{{ banner.enlace_boton }}" rel="nofollow" class="btn btn-banner btn-lg rounded-0 px-5 py-3 shadow-sm">
-                    {{ banner.texto_boton }}
-                </a>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-    {% else %}
-    <!-- Banner por defecto si no hay administrados -->
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=60&w=1200&auto=format&fit=crop" class="d-block w-100" alt="Tienda Virtual de Ropa para Dama en Cúcuta" fetchpriority="high" width="1200" height="800">
-            <div class="carousel-caption d-md-block" style="z-index: 2;">
-                <h2 class="display-2 fw-bold mb-3">NUEVA COLECCIÓN</h2>
-                <a href="#tienda" rel="nofollow" class="btn btn-banner btn-lg rounded-0 px-5 py-3 shadow-sm">VER COLECCIÓN</a>
-            </div>
-        </div>
-    </div>
-    {% endif %}
-    
-    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev" aria-label="Anterior">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next" aria-label="Siguiente">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    </button>
-</div>
 
-<section class="bg-white border-bottom" style="margin-top: -30px; position: relative; z-index: 10;">
-    <div class="container-fluid px-3 px-lg-5 py-5">
-        <div class="text-center mb-5">
-            <h1 class="display-3 fw-bold mb-0" style="letter-spacing: -2px; color: #1a1a1a; line-height: 1;">Ropa para Dama en Cúcuta</h1>
-            <p class="text-uppercase text-muted mt-3 mb-0" style="letter-spacing: 10px; font-size: 0.85rem;">Heilyn Aguilar - Moda Premium Virtual</p>
-        </div>
-        
-        <div class="row justify-content-center">
-            <div class="col-lg-11 text-center">
-                <p class="mb-0 fs-3 fw-light" style="line-height: 1.5; color: #1a1a1a;">
-                    Bienvenidos a la experiencia <strong>Heilyn Aguilar Store</strong>, el destino principal para la moda femenina en Cúcuta. Nuestra tienda se especializa en ofrecer colecciones exclusivas donde la calidad de cada prenda refleja la sofisticación de la mujer moderna colombiana.
-                </p>
+<!-- Hero -->
+<section class="ha-hero">
+    <div class="ha-container">
+        <div class="ha-hero-grid">
+            <div class="ha-hero-copy">
+                <div class="ha-eyebrow"><span class="ha-eyebrow-line"></span> <span>Nueva Colección</span> <i
+                        class="fas fa-wand-magic-sparkles ha-gold"></i></div>
+                <h1 class="ha-hero-title">OUTFITS <em class="ha-italic">EN TENDENCIA</em></h1>
+                <p class="ha-hero-sub">Diseñamos prendas que resaltan las curvas latinas con texturas premium y tallajes impecables. Exclusividad garantizada.</p>
+                <div class="ha-hero-cta">
+                    <a href="#tienda" class="ha-btn ha-btn-dark">Ver colección</a>
+                    <a href="https://wa.me/573123080861" target="_blank" rel="noopener noreferrer" class="ha-btn ha-btn-outline">Hablar con asesora</a>
+                </div>
+                <div class="ha-hero-trust">
+                    <div class="ha-trust-item">
+                        <strong>+1200 clientas felices</strong><br>
+                        <span style="color:rgba(0,0,0,0.5);">Heilyn Store</span>
+                    </div>
+                    <div class="ha-trust-divider"></div>
+                    <div class="ha-trust-item">
+                        <strong>Envío 24-48h</strong><br>
+                        <span style="color:rgba(0,0,0,0.5);">Todo Colombia</span>
+                    </div>
+                </div>
+            </div>
+            <div class="ha-hero-media">
+                {% with hero=productos.0 %}
+                    {% if hero.imagen %}
+                    <img src="{{ hero.imagen.url }}" alt="Ropa para dama en Cúcuta - {{ hero.nombre }}">
+                    {% else %}
+                    <div class="ha-shimmer" style="position:absolute; inset:0;"></div>
+                    {% endif %}
+                {% endwith %}
+                <div class="ha-hero-badge-top">Editorial • Cúcuta</div>
+                {% with hero=productos.0 %}
+                {% if hero %}
+                <div class="ha-hero-float">
+                    <div class="ha-esencia-watermark" style="position:static; width:48px; height:48px; font-size:14px; border-radius:50%; background:var(--ha-sand);">
+                        {{ hero.nombre|first|upper }}
+                    </div>
+                    <div>
+                        <div style="font-size:11px; letter-spacing:0.14em; text-transform:uppercase; font-weight:600; color:rgba(0,0,0,0.5);">Best Seller</div>
+                        <div class="ha-serif" style="font-size:16px; font-weight:500; line-height:1.2;">{{ hero.nombre }}</div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endwith %}
             </div>
         </div>
     </div>
 </section>
 
-<!-- Filtros y Título -->
-<section id="tienda" class="py-5 mt-4">
-    <div class="container">
-        <div class="row align-items-end mb-5">
-            <div class="col-md-6">
-                <h2 class="display-6 mb-0">Nuestros Productos</h2>
-                <p class="text-muted mb-0">{% if productos %}{{ productos.count }}{% else %}0{% endif %} artículos encontrados</p>
+<!-- Features -->
+<section class="ha-features">
+    <div class="ha-features-inner">
+        <div class="ha-feature">
+            <div class="ha-feature-icon"><i class="fas fa-truck"></i></div>
+            <div><div class="ha-feature-title">Envíos Nacionales</div>
+                <div class="ha-feature-sub">Cobertura todo Colombia • 24-48h</div></div>
+        </div>
+        <div class="ha-feature">
+            <div class="ha-feature-icon"><i class="fas fa-shield-alt"></i></div>
+            <div><div class="ha-feature-title">Compra Segura</div>
+                <div class="ha-feature-sub">Todos los medios de pago • Nequi, PSE</div></div>
+        </div>
+        <div class="ha-feature">
+            <div class="ha-feature-icon"><i class="fab fa-whatsapp"></i></div>
+            <div><div class="ha-feature-title">Atención WhatsApp</div>
+                <div class="ha-feature-sub">Asesoría de tallas inmediata</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Colección -->
+<section class="ha-section" id="tienda">
+    <div class="ha-container">
+        <div class="ha-section-head">
+            <div>
+                <div class="ha-label">Curaduría exclusiva</div>
+                <h2 class="ha-title">Nuestros <em class="ha-italic">Must-Haves</em></h2>
+                <p class="ha-lead">Piezas limitadas que se agotan en días. Diseños que moldean, estilizan y empoderan.</p>
             </div>
-            <div class="col-md-6 mt-4 mt-md-0">
-                <form id="filterForm" method="get" class="row g-2 justify-content-md-end">
-                    <div class="col-auto">
-                        <label for="cat-select" class="visually-hidden">Filtrar por categoría</label>
-                        <select id="cat-select" name="categoria" class="form-select form-select-sm rounded-0 border-0 border-bottom" aria-label="Seleccionar categoría de producto">
-                            <option value="">Categoría</option>
-                            {% for cat in categorias %}
-                            <option value="{{ cat }}" {% if request.GET.categoria == cat %}selected{% endif %}>{{ cat }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="size-select" class="visually-hidden">Filtrar por talla</label>
-                        <select id="size-select" name="talla" class="form-select rounded-0 border-0 bg-light" aria-label="Seleccionar talla disponible">
-                            <option value="">TODAS LAS TALLAS</option>
-                            {% for talla in tallas_list %}
-                            <option value="{{ talla.id }}" {% if request.GET.talla == talla.id|stringformat:"i" %}selected{% endif %}>{{ talla.nombre }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="col-auto">
-                        <label for="price-select" class="visually-hidden">Filtrar por precio</label>
-                        <select id="price-select" name="precio_max" class="form-select form-select-sm rounded-0 border-0 border-bottom" aria-label="Seleccionar rango de precio">
-                            <option value="">Precio</option>
-                            <option value="50000" {% if request.GET.precio_max == "50000" %}selected{% endif %}>Hasta $50k</option>
-                            <option value="100000" {% if request.GET.precio_max == "100000" %}selected{% endif %}>Hasta $100k</option>
-                            <option value="200000" {% if request.GET.precio_max == "200000" %}selected{% endif %}>Hasta $200k</option>
-                        </select>
-                    </div>
-                    {% if request.GET.talla or request.GET.categoria or request.GET.precio_max %}
-                    <div class="col-auto">
-                        <a href="{% url 'inicio' %}" class="btn btn-link btn-sm text-muted text-decoration-none">Limpiar</a>
-                    </div>
-                    {% endif %}
-                </form>
+            <div class="ha-tabs" id="haTabs" role="tablist" aria-label="Filtrar por categoría">
+                <button type="button" class="ha-tab active" data-cat="">Todos</button>
+                {% for cat in categorias %}
+                <button type="button" class="ha-tab" data-cat="{{ cat }}">{{ cat }}</button>
+                {% endfor %}
             </div>
         </div>
 
-        <!-- Grid de Productos (con ID para AJAX) -->
+        <!-- Filtros avanzados (talla y precio) -->
+        <form id="filterForm" method="get" class="d-flex flex-wrap align-items-center gap-2 mb-4">
+            <input type="hidden" name="categoria" value="{{ request.GET.categoria|default:'' }}">
+            <label for="size-select" class="visually-hidden">Filtrar por talla</label>
+            <select id="size-select" name="talla" class="form-select form-select-sm rounded-pill border-0" style="width:auto; background:#fff; font-size:0.8rem;">
+                <option value="">TODAS LAS TALLAS</option>
+                {% for talla in tallas_list %}
+                <option value="{{ talla.id }}" {% if request.GET.talla == talla.id|stringformat:"i" %}selected{% endif %}>{{ talla.nombre }}</option>
+                {% endfor %}
+            </select>
+            <label for="price-select" class="visually-hidden">Filtrar por precio</label>
+            <select id="price-select" name="precio_max" class="form-select form-select-sm rounded-pill border-0" style="width:auto; background:#fff; font-size:0.8rem;">
+                <option value="">Precio</option>
+                <option value="50000" {% if request.GET.precio_max == "50000" %}selected{% endif %}>Hasta $50k</option>
+                <option value="100000" {% if request.GET.precio_max == "100000" %}selected{% endif %}>Hasta $100k</option>
+                <option value="200000" {% if request.GET.precio_max == "200000" %}selected{% endif %}>Hasta $200k</option>
+            </select>
+            {% if request.GET.talla or request.GET.categoria or request.GET.precio_max %}
+            <a href="{% url 'inicio' %}" class="btn btn-link btn-sm text-muted text-decoration-none">Limpiar</a>
+            {% endif %}
+        </form>
+
         <div id="product-grid-container">
-            <div class="row g-4" id="product-grid">
-            {% for producto in productos %}
-            <div class="col-lg-3 col-md-4 col-6">
-                <div class="product-card">
-                    <div class="product-image-container">
+            <div class="ha-grid" id="product-grid">
+                {% for producto in productos %}
+                <article class="ha-card">
+                    <div class="ha-card-media">
                         <a href="{% url 'detalle_producto' producto.slug %}">
                             {% if producto.imagen %}
-                            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="product-image">
+                            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" loading="lazy">
                             {% else %}
-                            <div class="w-100 h-100 d-flex align-items-center justify-content-center bg-light">
-                                <i class="fas fa-image text-muted opacity-25" style="font-size: 3rem;"></i>
-                            </div>
+                            <div class="ha-card-noimg"><i class="fas fa-image"></i></div>
                             {% endif %}
                         </a>
-                        
-                        {% if producto.stock_total > 0 %}
-                        <div class="product-badge-new">NUEVO</div>
-                        <button class="bag-floating-btn btn-add-to-bag add-to-bag" 
-                                data-id="{{ producto.pk }}" 
-                                data-name="{{ producto.nombre }}" 
-                                data-price="{{ producto.precio|stringformat:'f' }}" 
-                                data-image="{% if producto.imagen %}{{ producto.imagen.url }}{% endif %}">
-                            <i class="fas fa-shopping-bag"></i> Añadir a la bolsa
-                        </button>
-                        {% else %}
-                        <div class="product-badge-new bg-secondary">AGOTADO</div>
-                        {% endif %}
-                    </div>
-                    <div class="product-info">
-                        <a href="{% url 'detalle_producto' producto.slug %}" class="product-title text-uppercase">{{ producto.nombre }}</a>
-                        
-                        <!-- Mini Tallas Refined -->
-                        <div class="product-sizes mb-2 d-flex flex-wrap gap-1" style="font-size: 0.7rem; letter-spacing: 0.5px;">
+                        <div class="ha-card-badges">
+                            {% if producto.stock_total > 0 %}
+                            <span class="ha-card-badge">Nuevo</span>
+                            {% else %}
+                            <span class="ha-card-badge gold">Agotado</span>
+                            {% endif %}
+                        </div>
+                        <div class="ha-card-sizes">
                             {% regroup producto.variaciones.all|dictsort:"talla.orden" by talla as variaciones_por_talla %}
-                            {% for talla_group in variaciones_por_talla %}
-                                <span class="badge border border-secondary-subtle text-muted fw-normal px-2 py-1 rounded-1" style="background-color: #fcfcfc;">{{ talla_group.grouper.nombre }}</span>
+                            {% for talla_group in variaciones_por_talla|slice:":4" %}
+                            {% if producto.stock_total > 0 %}
+                            <span class="ha-card-size">{{ talla_group.grouper.nombre }}</span>
+                            {% endif %}
                             {% endfor %}
                         </div>
-
-                        <div class="price-container">
-                            <span class="price-current fw-bold text-dark">${{ producto.precio|floatformat:0|intcomma }}</span>
+                    </div>
+                    <div class="ha-card-body">
+                        <div class="ha-card-top">
+                            <a href="{% url 'detalle_producto' producto.slug %}" class="ha-card-name" title="{{ producto.nombre }}">{{ producto.nombre }}</a>
+                            <span class="ha-card-cat">{{ producto.categoria|default:"Colección" }}</span>
                         </div>
+                        <div class="ha-card-price">${{ producto.precio|floatformat:0|intcomma }}</div>
+                        <div class="ha-card-sizepick">
+                            {% regroup producto.variaciones.all|dictsort:"talla.orden" by talla as v_talla %}
+                            {% for tg in v_talla %}
+                            {% if producto.stock_total > 0 %}
+                            <button type="button" class="ha-size-btn" data-value="{{ tg.grouper.nombre }}">{{ tg.grouper.nombre }}</button>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        {% if producto.stock_total > 0 %}
+                        <button class="ha-card-add add-to-bag"
+                            data-id="{{ producto.pk }}"
+                            data-name="{{ producto.nombre }}"
+                            data-price="{{ producto.precio|stringformat:'f' }}"
+                            data-image="{% if producto.imagen %}{{ producto.imagen.url }}{% endif %}"
+                            data-require-size="true">
+                            <i class="fas fa-shopping-bag"></i> Añadir al carrito
+                        </button>
+                        {% else %}
+                        <button class="ha-card-add" disabled style="background:#999;">Agotado</button>
+                        {% endif %}
+                    </div>
+                </article>
+                {% empty %}
+                <div class="ha-empty col-12" style="grid-column:1/-1;">
+                    <p class="lead" style="font-family:var(--ha-serif); font-style:italic;">No encontramos prendas con esos filtros.</p>
+                    <a href="{% url 'inicio' %}" class="ha-btn ha-btn-dark">Ver todo</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Esencia -->
+<section class="ha-esencia ha-section">
+    <div class="ha-container ha-esencia-grid">
+        <div class="ha-esencia-media">
+            <div class="ha-esencia-frame">
+                {% with img=productos.0 %}
+                    {% if img.imagen %}
+                    <img src="{{ img.imagen.url }}" alt="Heilyn Aguilar Store - Moda para dama en Cúcuta">
+                    {% else %}
+                    <div class="ha-etude-bg" style="position:absolute; inset:0; background:radial-gradient(100% 100% at 50% 30%, #F5F1EB 0%, #E8DCC8 50%, #D4A574 100%);"></div>
+                    {% endif %}
+                {% endwith %}
+                <div class="ha-esencia-watermark">HEILYN</div>
+                <div style="position:absolute; bottom:0; left:0; right:0; padding:16px; background:linear-gradient(to top, rgba(0,0,0,0.4), transparent);">
+                    <div style="background:rgba(255,255,255,0.85); backdrop-filter:blur(20px); border-radius:16px; padding:16px; display:flex; align-items:center; justify-content:space-between; border:1px solid rgba(255,255,255,0.6);">
+                        <div>
+                            <div style="font-weight:600; letter-spacing:0.14em; text-transform:uppercase; font-size:12px;">Heilyn Aguilar Store</div>
+                            <div style="color:rgba(0,0,0,0.5); font-size:12px;">Cúcuta • Desde 2023</div>
+                        </div>
+                        <span style="font-size:11px; padding:6px 12px; border-radius:999px; background:#111; color:#fff; letter-spacing:0.05em; text-transform:uppercase;">Drop limitado</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="ha-label">Nuestra Esencia</div>
+            <h2 class="ha-title">No vendemos telas, <em class="ha-italic">diseñamos Must-Haves.</em></h2>
+            <p style="margin-top:24px; font-size:16px; line-height:1.75; color:rgba(0,0,0,0.6);">
+                Nacida en el vibrante entorno de la moda en Cúcuta, <strong>HEILYN AGUILAR STORE</strong> es una marca emergente creada exclusivamente para inspirar fuerza, empoderamiento femenino y muchísima elegancia diaria.
+            </p>
+            <div class="ha-esencia-list">
+                <div class="ha-check"><span class="ha-check-icon"><i class="fas fa-check"></i></span><span class="ha-check-text">Inventarios limitados — cada drop es irrepetible</span></div>
+                <div class="ha-check"><span class="ha-check-icon"><i class="fas fa-check"></i></span><span class="ha-check-text">Control implacable de calidad y horma latina</span></div>
+                <div class="ha-check"><span class="ha-check-icon"><i class="fas fa-check"></i></span><span class="ha-check-text">Envíos veloces 24-48h a todo el país</span></div>
+            </div>
+            <div class="ha-esencia-cta">
+                <a class="ha-btn ha-btn-dark" href="https://www.instagram.com/byheilynaguilar?igsh=ZHlydmE0ZGh3cDgz&utm_source=qr" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> Únete a la revolución #ChicasHeilyn</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Comunidad -->
+<section class="ha-section">
+    <div class="ha-container">
+        <div class="ha-section-head">
+            <div>
+                <h2 class="ha-title" style="margin-bottom:8px;">NUESTRA COMUNIDAD</h2>
+                <div style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(0,0,0,0.5);">Suscríbete y etiqueta @HeilynAguilarStore</div>
+            </div>
+            <a class="ha-btn ha-btn-outline" style="width:fit-content;" href="https://www.instagram.com/byheilynaguilar?igsh=ZHlydmE0ZGh3cDgz&utm_source=qr" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> Seguir en Instagram</a>
+        </div>
+        <div class="ha-community-grid">
+            {% for testimonio in testimonios|slice:":6" %}
+            <div class="ha-community-item">
+                {% if testimonio.imagen %}
+                <img src="{{ testimonio.imagen.url }}" alt="Cliente {{ testimonio.nombre_cliente|default:'Heilyn' }}" loading="lazy">
+                {% else %}
+                <div class="ha-shimmer" style="position:absolute; inset:0;"></div>
+                {% endif %}
+                <div class="ha-community-overlay">
+                    <div>
+                        <div class="ha-community-user">@{{ testimonio.nombre_cliente|default:"chicasheilyn"|cut:" "|lower }}</div>
+                        <div class="ha-community-cap">{% if testimonio.comentario %}{{ testimonio.comentario|truncatechars:28 }}{% else %}UGC • Cúcuta{% endif %}</div>
                     </div>
                 </div>
             </div>
             {% empty %}
-            <div class="col-12 text-center py-5">
-                <p class="lead font-elegant italic">No encontramos prendas con esos filtros.</p>
-                <a href="{% url 'inicio' %}" class="btn btn-dark rounded-0 px-4">Ver todo</a>
+            {% for producto in productos|slice:":6" %}
+            <a class="ha-community-item" href="{% url 'detalle_producto' producto.slug %}">
+                {% if producto.imagen %}
+                <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" loading="lazy">
+                {% else %}
+                <div class="ha-shimmer" style="position:absolute; inset:0;"></div>
+                {% endif %}
+                <div class="ha-community-overlay">
+                    <div>
+                        <div class="ha-community-user">@{{ producto.nombre|cut:" "|lower }}</div>
+                        <div class="ha-community-cap">{{ producto.categoria|default:"UGC • Cúcuta" }}</div>
+                    </div>
+                </div>
+            </a>
+            {% empty %}
+            <div class="ha-community-item"><div class="ha-shimmer" style="position:absolute; inset:0;"></div></div>
+            <div class="ha-community-item"><div class="ha-shimmer" style="position:absolute; inset:0;"></div></div>
+            <div class="ha-community-item"><div class="ha-shimmer" style="position:absolute; inset:0;"></div></div>
+            <div class="ha-community-item"><div class="ha-shimmer" style="position:absolute; inset:0;"></div></div>
+            <div class="ha-community-item"><div class="ha-shimmer" style="position:absolute; inset:0;"></div></div>
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Testimonios -->
+<section class="ha-testimonials ha-section">
+    <div class="ha-container">
+        <div class="ha-section-head">
+            <h2 class="ha-title">Lo que dicen nuestras clientas</h2>
+        </div>
+        <div class="ha-testi-grid">
+            {% for t in testimonios|slice:":3" %}
+            <div class="ha-testi-card {% if forloop.first %}highlight{% endif %}">
+                <div class="ha-testi-head">
+                    <div class="ha-avatar">{{ t.nombre_cliente|default:"C"|slice:":1"|upper }}{{ t.nombre_cliente|slice:"1:2"|upper }}</div>
+                    <div><div class="ha-testi-name">{{ t.nombre_cliente|default:"Cliente Heilyn" }}</div><div class="ha-testi-city">Compra verificada</div></div>
+                    <div class="ha-testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+                <p class="ha-testi-text">{{ t.comentario|default:"La calidad se siente premium y el tallaje es impecable." }}</p>
+            </div>
+            {% empty %}
+            <div class="ha-testi-card highlight">
+                <div class="ha-testi-head">
+                    <div class="ha-avatar">VR</div>
+                    <div><div class="ha-testi-name">Valentina R.</div><div class="ha-testi-city">Bogotá • Compra verificada</div></div>
+                    <div class="ha-testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+                <p class="ha-testi-text">El Corset Corazón horma espectacular, realza muchísimo. La calidad se siente premium, no es la típica tela delgada. Ya pedí otro color.</p>
+            </div>
+            <div class="ha-testi-card">
+                <div class="ha-testi-head">
+                    <div class="ha-avatar">CT</div>
+                    <div><div class="ha-testi-name">Camila T.</div><div class="ha-testi-city">Medellín • Compra verificada</div></div>
+                    <div class="ha-testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+                <p class="ha-testi-text">Atención por WhatsApp 10/10. Me asesoraron la talla perfecto y llegó en 24h. El Body Sesgo no transparenta nada.</p>
+            </div>
+            <div class="ha-testi-card">
+                <div class="ha-testi-head">
+                    <div class="ha-avatar">DM</div>
+                    <div><div class="ha-testi-name">Daniela M.</div><div class="ha-testi-city">Cúcuta • Compra verificada</div></div>
+                    <div class="ha-testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+                <p class="ha-testi-text">Soy #ChicaHeilyn desde el primer drop. Todo es limitado así que no lo pienses. He recibido muchos cumplidos.</p>
             </div>
             {% endfor %}
-            </div>
         </div>
+    </div>
+</section>
+
+<!-- Newsletter -->
+<section class="ha-newsletter">
+    <div class="ha-container">
+        <div class="ha-newsletter-box">
+            <div>
+                <span class="ha-news-pill">15% off bienvenida</span>
+                <h3 class="ha-news-title">Obtén 15% OFF <em class="ha-italic">en tu primera compra</em></h3>
+                <p class="ha-news-sub">Únete a #ChicasHeilyn y recibe acceso anticipado a drops limitados.</p>
+            </div>
+            <form class="ha-news-form" id="newsletterForm" onsubmit="event.preventDefault(); this.querySelector('input').value='¡Listo! 15% enviado a tu email'; this.querySelector('button').style.display='none';">
+                <input type="email" placeholder="Tu email" aria-label="Tu email" required style="height:44px;">
+                <button class="ha-btn ha-btn-dark" type="submit" style="height:40px; padding:0 24px;">Suscribirme</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Párrafo SEO Final -->
+<section class="ha-section" style="padding-top:0;">
+    <div class="ha-container" style="max-width:1000px;">
+        <h2 class="ha-title" style="font-size:28px; line-height:1.2; margin-bottom:16px;">Tu mejor opción en Moda para Dama en Cúcuta</h2>
+        <p style="font-size:1.05rem; line-height:1.8; color:rgba(0,0,0,0.65);">
+            En <strong>Heilyn Aguilar Store</strong> entendemos que buscas el mejor <strong>outfit para mujer en Cúcuta</strong>. Somos una <strong>tienda virtual</strong> comprometida con la elegancia y la modernidad. Nuestra colección de <strong>moda para dama en Cúcuta</strong> incluye desde blusas sofisticadas hasta jeans denim premium, diseñados para resaltar tu estilo único. Disfruta de la comodidad de comprar online con envíos rápidos a todo Colombia y la seguridad que solo una marca líder te puede ofrecer.
+        </p>
     </div>
 </section>
 
@@ -176,154 +355,60 @@
 document.addEventListener('DOMContentLoaded', function() {
     const filterForm = document.getElementById('filterForm');
     const gridContainer = document.getElementById('product-grid-container');
+    const tabs = document.querySelectorAll('.ha-tab');
 
     if (filterForm && gridContainer) {
-        const selects = filterForm.querySelectorAll('select');
-        
-        selects.forEach(select => {
-            select.onchange = null; // Quitar el submit automático anterior
-            select.addEventListener('change', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const activeCat = urlParams.get('categoria') || '';
+        tabs.forEach(tab => {
+            tab.classList.toggle('active', tab.dataset.cat === activeCat);
+            tab.addEventListener('click', function() {
+                tabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                const catInput = filterForm.querySelector('input[name="categoria"]');
+                if (catInput) catInput.value = this.dataset.cat;
                 updateFilters();
             });
+        });
+
+        const selects = filterForm.querySelectorAll('select');
+        selects.forEach(select => {
+            select.addEventListener('change', updateFilters);
         });
 
         function updateFilters() {
             const formData = new FormData(filterForm);
             const params = new URLSearchParams(formData).toString();
             const url = `${window.location.pathname}?${params}`;
-
-            // Añadir clase de carga (opcional)
             gridContainer.style.opacity = '0.5';
             gridContainer.style.transition = 'opacity 0.3s ease';
 
-            fetch(url, {
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            })
-            .then(response => response.text())
-            .then(html => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const newGrid = doc.getElementById('product-grid-container').innerHTML;
-                
-                gridContainer.innerHTML = newGrid;
-                gridContainer.style.opacity = '1';
-
-                // Actualizar la URL sin recargar para que el usuario pueda compartir
-                window.history.pushState({}, '', url);
-                
-                // Re-inicializar animaciones (si existen)
-                if (typeof initAnimations === 'function') initAnimations();
-            })
-            .catch(error => {
-                console.error('Error fetching filtered products:', error);
-                gridContainer.style.opacity = '1';
-            });
+            fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newGrid = doc.getElementById('product-grid-container');
+                    gridContainer.innerHTML = newGrid ? newGrid.innerHTML : '';
+                    gridContainer.style.opacity = '1';
+                    window.history.pushState({}, '', url);
+                })
+                .catch(() => { gridContainer.style.opacity = '1'; });
         }
     }
+
+    // Selector de talla en tarjetas
+    document.querySelectorAll('.ha-card').forEach(card => {
+        const addBtn = card.querySelector('.add-to-bag');
+        card.querySelectorAll('.ha-size-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                card.querySelectorAll('.ha-size-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                if (addBtn) addBtn.dataset.talla = this.dataset.value;
+            });
+        });
+    });
 });
 </script>
 
-<!-- Explora por Categorías -->
-<div class="py-5">
-    <div class="container">
-        <div class="row g-3">
-            <div class="col-12 col-md-6">
-                <a href="?categoria=Shorts#tienda" rel="nofollow" class="category-banner w-100">
-                    <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=700&auto=webp" alt="Pantalones Denim y Jeans para mujer en Cúcuta" loading="lazy" width="700" height="440">
-                    <div class="category-content">
-                        <h2 class="display-5 fw-bold text-white">DENIM</h2>
-                        <span class="text-white text-uppercase" style="letter-spacing: 2px;">Comprar Denim</span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-12 col-md-6">
-                <a href="?categoria=Top#tienda" rel="nofollow" class="category-banner w-100">
-                    <img src="https://images.unsplash.com/photo-1565084888279-aca607ecce0c?q=80&w=700&auto=webp" alt="Blusas y Tops - Moda para dama en Cúcuta" loading="lazy" width="700" height="440">
-                    <div class="category-content">
-                        <h2 class="display-5 fw-bold text-white">BLUSAS</h2>
-                        <span class="text-white text-uppercase" style="letter-spacing: 2px;">Comprar Blusas</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Nuestra Comunidad -->
-<section class="py-5 bg-accent-soft">
-    <div class="container">
-        <div class="text-center mb-5">
-            <p class="text-uppercase mb-2" style="letter-spacing: 3px; font-size: 0.7rem;">INSTAGRAM</p>
-            <h2 class="display-6 fw-bold">NUESTRA COMUNIDAD</h2>
-            <p class="text-muted">Suscríbete y etiqueta @HeilynAguilarStore para aparecer aquí.</p>
-        </div>
-        <div class="row g-3">
-            {% for testimonio in testimonios %}
-            <div class="col-md-3 col-6">
-                <div class="instagram-item aspect-square overflow-hidden bg-white shadow-sm group" style="aspect-ratio: 1/1; border-radius: 12px; position: relative;">
-                    <img src="{{ testimonio.imagen.url }}" class="w-100 h-100" style="object-fit: cover; transition: transform 0.5s ease;" alt="Cliente {{ testimonio.nombre_cliente }}" width="400" height="400">
-                    <div class="community-overlay" style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 15px; color: white; transform: translateY(100%); transition: transform 0.3s ease;">
-                        <p class="small mb-0 fw-bold">{{ testimonio.nombre_cliente }}</p>
-                        {% if testimonio.comentario %}
-                        <p style="font-size: 0.65rem; opacity: 0.9; margin: 0; line-height: 1.2;">{{ testimonio.comentario }}</p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            {% empty %}
-            <!-- Fallback estático si no hay testimonios -->
-            <div class="col-md-3 col-6">
-                <div class="instagram-item aspect-square overflow-hidden" style="aspect-ratio: 1/1;">
-                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=400&auto=webp&fit=crop" class="w-100 h-100 border" style="object-fit: cover;" alt="Cliente" width="400" height="400">
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-
-<!-- Sección Beneficios Minimalista Refined -->
-<section class="py-5 bg-light">
-    <div class="container py-4">
-        <div class="row g-4 text-center">
-            <div class="col-lg-4 col-md-4 col-12">
-                <div class="feature-card">
-                    <i class="fas fa-truck feature-icon"></i>
-                    <h3 class="feature-title h6">ENVÍOS NACIONALES</h3>
-                    <p class="feature-text" style="color: #555;">Contamos con cobertura en todo el país a través de las mejores transportadoras.</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-12">
-                <div class="feature-card">
-                    <i class="fas fa-shield-alt feature-icon"></i>
-                    <h3 class="feature-title h6">COMPRA SEGURA</h3>
-                    <p class="feature-text" style="color: #555;">Tus transacciones están protegidas. Recibimos todos los medios de pago.</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-12">
-                <div class="feature-card">
-                    <i class="fab fa-whatsapp feature-icon"></i>
-                    <h3 class="feature-title h6">ATENCIÓN WHATSAPP</h3>
-                    <p class="feature-text" style="color: #555;">¿Dudas con tu talla? Nuestras asesoras están listas para ayudarte en línea de inmediato.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Segundo Párrafo Informativo Final -->
-<section class="py-5 bg-white border-top">
-    <div class="container-fluid px-3 px-lg-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-11 text-center">
-                <h2 class="h5 fw-bold mb-4">Tu mejor opción en Moda para Dama en Cúcuta</h2>
-                <p class="text-muted mb-0 mx-auto" style="font-size: 1.1rem; line-height: 1.8; max-width: 1000px;">
-                    En <strong>Heilyn Aguilar Store</strong>, entendemos que buscas el mejor <strong>outfit para mujer en Cúcuta</strong>. Somos una <strong>tienda virtual</strong> comprometida con la elegancia y la modernidad. Nuestra colección de <strong>moda para dama en Cúcuta</strong> incluye desde blusas sofisticadas hasta jeans denim premium, diseñados para resaltar tu estilo único. Disfruta de la comodidad de comprar online con envíos rápidos a todo Colombia y la seguridad que solo una marca líder te puede ofrecer.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
 {% endblock %}

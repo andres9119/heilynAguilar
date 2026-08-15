@@ -28,7 +28,7 @@
     <meta property="og:description"
         content="{% block og_description %}La mejor tienda de ropa femenina en Cúcuta. Envíos a todo Colombia.{% endblock %}">
     <meta property="og:image"
-        content="{% block og_image %}{% load static %}{% static 'img/productos/logo-lg.webp' %}{% endblock %}">
+        content="{% block og_image %}{% static 'img/productos/logo-lg.webp' %}{% endblock %}">
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
 
     <!-- Twitter Cards -->
@@ -36,7 +36,7 @@
     <meta name="twitter:title"
         content="{% block twitter_title %}Heilyn Aguilar | Ropa para Dama en Cúcuta{% endblock %}">
     <meta name="twitter:description" content="La mejor tienda de ropa femenina en Cúcuta. Envíos a todo Colombia.">
-    <meta name="twitter:image" content="{% load static %}{% static 'img/productos/logo-lg.webp' %}">
+    <meta name="twitter:image" content="{% static 'img/productos/logo-lg.webp' %}">
 
     <!-- ============================================================
          GOOGLE SEARCH CONSOLE — VERIFICACIÓN
@@ -60,7 +60,6 @@
 
     <!-- Bloque extra para metas específicas por página -->
     {% block meta_extra %}{% endblock %}
-
 
     <!-- JSON-LD para SEO Local y E-commerce -->
     <script type="application/ld+json">
@@ -124,313 +123,193 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"
         media="print" onload="this.media='all'">
     <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <!-- CSS personalizado -->
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
-    <link rel="stylesheet" href="{% static 'css/tienda.css' %}">
-    <link rel="stylesheet" href="{% static 'css/brand.css' %}">
-
-    <style>
-        /* Loader Styles */
-        #page-loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-
-        .loader-content {
-            text-align: center;
-            animation: fadeIn 1s ease;
-        }
-
-        .loader-logo {
-            height: 60px;
-            margin-bottom: 20px;
-            opacity: 0.8;
-        }
-
-        .loader-spinner {
-            width: 30px;
-            height: 30px;
-            border: 2px solid #f3f3f3;
-            border-top: 2px solid var(--primary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Bag Sidebar */
-        #bag-sidebar {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 350px;
-            height: 100%;
-            background: #fff;
-            z-index: 1050;
-            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
-            transition: var(--transition-premium);
-            display: flex;
-            flex-direction: column;
-        }
-
-        #bag-sidebar.active {
-            right: 0;
-        }
-
-        .bag-header {
-            padding: 20px;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .bag-items {
-            flex-grow: 1;
-            overflow-y: auto;
-            padding: 20px;
-        }
-
-        .bag-footer {
-            padding: 20px;
-            border-top: 1px solid #eee;
-        }
-
-        .bag-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            z-index: 1045;
-            display: none;
-            backdrop-filter: blur(5px);
-        }
-
-        .bag-overlay.active {
-            display: block;
-        }
-
-        .bag-count-badge {
-            position: absolute;
-            top: -5px;
-            right: -8px;
-            background: var(--accent-pink);
-            color: #fff;
-            font-size: 0.6rem;
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/mejorada.css' %}">
 </head>
 
-<body class="loading">
-    <!-- Page Loader -->
-    <div id="page-loader">
-        <div class="loader-content">
-            <img src="{% static 'img/productos/logo-sm.webp' %}" alt="Logo" class="loader-logo" width="60" height="60">
-            <div class="loader-spinner"></div>
-        </div>
-    </div>
-    <!-- Top Bar -->
-    <div class="top-bar py-1 text-center bg-dark text-white" style="font-size: 0.75rem; letter-spacing: 1px;">
-        ENVÍOS NACIONALES | <a href="https://wa.me/573123080861" class="text-white text-decoration-none">ESCRIBENOS <i
-                class="fab fa-whatsapp"></i></a>
+<body class="ha-theme">
+    <!-- Barra superior -->
+    <div class="ha-topbar">
+        <span>Envíos nacionales gratis desde $150.000</span>
+        <span style="opacity:0.3;">|</span>
+        <a href="https://wa.me/573123080861" target="_blank" rel="noopener noreferrer">Escríbenos al WhatsApp</a>
     </div>
 
-    <!-- ... rest of navbar ... -->
-    <!-- (I'll keep the rest as is but focus on the end) -->
-
-    <!-- Floating WhatsApp -->
-    <a href="https://wa.me/573123080861" class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'inicio' %}">
-                <img src="{% static 'img/productos/logo-sm.webp' %}" alt="Logo" height="40" width="120"
-                    class="d-inline-block align-top" style="height: 40px; width: auto;">
-                <span>By: Heilyn Aguilar</span>
-            </a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'inicio' %}">INICIO</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'inicio' %}?categoria=Bodys#tienda">BODYS</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link"
-                            href="{% url 'inicio' %}?categoria=Corset#tienda">CORSET</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'inicio' %}?categoria=Top#tienda">TOP</a></li>
-                    <li class="nav-item"><a class="nav-link"
-                            href="{% url 'inicio' %}?categoria=Shorts#tienda">SHORTS</a></li>
-                    <li class="nav-item"><a class="nav-link"
-                            href="{% url 'inicio' %}?categoria=Faldas#tienda">FALDAS</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'inicio' %}?categoria=Denim#tienda">DENIM</a>
-                    </li>
-                </ul>
-
-                <div class="navbar-icons d-flex align-items-center justify-content-center gap-3">
-                    <div class="search-wrapper d-none d-lg-block">
-                        <form action="{% url 'inicio' %}" method="get" style="position: relative;">
-                            <label for="search-input" class="visually-hidden">Buscar productos</label>
-                            <input type="text" id="search-input" name="q" class="search-input"
-                                placeholder="¿Qué estás buscando?" value="{{ request.GET.q|default:'' }}">
-                            <button type="submit" class="p-0 border-0 bg-transparent" aria-label="Buscar"
-                                style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #999;">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </form>
-                    </div>
-                    <button type="button" class="nav-icon position-relative border-0 bg-transparent p-0" id="open-bag"
-                        aria-label="Abrir bolsa de compra" aria-haspopup="dialog">
-                        <i class="fas fa-shopping-bag"></i>
-                        <span class="bag-count-badge" id="bag-count">0</span>
-                    </button>
-                </div>
+    <!-- Header sticky -->
+    <header class="ha-header" id="haHeader">
+        <div class="ha-container ha-header-inner">
+            <div class="d-flex align-items-center" style="gap:40px;">
+                <button class="ha-burger" id="haBurger" aria-label="Menú"><i class="fas fa-bars"></i></button>
+                <a class="ha-logo" href="{% url 'inicio' %}">HEILYN AGUILAR</a>
+                <nav class="ha-nav" aria-label="Principal">
+                    <a href="{% url 'inicio' %}">Inicio</a>
+                    <a href="{% url 'inicio' %}#tienda">Colección</a>
+                    <button type="button" id="haOpenTallas" class="ha-nav-btn">Guía de Tallas</button>
+                    <a href="{% url 'nosotros' %}">Quienes Somos</a>
+                </nav>
+            </div>
+            <div class="ha-actions">
+                <button class="ha-icon-btn" type="button" aria-label="Favoritos"><i
+                        class="far fa-heart"></i></button>
+                <button class="ha-icon-btn" type="button" id="open-bag" aria-label="Carrito" aria-haspopup="dialog">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="ha-badge" id="bag-count">0</span>
+                </button>
+                <a class="ha-whatsapp-pill" href="https://wa.me/573123080861" target="_blank" rel="noopener noreferrer"><i
+                        class="fab fa-whatsapp"></i> WhatsApp</a>
             </div>
         </div>
-    </nav>
+    </header>
+
+    <!-- Menú móvil -->
+    <div class="ha-mobile-menu" id="haMobileMenu">
+        <div class="ha-mobile-panel">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <span class="ha-logo" style="font-size:18px;">HEILYN AGUILAR</span>
+                <button class="ha-modal-close" id="haMobileClose" aria-label="Cerrar"><i class="fas fa-times"></i></button>
+            </div>
+            <a href="{% url 'inicio' %}">Inicio</a>
+            <a href="{% url 'inicio' %}#tienda">Colección</a>
+            <a href="#" id="haOpenTallasMobile">Guía de Tallas</a>
+            <a href="{% url 'nosotros' %}">Quienes Somos</a>
+            <a href="{% url 'tallas' %}">Guía de tallas</a>
+            <a href="{% url 'faq' %}">Preguntas frecuentes</a>
+            <a href="{% url 'contacto' %}">Contacto</a>
+            <a href="https://wa.me/573123080861" target="_blank" rel="noopener noreferrer" style="color:var(--ha-gold);">WhatsApp</a>
+        </div>
+    </div>
 
     <!-- Contenido principal -->
     <main>
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Footer Estructurado -->
-    <footer class="footer-fds">
-        <div class="container">
-
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6">
-                    <h3 class="footer-heading h6">¿NECESITAS AYUDA?</h3>
-                    <ul class="footer-links">
-                        <li><a href="{% url 'politicas' %}">Políticas de privacidad</a></li>
-                        <li><a href="{% url 'terminos' %}">T&C - Servicio General</a></li>
-                        <li><a href="{% url 'faq' %}">Preguntas Frecuentes</a></li>
-                        <li><a href="{% url 'devoluciones' %}">Devoluciones</a></li>
-                    </ul>
-                </div>
-                <!-- Columna 2: Sobre Nosotros -->
-                <div class="col-lg-3 col-md-6">
-                    <h3 class="footer-heading h6 mb-3">SOBRE NOSOTROS</h3>
-                    <p class="small text-muted mb-4">HEILYN AGUILAR es una marca dedicada a la mujer moderna, ofreciendo
-                        las últimas tendencias en moda con calidad y elegancia.</p>
-                    <ul class="footer-links">
-                        <li><a href="{% url 'nosotros' %}">¿Quiénes somos?</a></li>
-                        <li><a href="{% url 'beneficios' %}">Beneficios por tus compras</a></li>
-                        <li><a href="{% url 'tallas' %}">Guía de tallas</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h3 class="footer-heading h6">NUESTRAS CATEGORÍAS</h3>
-                    <ul class="footer-links">
-                        <li><a href="{% url 'inicio' %}?categoria=Bodys#tienda">Bodys</a></li>
-                        <li><a href="{% url 'inicio' %}?categoria=Corset#tienda">Corset</a></li>
-                        <li><a href="{% url 'inicio' %}?categoria=Top#tienda">Top</a></li>
-                        <li><a href="{% url 'inicio' %}?categoria=Shorts#tienda">Shorts</a></li>
-                        <li><a href="{% url 'inicio' %}?categoria=Faldas#tienda">Faldas</a></li>
-                        <li><a href="{% url 'inicio' %}?categoria=Denim#tienda">Denim</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h3 class="footer-heading h6">SÍGUENOS</h3>
-                    <div class="social-icons d-flex gap-4 mb-4">
-                        <a href="https://www.instagram.com/byheilynaguilar?igsh=ZHlydmE0ZGh3cDgz&utm_source=qr"
-                            target="_blank" class="fs-4" aria-label="Síguenos en Instagram"
-                            title="Síguenos en Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://wa.me/573123080861" target="_blank" class="fs-4"
-                            aria-label="Escríbenos por WhatsApp" title="Escríbenos por WhatsApp"><i
-                                class="fab fa-whatsapp"></i></a>
-                        <a href="https://www.tiktok.com/@byheilynaguilar?_r=1&_t=ZS-95NIDpg1AEE" target="_blank" class="fs-4"
-                            aria-label="Síguenos en TikTok" title="Síguenos en TikTok"><i
-                                class="fab fa-tiktok"></i></a>
-                        <a href="#" class="fs-4 opacity-50" aria-label="Facebook - Próximamente" title="Próximamente"
-                            style="cursor: default;"><i class="fab fa-facebook"></i></a>
-                    </div>
-                    <div class="footer-logo-small mt-2">
-                        <img src="{% static 'img/productos/logo-md.webp' %}" alt="Logo Footer" height="240" width="240"
-                            class="opacity-75" style="height: 80px; width: 80px;">
-                    </div>
+    <!-- Footer -->
+    <footer class="ha-footer">
+        <div class="ha-footer-inner">
+            <div class="ha-footer-brand">
+                <span class="ha-logo">HEILYN AGUILAR</span>
+                <p class="ha-footer-desc">Must-haves que moldean la silueta latina. Drops limitados desde Cúcuta para toda Colombia.</p>
+                <div class="ha-footer-social">
+                    <a class="ha-social-btn" href="https://www.instagram.com/byheilynaguilar?igsh=ZHlydmE0ZGh3cDgz&utm_source=qr" target="_blank" aria-label="Síguenos en Instagram"><i class="fab fa-instagram"></i></a>
+                    <a class="ha-social-btn" href="https://wa.me/573123080861" target="_blank" aria-label="Escríbenos por WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a class="ha-social-btn" href="https://www.tiktok.com/@byheilynaguilar?_r=1&_t=ZS-95NIDpg1AEE" target="_blank" aria-label="Síguenos en TikTok"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
-            <div class="footer-bottom mt-5 pt-4 border-top text-center text-muted small">
-                <p>&copy; 2026 HEILYN AGUILAR. Todos los derechos reservados. | Cúcuta, Colombia</p>
+            <div>
+                <div class="ha-footer-col-title">Comprar</div>
+                <div class="ha-footer-col">
+                    <a href="{% url 'inicio' %}#tienda">Colección</a>
+                    <a href="#" id="haOpenTallasFooter">Guía de tallas</a>
+                    <a href="{% url 'nosotros' %}">Nuestra esencia</a>
+                </div>
+            </div>
+            <div>
+                <div class="ha-footer-col-title">Ayuda</div>
+                <div class="ha-footer-col">
+                    <a href="{% url 'faq' %}">Preguntas frecuentes</a>
+                    <a href="{% url 'devoluciones' %}">Cambios y devoluciones</a>
+                    <a href="{% url 'politicas' %}">Políticas de privacidad</a>
+                    <a href="{% url 'terminos' %}">Términos y condiciones</a>
+                    <a href="{% url 'beneficios' %}">Beneficios</a>
+                    <a href="{% url 'contacto' %}">Contacto</a>
+                </div>
+            </div>
+            <div>
+                <div class="ha-footer-col-title">Contacto</div>
+                <div class="ha-footer-contact">
+                    <div>Cúcuta, Norte de Santander</div>
+                    <div>Colombia</div>
+                    <div>Tel +57 312 308 0861</div>
+                    <div>Lun-Sáb 9am-7pm</div>
+                </div>
+            </div>
+        </div>
+        <div class="ha-footer-bottom">
+            <span>&copy; 2026 Heilyn Aguilar Store — Todos los derechos reservados.</span>
+            <div class="ha-footer-bottom-links">
+                <span>Hecho en Cúcuta</span>
+                <span style="opacity:0.5;">Envío gratis desde $150.000</span>
             </div>
         </div>
     </footer>
 
-    <!-- Shopping Bag Sidebar -->
-    <div class="bag-overlay" id="bag-overlay"></div>
-    <div id="bag-sidebar">
-        <div class="bag-header">
-            <h2 class="mb-0 fw-bold fs-6" style="letter-spacing: 2px;">MI SELECCIÓN</h2>
-            <button class="btn-close" id="close-sidebar" aria-label="Cerrar bolsa de compra"></button>
+    <!-- WhatsApp flotante -->
+    <a class="ha-float-wa" href="https://wa.me/573123080861" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Carrito sidebar -->
+    <div class="ha-cart-overlay" id="bag-overlay"></div>
+    <div class="ha-cart-panel" id="bag-sidebar" role="dialog" aria-label="Carrito de compras">
+        <div class="ha-cart-head">
+            <h5 class="ha-cart-title mb-0">Tu carrito</h5>
+            <button class="ha-modal-close" id="close-sidebar" aria-label="Cerrar carrito"><i
+                    class="fas fa-times"></i></button>
         </div>
-        <div class="bag-items" id="bag-items-container">
-            <!-- Items populated by JS -->
-            <div class="text-center py-5 text-muted small">Tu bolsa está vacía</div>
-        </div>
-        <div class="bag-footer border-top pt-3">
-            <div class="d-flex justify-content-between mb-3 fw-bold align-items-center">
-                <span style="font-size: 0.85rem;">TOTAL A PAGAR:</span>
-                <span id="bag-total" class="fs-5">$0</span>
+        <div class="ha-cart-items" id="bag-items-container">
+            <div class="ha-cart-empty">
+                <div class="ha-cart-empty-icon"><i class="fas fa-shopping-bag"></i></div>
+                <div class="ha-cart-empty-title">Tu carrito está vacío</div>
+                <p class="ha-cart-empty-sub">Añade tus must-haves y paga por WhatsApp en segundos.</p>
             </div>
+        </div>
+        <div class="ha-cart-foot">
+            <div class="ha-cart-subtotal">
+                <span>Subtotal</span>
+                <strong id="bag-total">$0</strong>
+            </div>
+            <div class="ha-cart-note">Envío gratis desde $150.000 • 3 cuotas sin interés</div>
 
             <!-- Bloque de Pago Nequi -->
-            <div class="payment-instructions p-3 mb-3 bg-light border border-secondary-subtle rounded text-center">
-                <p class="mb-2 fw-bold small text-dark d-flex align-items-center justify-content-center gap-2">
-                    <span
-                        style="display:inline-block; width:8px; height:8px; background:#e84393; border-radius:50%;"></span>
-                    Pago por Nequi
+            <div class="text-center mt-3 p-3" style="background:var(--ha-cream); border-radius:14px;">
+                <p class="mb-1 fw-bold small d-flex align-items-center justify-content-center gap-2">
+                    <i class="fas fa-circle" style="color:#e84393; font-size:8px;"></i> Pago por Nequi
                 </p>
-                <div class="d-flex align-items-center justify-content-center mb-2">
-                    <h5 class="mb-0 fw-bold" style="letter-spacing: 1px;">312 308 0861</h5>
-                </div>
-                <p class="mb-0 text-muted" style="font-size: 0.7rem; line-height: 1.3;">
-                    Transfiere el valor total y dale clic al botón para enviarnos el comprobante y coordinar tu envío.
+                <h5 class="fw-bold mb-1" style="letter-spacing:1px;">312 308 0861</h5>
+                <p class="mb-0" style="font-size:0.7rem; color:rgba(0,0,0,0.5);">
+                    Transfiere el total y envía el comprobante con tu pedido.
                 </p>
             </div>
 
-            <button
-                class="btn btn-dark w-100 rounded-0 py-3 mb-2 d-flex align-items-center justify-content-center gap-2 shadow-sm"
-                id="whatsapp-checkout" aria-label="Enviar pedido por WhatsApp">
-                <i class="fab fa-whatsapp fs-5"></i> ENVIAR MI PEDIDO Y RECIBO
+            <button class="ha-btn ha-btn-dark ha-btn-block ha-cart-cta" id="whatsapp-checkout" aria-label="Enviar mi pedido y recibo por WhatsApp">
+                <i class="fab fa-whatsapp"></i> Enviar mi pedido y recibo
             </button>
-            <button class="btn btn-link text-muted w-100 py-2 small text-decoration-none shadow-none" id="clear-bag"
-                style="font-size: 0.7rem;" aria-label="Vaciar toda la bolsa de compras">Vaciar toda la bolsa</button>
+            <button class="ha-cart-clear" id="clear-bag" aria-label="Vaciar toda la bolsa de compras">Vaciar toda la bolsa</button>
+        </div>
+    </div>
+
+    <!-- Modal Guía de Tallas -->
+    <div class="ha-modal" id="tallaModal">
+        <div class="ha-modal-bg" data-close-modal></div>
+        <div class="ha-modal-box">
+            <div class="ha-modal-head">
+                <h5 class="ha-modal-title mb-0">Guía de Tallas — Horma Latina</h5>
+                <button class="ha-modal-close" data-close-modal aria-label="Cerrar"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="ha-modal-body">
+                <p style="font-size:13px; color:rgba(0,0,0,0.6); line-height:1.6; margin-bottom:20px;">
+                    Nuestras piezas están patronadas para curvas latinas. Si estás entre dos tallas, te recomendamos la mayor. Escríbenos y te asesoramos en vivo.
+                </p>
+                <div style="overflow:auto; border-radius:14px; border:1px solid rgba(0,0,0,0.05);">
+                    <table class="ha-table">
+                        <thead>
+                            <tr><th>Talla</th><th>Busto (cm)</th><th>Cintura (cm)</th><th>Cadera (cm)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>XS</td><td>82-86</td><td>62-66</td><td>88-92</td></tr>
+                            <tr><td>S</td><td>86-90</td><td>66-70</td><td>92-96</td></tr>
+                            <tr><td>M</td><td>90-94</td><td>70-74</td><td>96-100</td></tr>
+                            <tr><td>L</td><td>94-98</td><td>74-78</td><td>100-104</td></tr>
+                            <tr><td>XL</td><td>98-102</td><td>78-82</td><td>104-108</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <a class="ha-btn ha-btn-dark ha-btn-block mt-4" href="https://wa.me/573123080861" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-whatsapp"></i> Asesoría de talla por WhatsApp
+                </a>
+            </div>
         </div>
     </div>
 
@@ -439,72 +318,30 @@
     <!-- Bolsa JS -->
     <script src="{% static 'js/bolsa.js' %}"></script>
 
-    <!-- Scripts adicionales -->
     <script>
-        // Loader handling
-        window.addEventListener('load', function () {
-            const loader = document.getElementById('page-loader');
-            loader.style.opacity = '0';
-            setTimeout(() => {
-                loader.style.visibility = 'hidden';
-                document.body.classList.remove('loading');
-            }, 500);
+        // Header scroll effect
+        const haHeader = document.getElementById('haHeader');
+        window.addEventListener('scroll', () => {
+            if (haHeader) haHeader.classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        // Validación de formularios
-        (function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                var forms = document.getElementsByClassName('needs-validation');
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
+        // Menú móvil
+        const haMobileMenu = document.getElementById('haMobileMenu');
+        function openMobile(){ haMobileMenu.classList.add('open'); document.body.style.overflow='hidden'; }
+        function closeMobile(){ haMobileMenu.classList.remove('open'); document.body.style.overflow=''; }
+        document.getElementById('haBurger').addEventListener('click', openMobile);
+        document.getElementById('haMobileClose').addEventListener('click', closeMobile);
+        haMobileMenu.addEventListener('click', (e) => { if (e.target === haMobileMenu) closeMobile(); });
 
-        // Navbar scroll effect
-        window.addEventListener('scroll', function () {
-            const nav = document.querySelector('.navbar');
-            if (nav) {
-                if (window.scrollY > 50) {
-                    nav.classList.add('navbar-scrolled');
-                } else {
-                    nav.classList.remove('navbar-scrolled');
-                }
-            }
+        // Modal Guía de Tallas
+        const haModal = document.getElementById('tallaModal');
+        function openModal(){ haModal.classList.add('open'); document.body.style.overflow='hidden'; }
+        function closeModal(){ haModal.classList.remove('open'); document.body.style.overflow=''; }
+        haModal.addEventListener('click', (e) => { if (e.target.hasAttribute('data-close-modal')) closeModal(); });
+        document.querySelectorAll('#haOpenTallas, #haOpenTallasMobile, #haOpenTallasFooter').forEach(el => {
+            if (el) el.addEventListener('click', (ev) => { ev.preventDefault(); openModal(); });
         });
-
-        // Initialize any animations or intersections
-        function initAnimations() {
-            const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach(el => {
-                const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight - 50) {
-                    el.classList.add('active');
-                }
-            });
-        }
-        window.addEventListener('scroll', initAnimations);
-        window.addEventListener('load', initAnimations);
-
-        // Smooth scroll para enlaces internos
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeModal(); }} );
     </script>
 </body>
 

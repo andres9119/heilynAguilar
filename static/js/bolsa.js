@@ -1,5 +1,6 @@
 /**
  * bolsa.js - Lógica para el carrito de compras (Bolsa) vía WhatsApp
+ * Flujo: pago por Nequi (312 308 0861) + envío de comprobante por WhatsApp
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -26,26 +27,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Global click for "Add to Bag" buttons (using event delegation)
     document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('add-to-bag')) {
+        const addBtn = e.target.closest('.add-to-bag');
+        if (addBtn) {
             const product = {
-                id: e.target.dataset.id,
-                name: e.target.dataset.name,
-                price: parseFloat(e.target.dataset.price),
-                image: e.target.dataset.image,
-                talla: e.target.dataset.talla || 'Única',
-                color: e.target.dataset.color || 'Único'
+                id: addBtn.dataset.id,
+                name: addBtn.dataset.name,
+                price: parseFloat(addBtn.dataset.price),
+                image: addBtn.dataset.image,
+                talla: addBtn.dataset.talla || 'Única',
+                color: addBtn.dataset.color || 'Único'
             };
+
+            // Si hay selector de talla en la tarjeta y aún no eligió, alertar
+            const card = addBtn.closest('.ha-card');
+            if (card) {
+                const activeSize = card.querySelector('.ha-size-btn.active');
+                if (addBtn.dataset.requireSize === 'true' && !activeSize) {
+                    alert('Selecciona una talla primero');
+                    return;
+                }
+                if (activeSize) product.talla = activeSize.dataset.value;
+            }
             addToBag(product);
+        }
+
+        // Controles de cantidad / eliminación dentro del carrito
+        const qtyBtn = e.target.closest('[data-qty]');
+        if (qtyBtn && bagItemsContainer.contains(qtyBtn)) {
+            const index = parseInt(qtyBtn.dataset.index, 10);
+            const delta = parseInt(qtyBtn.dataset.qty, 10);
+            if (bag[index]) {
+                bag[index].quantity = (bag[index].quantity || 1) + delta;
+                if (bag[index].quantity < 1) bag[index].quantity = 1;
+                saveBag(); renderBag();
+            }
+        }
+        const removeBtn = e.target.closest('[data-remove]');
+        if (removeBtn && bagItemsContainer.contains(removeBtn)) {
+            const index = parseInt(removeBtn.dataset.remove, 10);
+            bag.splice(index, 1);
+            saveBag(); renderBag();
         }
     });
 
     function toggleBag() {
-        bagSidebar.classList.toggle('active');
-        bagOverlay.classList.toggle('active');
+        bagSidebar.classList.toggle('open');
+        bagOverlay.classList.toggle('open');
+        document.body.style.overflow = bagSidebar.classList.contains('open') ? 'hidden' : '';
     }
 
     function addToBag(product) {
-        // Check if item already exists with same talla & color
         const existing = bag.find(item => item.id === product.id && item.talla === product.talla && item.color === product.color);
         if (existing) {
             existing.quantity = (existing.quantity || 1) + 1;
@@ -55,13 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         saveBag();
         renderBag();
-        if (!bagSidebar.classList.contains('active')) toggleBag();
-    }
-
-    function removeFromBag(index) {
-        bag.splice(index, 1);
-        saveBag();
-        renderBag();
+        if (!bagSidebar.classList.contains('open')) toggleBag();
     }
 
     function clearBag() {
@@ -76,41 +101,56 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('heilyn_bag', JSON.stringify(bag));
     }
 
+    function money(n) {
+        return '$' + Math.round(n).toLocaleString('es-CO');
+    }
+
     function renderBag() {
         if (!bagItemsContainer) return;
-        
-        bagCountBadge.innerText = bag.reduce((acc, item) => acc + (item.quantity || 1), 0);
-        
+        const totalQuantity = bag.reduce((acc, item) => acc + (item.quantity || 1), 0);
+        if (bagCountBadge) bagCountBadge.innerText = totalQuantity;
+
         if (bag.length === 0) {
-            bagItemsContainer.innerHTML = '<div class="text-center py-5 text-muted small">Tu bolsa está vacía</div>';
+            bagItemsContainer.innerHTML =
+                '<div class="ha-cart-empty">' +
+                '  <div class="ha-cart-empty-icon"><i class="fas fa-shopping-bag"></i></div>' +
+                '  <div class="ha-cart-empty-title">Tu carrito está vacío</div>' +
+                '  <p class="ha-cart-empty-sub">Añade tus must-haves y paga por WhatsApp en segundos.</p>' +
+                '</div>';
             bagTotalDisplay.innerText = '$0';
             return;
         }
 
         let total = 0;
         bagItemsContainer.innerHTML = bag.map((item, index) => {
-            total += item.price * (item.quantity || 1);
-            return `
-                <div class="bag-item d-flex gap-3 mb-4">
-                    <img src="${item.image}" alt="${item.name}" style="width: 70px; height: 90px; object-fit: cover; border-radius: 4px;">
-                    <div class="flex-grow-1">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="mb-1 small fw-bold">${item.name}</h6>
-                            <button class="btn-close" style="font-size: 0.6rem;" onclick="removeFromBag(${index})"></button>
-                        </div>
-                        <p class="text-muted mb-1" style="font-size: 0.7rem;">TALLA: ${item.talla} | COLOR: ${item.color}</p>
-                        <div class="d-flex justify-content-between align-items-center mt-2">
-                             <span class="small fw-bold">$${Math.round(item.price).toLocaleString('es-CO')} COP</span>
-                             <span class="small text-muted">Cant: ${item.quantity || 1}</span>
-                        </div>
-                    </div>
-                </div>
-            `;
+            const itemTotal = item.price * (item.quantity || 1);
+            total += itemTotal;
+            const img = item.image
+                ? '<img src="' + item.image + '" alt="' + item.name + '">'
+                : '<i class="fas fa-image"></i>';
+            return (
+                '<div class="ha-cart-item">' +
+                '  <div class="ha-cart-item-img">' + img + '</div>' +
+                '  <div class="ha-cart-item-body">' +
+                '    <div class="ha-cart-item-top">' +
+                '      <span class="ha-cart-item-name">' + item.name + '</span>' +
+                '      <button class="ha-cart-remove" data-remove="' + index + '" aria-label="Eliminar"><i class="fas fa-times"></i></button>' +
+                '    </div>' +
+                '    <div class="ha-cart-item-meta">Talla ' + item.talla + ' | ' + item.color + '</div>' +
+                '    <div class="ha-cart-item-bottom">' +
+                '      <span class="ha-cart-item-price">' + money(itemTotal) + '</span>' +
+                '      <div class="ha-qty">' +
+                '        <button class="ha-qty-btn" data-qty="-1" data-index="' + index + '" aria-label="Menos"><i class="fas fa-minus"></i></button>' +
+                '        <span class="ha-qty-num">' + (item.quantity || 1) + '</span>' +
+                '        <button class="ha-qty-btn" data-qty="1" data-index="' + index + '" aria-label="Más"><i class="fas fa-plus"></i></button>' +
+                '      </div>' +
+                '    </div>' +
+                '  </div>' +
+                '</div>'
+            );
         }).join('');
-        bagTotalDisplay.innerText = `$${Math.round(total).toLocaleString('es-CO')} COP`;
+        bagTotalDisplay.innerText = money(total);
     }
-
-    window.removeFromBag = removeFromBag; // Make it global for the onclick
 
     function checkoutWhatsApp() {
         if (bag.length === 0) return;
@@ -125,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         message += `💰 *Total a pagar: $${Math.round(total).toLocaleString('es-CO')} COP*\n\n¡Hola! Acabo de hacer la transferencia por Nequi. En este chat adjuntaré el pantallazo para que me despachen el pedido. Quedo atenta para los datos de envío. 🚚✨`;
-        
+
         const whatsappUrl = `https://wa.me/573123080861?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
     }
