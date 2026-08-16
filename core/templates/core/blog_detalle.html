@@ -5,7 +5,7 @@
 {% block meta_description %}{{ articulo.resumen }}{% endblock %}
 {% block og_title %}{{ articulo.titulo }} | Heilyn Aguilar Store{% endblock %}
 {% block og_description %}{{ articulo.resumen }}{% endblock %}
-{% if articulo.imagen %}{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{{ articulo.imagen.url }}{% endblock %}{% endif %}
+{% block og_image %}{% if articulo.imagen %}{{ request.scheme }}://{{ request.get_host }}{{ articulo.imagen.url }}{% else %}{% static 'img/productos/logo-lg.webp' %}{% endif %}{% endblock %}
 {% block canonical %}{{ request.scheme }}://{{ request.get_host }}{% url 'blog_detalle' articulo.slug %}{% endblock %}
 
 {% block content %}
