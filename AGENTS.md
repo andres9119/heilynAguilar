@@ -246,6 +246,7 @@ systemctl restart gunicorn-tienda
 
 - Sitemap: `https://byheilynaguilar.com/sitemap.xml`. Registrar páginas nuevas en Google Search Console y pedir indexación.
 - Google Analytics 4: `G-TCS3JX9RV7` (no duplicar).
+- ⚠️ Tras agregar/quitar **estáticos** (favicons, fuentes, css) siempre correr `collectstatic`; el cambio no se ve en producción si no. En dúd de que los navegadores tengan cache vieja de estáticos "immutable 1 mes", recordar hard reload o `?v=`. El HTML no se cachea.
 
 `deploy/gunicorn.service` / `deploy/gunicorn.socket` / `deploy/nginx.conf` son las plantillas de despliegue (405→HTTPS, static/media alias).
 
@@ -256,7 +257,7 @@ systemctl restart gunicorn-tienda
 ### ✅ Hecho (ago 2026)
 - **Miniaturas responsivas**: `Producto.imagen_thumb` (`_360.webp`) y `Producto.imagen_thumb_media` (`_627.webp`) generadas en `save()` + comando `generate_product_thumbs`. Las tarjetas usan 288x360; el hero (LCP) usa `_627` con `srcset="[mid] 627w, [main] 1080w"`, `fetchpriority="high"` y `width/height` explícitos (menos CLS/bandwidth).
 - **Accesibilidad**: pestañas filtrantes con `role="group"` + `aria-pressed` (ya no `role="tablist"` huérfano); contraste subido en textos grises (0.5→0.72/0.75) y labels dorados (`#7A5226`); títulos "Tu carrito"/"Guía de Tallas" de `h5`→`h2`; número Nequi de `h5`→`div`.
-- **Fuentes autoalojadas**: `static/fonts/fonts.css` (`@font-face` con `display:swap`) sirve Inter y Playfair Display (latin+latin-ext, una sola woff2 variable por familia). Font Awesome en `static/fontawesome/` (all.min.css + webfonts). **Ya NO** se carga Google Fonts ni Font Awesome CDN en `base.html`. Tras cambios en `static`, correr `collectstatic`.
+- **Fuentes autoalojadas**: `static/fonts/fonts.css` (`@font-face` con `display:swap`) sirve Inter y Playfair Display (latin+latin-ext, una sola woff2 variable por familia). Font Awesome en `static/fontawesome/` (**Estructura oficial**: `css/all.min.css` + `webfonts/` hermanas). ⚠️ No mover `all.min.css` fuera de `css/`: el CSS usa `url(../webfonts/…)`, que solo resuelve bien desde `static/fontawesome/css/` → `/static/fontawesome/webfonts/`. Un error histórico (CSS en `fontawesome/` sin `css/`) hacía que pidiera `/static/webfonts/` → 404 y los iconos salían como cuadritos. Tras cambios en `static`, correr `collectstatic`.**Ya NO** se carga Google Fonts ni Font Awesome CDN en `base.html`.
 - **Rendimiento móvil**: `bootstrap.min.css` se carga **asíncrono** (`media="print" onload="this.media='all'"` + `<noscript>`) con un **CSS crítico inline** replicando las utilidades del primer render (`.d-flex`, `.align-items-center`, `.gap-*`, `.m*`, `.btn`, `.visually-hidden`). JS con `defer` (`bootstrap.bundle.min.js`, `bolsa.js`). Reduce render-blocking y LCP en 4G lento. No añadir nuevas utilidades de Bootstrap críticas sin replicarlas en ese bloque inline.
 
 ### ✅ Estrategia de imágenes RESUELTA (ago 2026)
@@ -264,6 +265,25 @@ El LCP (hero) ya se sirve con variante `_627.webp` + `srcset`, eliminando el war
 - **Cloudinary** (plan free, vía `CloudinaryField` o `?tr=` en URL) — requiere cuenta + keys a `.env`.
 - **Cloudflare Images** si el dominio ya pasa por Cloudflare.
 (No necesario para el score actual; solo si se quiere variantes on-the-fly para blog/galerías.)
+
+### ✅ Infraestructura Cloudflare (ago 2026)
+- Zona activa en **Cloudflare** (plan free) con NS `keenan.ns.cloudflare.com` + `lily.ns.cloudflare.com` (IONOS). **DNSSEC OFF** (sin Domain Guard; si se activa, rompe la zona).
+- **SSL Full** (edge). **Always Use HTTPS ON**. **Browser Cache TTL = 1 mes** (2678400, `immutable` en estáticos) → tras cambiar un estático, los navegadores con cache vieja pueden seguir 404; usar URL nueva (`?v=`) o pedir "Clear site data"/hard reload al usuario.
+- **HTTP/3 + 0-RTT APAGADOS** (daba `ERR_QUIC_PROTOCOL_ERROR` en Chrome del usuario; con HTTP/3 off baja a HTTP/2 estable). Si se reactiva, vigilar errores QUIC en Chrome.
+- HTML **no** se cachea en edge (opción A, sin Cache Rule): carrito va en `localStorage`, TTFB ~0.5s es aceptable.
+- `Always Online` + `Crawler Hints` ON.
+
+### ✅ Correcciones (ago 2026)
+- **Favicons**: `static/img/favicon-16x16.png`, `favicon-32x32.png`, `favicon-48x48.png`, `apple-touch-icon.png` (180). Referenciados en `base.html`. ⚠️ Google no usa como icono de sitio un PNG >48px ni el logo 581×584 (por eso salía el globo). La cache de favicons de Google es **independiente y lenta** (puede tardar semanas en refrescarse; no es bug del sitio). Google prefiere `/favicon.ico` en la raíz (no servido aún por Django; opcional: nginx alias).
+- **Página `/contacto/`**: reescrita sin mojibake, datos consistente con Cúcuta (ubicación, teléfono/WhatsApp **312 308 0861** — se eliminó el falso `573001234567` y la dirección "Bogotá"). Añadido `meta_description` con keyword.
+- **H1 del hero** (`inicio.html`): quitado el `<em class="ha-italic">EN CÚCUTA</em>` → título uniforme (el italic solo estaba a peso 400 y se veía desigual contra el 500 del título).
+- **Contacto/NAP**: número de ventas WhatsApp = `573123080861`; Nequi `312 308 0861`. Usar siempre estos (no inventar teléfonos en plantillas).
+
+### 🟡 Google Business Profile (ago 2026)
+- **Creado y publicado** como "byheilynaguilar" (dashboard "Tu negocio en Google"). Ya enlaza web, Instagram (10.8k) y blog.
+- Tareas pendientes de mayor impacto: **subir fotos**, **conseguir las primeras reseñas** (formulario por WhatsApp), **configurar seguimiento de conversiones**.
+- ⚠️ Como es **tienda virtual**, usar **Área de servicio + ocultar dirección** en "Editar perfil → Información → Ubicación" (no mostrar una dirección física inventada).
+- El SEO local ya da resultados: `ropa para dama en Cúcuta` → posición #1; `corset para mujer Cúcuta` → #2. Backlinks siguen siendo el gap principal (sin pagar).
 
 ---
 
