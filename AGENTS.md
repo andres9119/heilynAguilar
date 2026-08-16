@@ -255,7 +255,8 @@ systemctl restart gunicorn-tienda
 
 ### ✅ Hecho (ago 2026)
 - **Miniaturas responsivas**: `Producto.imagen_thumb` (`_360.webp`) generada en `save()` + comando `generate_product_thumbs`. Las tarjetas del grid usan la miniatura 288x360; LCP del hero usa `fetchpriority="high"` y `width/height` explícitos (menos CLS).
-- **Accesibilidad**: pestañas filtrantes con `role="group"` + `aria-pressed` (ya no `role="tablist"` huérfano); contraste subido en textos grises (0.5→0.72/0.75) y labels dorados (`#9C6F3F`); títulos "Tu carrito"/"Guía de Tallas" de `h5`→`h2`.
+- **Accesibilidad**: pestañas filtrantes con `role="group"` + `aria-pressed` (ya no `role="tablist"` huérfano); contraste subido en textos grises (0.5→0.72/0.75) y labels dorados (`#7A5226`); títulos "Tu carrito"/"Guía de Tallas" de `h5`→`h2`; número Nequi de `h5`→`div`.
+- **Fuentes autoalojadas**: `static/fonts/fonts.css` (`@font-face` con `display:swap`) sirve Inter y Playfair Display (latin+latin-ext, una sola woff2 variable por familia). Font Awesome en `static/fontawesome/` (all.min.css + webfonts). **Ya NO** se carga Google Fonts ni Font Awesome CDN en `base.html`. Tras cambios en `static`, correr `collectstatic`.
 
 ### ⏳ Pendiente — CDN de imágenes responsivas
 El hero (LCP, corset-corazon 1080x1309 / ~92 KB) aún se sirve a tamaño completo. Para servir variantes 288/627/1200 con `srcset` como la tarjeta, elegir y configurar:
