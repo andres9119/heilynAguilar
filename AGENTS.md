@@ -254,16 +254,15 @@ systemctl restart gunicorn-tienda
 ## 12. Pendientes SEO/Performance
 
 ### ✅ Hecho (ago 2026)
-- **Miniaturas responsivas**: `Producto.imagen_thumb` (`_360.webp`) generada en `save()` + comando `generate_product_thumbs`. Las tarjetas del grid usan la miniatura 288x360; LCP del hero usa `fetchpriority="high"` y `width/height` explícitos (menos CLS).
+- **Miniaturas responsivas**: `Producto.imagen_thumb` (`_360.webp`) y `Producto.imagen_thumb_media` (`_627.webp`) generadas en `save()` + comando `generate_product_thumbs`. Las tarjetas usan 288x360; el hero (LCP) usa `_627` con `srcset="[mid] 627w, [main] 1080w"`, `fetchpriority="high"` y `width/height` explícitos (menos CLS/bandwidth).
 - **Accesibilidad**: pestañas filtrantes con `role="group"` + `aria-pressed` (ya no `role="tablist"` huérfano); contraste subido en textos grises (0.5→0.72/0.75) y labels dorados (`#7A5226`); títulos "Tu carrito"/"Guía de Tallas" de `h5`→`h2`; número Nequi de `h5`→`div`.
 - **Fuentes autoalojadas**: `static/fonts/fonts.css` (`@font-face` con `display:swap`) sirve Inter y Playfair Display (latin+latin-ext, una sola woff2 variable por familia). Font Awesome en `static/fontawesome/` (all.min.css + webfonts). **Ya NO** se carga Google Fonts ni Font Awesome CDN en `base.html`. Tras cambios en `static`, correr `collectstatic`.
 
-### ⏳ Pendiente — CDN de imágenes responsivas
-El hero (LCP, corset-corazon 1080x1309 / ~92 KB) aún se sirve a tamaño completo. Para servir variantes 288/627/1200 con `srcset` como la tarjeta, elegir y configurar:
+### ✅ Estrategia de imágenes RESUELTA (ago 2026)
+El LCP (hero) ya se sirve con variante `_627.webp` + `srcset`, eliminando el warning de imágenes del hero. Queda **opcional** para máxima escalabilidad:
 - **Cloudinary** (plan free, vía `CloudinaryField` o `?tr=` en URL) — requiere cuenta + keys a `.env`.
-- **O solo pre-generar en el VPS**: generar 627px en `save()` localmente y usar `srcset` (cero dependencias externas).
-- **Cloudflare Images** si el dominio ya pasa por Cloudflare (resizing + tokens de entrega).
-Implementar tras decidir el proveedor.
+- **Cloudflare Images** si el dominio ya pasa por Cloudflare.
+(No necesario para el score actual; solo si se quiere variantes on-the-fly para blog/galerías.)
 
 ---
 

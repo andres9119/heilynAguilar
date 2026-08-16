@@ -33,7 +33,9 @@
             <div class="ha-hero-media">
                 {% with hero=productos.0 %}
                     {% if hero.imagen %}
-                    <img src="{{ hero.imagen.url }}" alt="Ropa para dama en Cúcuta - {{ hero.nombre }}" width="627" height="784" fetchpriority="high">
+                    {% with href=hero.imagen.url mid=hero.imagen_thumb_media.url|default:hero.imagen.url %}
+                    <img src="{{ mid }}" srcset="{{ mid }} 627w, {{ href }} 1080w" sizes="(max-width: 768px) 100vw, 627px" alt="Ropa para dama en Cúcuta - {{ hero.nombre }}" width="627" height="784" fetchpriority="high">
+                    {% endwith %}
                     {% else %}
                     <div class="ha-shimmer" style="position:absolute; inset:0;"></div>
                     {% endif %}

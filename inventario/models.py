@@ -38,6 +38,7 @@ class Producto(models.Model):
     categoria = models.CharField(max_length=50, choices=CATEGORIAS, blank=True, null=True)
     imagen = models.ImageField(upload_to='productos/', blank=True, null=True, help_text="Imagen principal")
     imagen_thumb = models.ImageField(upload_to='productos/', blank=True, null=True, help_text="Miniatura responsiva (auto)")
+    imagen_thumb_media = models.ImageField(upload_to='productos/', blank=True, null=True, help_text="Variante media 627px (auto)")
     slug = models.SlugField(max_length=200, unique=True, blank=True, null=True)
     fecha_ingreso = models.DateField(auto_now_add=True)
     activo = models.BooleanField(default=True)
@@ -78,6 +79,19 @@ class Producto(models.Model):
                 thumb_out.seek(0)
                 base = os.path.splitext(self.imagen.name)[0]
                 self.imagen_thumb.save(base + "_360.webp", ContentFile(thumb_out.read()), save=False)
+
+            # Variante media 627px para el hero / LCP (optimiza el render del LCP)
+            if not self.imagen_thumb_media:
+                src_m = Image.open(self.imagen)
+                if src_m.mode in ("RGBA", "P"):
+                    src_m = src_m.convert("RGB")
+                if src_m.width > 627:
+                    src_m.thumbnail((627, int((627 * src_m.height) / src_m.width)), Image.LANCZOS)
+                mid_out = BytesIO()
+                src_m.save(mid_out, format='WebP', quality=82)
+                mid_out.seek(0)
+                base = os.path.splitext(self.imagen.name)[0]
+                self.imagen_thumb_media.save(base + "_627.webp", ContentFile(mid_out.read()), save=False)
             
         if not self.slug:
             base_slug = slugify(self.nombre)
