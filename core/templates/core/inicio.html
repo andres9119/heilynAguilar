@@ -255,7 +255,7 @@
             {% for producto in productos|slice:":6" %}
             <a class="ha-community-item" href="{% url 'detalle_producto' producto.slug %}">
                 {% if producto.imagen %}
-                <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" loading="lazy">
+                <img src="{{ producto.imagen_thumb.url|default:producto.imagen.url }}" alt="{{ producto.nombre }}" width="288" height="360" loading="lazy">
                 {% else %}
                 <div class="ha-shimmer" style="position:absolute; inset:0;"></div>
                 {% endif %}

@@ -401,7 +401,7 @@ h1, h2, h3, h4, h5, h6, .ha-serif {
 @media (min-width: 768px) { .ha-section { padding: 112px 0; } }
 .ha-section-head { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
 @media (min-width: 768px) { .ha-section-head { flex-direction: row; align-items: flex-end; justify-content: space-between; } }
-.ha-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; color: #9C6F3F; margin-bottom: 12px; }
+.ha-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; color: #7A5226; margin-bottom: 12px; }
 .ha-title { font-size: 36px; line-height: 0.95; letter-spacing: -0.02em; font-weight: 500; }
 @media (min-width: 768px) { .ha-title { font-size: 52px; } }
 .ha-lead { margin-top: 12px; font-size: 14.5px; color: rgba(0,0,0,0.55); max-width: 48ch; line-height: 1.6; }
