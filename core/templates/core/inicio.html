@@ -21,19 +21,19 @@
                 <div class="ha-hero-trust">
                     <div class="ha-trust-item">
                         <strong>+1200 clientas felices</strong><br>
-                        <span style="color:rgba(0,0,0,0.5);">Heilyn Store</span>
+                        <span style="color:rgba(0,0,0,0.72);">Heilyn Store</span>
                     </div>
                     <div class="ha-trust-divider"></div>
                     <div class="ha-trust-item">
                         <strong>Envío 24-48h</strong><br>
-                        <span style="color:rgba(0,0,0,0.5);">Todo Colombia</span>
+                        <span style="color:rgba(0,0,0,0.72);">Todo Colombia</span>
                     </div>
                 </div>
             </div>
             <div class="ha-hero-media">
                 {% with hero=productos.0 %}
                     {% if hero.imagen %}
-                    <img src="{{ hero.imagen.url }}" alt="Ropa para dama en Cúcuta - {{ hero.nombre }}">
+                    <img src="{{ hero.imagen.url }}" alt="Ropa para dama en Cúcuta - {{ hero.nombre }}" width="627" height="784" fetchpriority="high">
                     {% else %}
                     <div class="ha-shimmer" style="position:absolute; inset:0;"></div>
                     {% endif %}
@@ -46,7 +46,7 @@
                         {{ hero.nombre|first|upper }}
                     </div>
                     <div>
-                        <div style="font-size:11px; letter-spacing:0.14em; text-transform:uppercase; font-weight:600; color:rgba(0,0,0,0.5);">Best Seller</div>
+                        <div style="font-size:11px; letter-spacing:0.14em; text-transform:uppercase; font-weight:600; color:rgba(0,0,0,0.72);">Best Seller</div>
                         <div class="ha-serif" style="font-size:16px; font-weight:500; line-height:1.2;">{{ hero.nombre }}</div>
                     </div>
                 </div>
@@ -87,10 +87,10 @@
                 <h2 class="ha-title">Nuestros <em class="ha-italic">Must-Haves</em></h2>
                 <p class="ha-lead">Piezas limitadas que se agotan en días. Diseños que moldean, estilizan y empoderan.</p>
             </div>
-            <div class="ha-tabs" id="haTabs" role="tablist" aria-label="Filtrar por categoría">
-                <button type="button" class="ha-tab active" data-cat="">Todos</button>
+            <div class="ha-tabs" id="haTabs" role="group" aria-label="Filtrar por categoría">
+                <button type="button" class="ha-tab active" data-cat="" aria-pressed="true">Todos</button>
                 {% for cat in categorias %}
-                <button type="button" class="ha-tab" data-cat="{{ cat }}">{{ cat }}</button>
+                <button type="button" class="ha-tab" data-cat="{{ cat }}" aria-pressed="false">{{ cat }}</button>
                 {% endfor %}
             </div>
         </div>
@@ -124,7 +124,7 @@
                     <div class="ha-card-media">
                         <a href="{% url 'detalle_producto' producto.slug %}">
                             {% if producto.imagen %}
-<img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }} - Ropa para dama en Cúcuta" loading="lazy">
+<img src="{{ producto.imagen_thumb.url|default:producto.imagen.url }}" alt="{{ producto.nombre }} - Ropa para dama en Cúcuta" width="288" height="360" loading="lazy">
                             {% else %}
                             <div class="ha-card-noimg"><i class="fas fa-image"></i></div>
                             {% endif %}
@@ -201,7 +201,7 @@
                     <div style="background:rgba(255,255,255,0.85); backdrop-filter:blur(20px); border-radius:16px; padding:16px; display:flex; align-items:center; justify-content:space-between; border:1px solid rgba(255,255,255,0.6);">
                         <div>
                             <div style="font-weight:600; letter-spacing:0.14em; text-transform:uppercase; font-size:12px;">Heilyn Aguilar Store</div>
-                            <div style="color:rgba(0,0,0,0.5); font-size:12px;">Cúcuta • Desde 2023</div>
+                            <div style="color:rgba(0,0,0,0.72); font-size:12px;">Cúcuta • Desde 2023</div>
                         </div>
                         <span style="font-size:11px; padding:6px 12px; border-radius:999px; background:#111; color:#fff; letter-spacing:0.05em; text-transform:uppercase;">Drop limitado</span>
                     </div>
@@ -211,7 +211,7 @@
         <div>
             <div class="ha-label">Nuestra Esencia</div>
             <h2 class="ha-title">No vendemos telas, <em class="ha-italic">diseñamos Must-Haves.</em></h2>
-            <p style="margin-top:24px; font-size:16px; line-height:1.75; color:rgba(0,0,0,0.6);">
+            <p style="margin-top:24px; font-size:16px; line-height:1.75; color:rgba(0,0,0,0.75);">
                 Nacida en el vibrante entorno de la moda en Cúcuta, <strong>HEILYN AGUILAR STORE</strong> es una marca emergente creada exclusivamente para inspirar fuerza, empoderamiento femenino y muchísima elegancia diaria.
             </p>
             <div class="ha-esencia-list">
@@ -232,7 +232,7 @@
         <div class="ha-section-head">
             <div>
                 <h2 class="ha-title" style="margin-bottom:8px;">NUESTRA COMUNIDAD</h2>
-                <div style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(0,0,0,0.5);">Suscríbete y etiqueta @HeilynAguilarStore</div>
+                <div style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(0,0,0,0.72);">Suscríbete y etiqueta @HeilynAguilarStore</div>
             </div>
             <a class="ha-btn ha-btn-outline" style="width:fit-content;" href="https://www.instagram.com/byheilynaguilar?igsh=ZHlydmE0ZGh3cDgz&utm_source=qr" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> Seguir en Instagram</a>
         </div>
@@ -345,10 +345,10 @@
 <section class="ha-section" style="padding-top:0;">
     <div class="ha-container" style="max-width:1000px;">
         <h2 class="ha-title" style="font-size:28px; line-height:1.2; margin-bottom:16px;">Tu mejor opción en Moda para Dama en Cúcuta</h2>
-        <p style="font-size:1.05rem; line-height:1.8; color:rgba(0,0,0,0.65);">
+        <p style="font-size:1.05rem; line-height:1.8; color:rgba(0,0,0,0.78);">
             En <strong>Heilyn Aguilar Store</strong> entendemos que buscas la mejor <strong>ropa para mujer en Cúcuta</strong>. Somos una <strong>tienda virtual</strong> comprometida con la elegancia y la modernidad. Nuestra colección de <strong>moda para dama en Cúcuta</strong> incluye <strong>bodys</strong>, <strong>corsets</strong>, <strong>tops</strong>, <strong>faldas</strong> y <strong>denim premium</strong>, diseñados para resaltar tu estilo único y tu silueta. Disfruta de la comodidad de <strong>comprar ropa online en Cúcuta</strong> con envíos rápidos a todo Colombia y la seguridad que solo una marca líder te puede ofrecer.
         </p>
-        <p class="mb-1" style="font-size:1.05rem; line-height:1.8; color:rgba(0,0,0,0.65);">
+        <p class="mb-1" style="font-size:1.05rem; line-height:1.8; color:rgba(0,0,0,0.78);">
             <a href="{% url 'blog_lista' %}" class="text-dark text-decoration-underline">Descubre nuestras guías de outfits para el clima de Cúcuta</a> y arma looks con las prendas que más moldean. Heilyn Aguilar Store: <strong>moda femenina en Cúcuta</strong> que empodera.
         </p>
     </div>
@@ -364,10 +364,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const urlParams = new URLSearchParams(window.location.search);
         const activeCat = urlParams.get('categoria') || '';
         tabs.forEach(tab => {
-            tab.classList.toggle('active', tab.dataset.cat === activeCat);
+            const isActive = tab.dataset.cat === activeCat;
+            tab.classList.toggle('active', isActive);
+            tab.setAttribute('aria-pressed', isActive ? 'true' : 'false');
             tab.addEventListener('click', function() {
-                tabs.forEach(t => t.classList.remove('active'));
+                tabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-pressed', 'false');
+                });
                 this.classList.add('active');
+                this.setAttribute('aria-pressed', 'true');
                 const catInput = filterForm.querySelector('input[name="categoria"]');
                 if (catInput) catInput.value = this.dataset.cat;
                 updateFilters();

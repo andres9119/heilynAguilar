@@ -37,6 +37,7 @@ class Producto(models.Model):
     precio_costo = models.DecimalField(max_digits=10, decimal_places=2, default=0, help_text="Costo de compra predeterminado")
     categoria = models.CharField(max_length=50, choices=CATEGORIAS, blank=True, null=True)
     imagen = models.ImageField(upload_to='productos/', blank=True, null=True, help_text="Imagen principal")
+    imagen_thumb = models.ImageField(upload_to='productos/', blank=True, null=True, help_text="Miniatura responsiva (auto)")
     slug = models.SlugField(max_length=200, unique=True, blank=True, null=True)
     fecha_ingreso = models.DateField(auto_now_add=True)
     activo = models.BooleanField(default=True)
@@ -64,6 +65,19 @@ class Producto(models.Model):
                 
                 name = os.path.splitext(self.imagen.name)[0] + ".webp"
                 self.imagen.save(name, ContentFile(output.read()), save=False)
+            
+            # Miniatura responsiva 360px para tarjetas y grid (optimiza LCP/bandwidth)
+            if not self.imagen_thumb:
+                src = Image.open(self.imagen)
+                if src.mode in ("RGBA", "P"):
+                    src = src.convert("RGB")
+                if src.width > 360:
+                    src.thumbnail((360, int((360 * src.height) / src.width)), Image.LANCZOS)
+                thumb_out = BytesIO()
+                src.save(thumb_out, format='WebP', quality=80)
+                thumb_out.seek(0)
+                base = os.path.splitext(self.imagen.name)[0]
+                self.imagen_thumb.save(base + "_360.webp", ContentFile(thumb_out.read()), save=False)
             
         if not self.slug:
             base_slug = slugify(self.nombre)
