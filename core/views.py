@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from inventario.models import Producto, Talla, Color
-from .models import Banner, ResenaComunidad
+from .models import Banner, ResenaComunidad, ArticuloBlog
 
 def inicio(request):
-    productos = Producto.objects.filter(activo=True).distinct()
+    productos = Producto.objects.filter(activo=True).prefetch_related('variaciones__talla', 'variaciones__color').distinct()
     
     # Filtros
     q = request.GET.get('q')
@@ -37,7 +37,10 @@ def inicio(request):
     })
 
 def detalle_producto(request, slug):
-    producto = get_object_or_404(Producto, slug=slug, activo=True)
+    producto = get_object_or_404(
+        Producto.objects.prefetch_related('variaciones__talla', 'variaciones__color', 'imagenes'),
+        slug=slug, activo=True
+    )
     return render(request, 'core/detalle_producto.html', {'producto': producto})
 
 def contacto(request):
@@ -63,3 +66,11 @@ def beneficios(request):
 
 def tallas(request):
     return render(request, 'core/tallas.html')
+
+def blog_lista(request):
+    articulos = ArticuloBlog.objects.filter(activo=True)
+    return render(request, 'core/blog_lista.html', {'articulos': articulos})
+
+def blog_detalle(request, slug):
+    articulo = get_object_or_404(ArticuloBlog, slug=slug, activo=True)
+    return render(request, 'core/blog_detalle.html', {'articulo': articulo})

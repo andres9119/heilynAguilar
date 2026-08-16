@@ -31,3 +31,32 @@ class ResenaComunidad(models.Model):
 
     def __str__(self):
         return f"Reseña de {self.nombre_cliente}"
+
+class ArticuloBlog(models.Model):
+    titulo = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=220, unique=True, blank=True, null=True)
+    resumen = models.CharField(max_length=300, help_text="Aparece en la lista y en la meta descripción")
+    contenido = models.TextField(help_text="Contenido del artículo. Los saltos de línea generan párrafos.")
+    imagen = models.ImageField(upload_to='blog/', blank=True, null=True)
+    fecha_publicacion = models.DateTimeField(auto_now_add=True)
+    activo = models.BooleanField(default=True, help_text="Desmarcar para ocultar el artículo")
+
+    class Meta:
+        ordering = ['-fecha_publicacion']
+        verbose_name = "Artículo de Blog"
+        verbose_name_plural = "Artículos de Blog"
+
+    def __str__(self):
+        return self.titulo
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            from django.utils.text import slugify
+            base_slug = slugify(self.titulo)
+            slug = base_slug
+            counter = 1
+            while ArticuloBlog.objects.filter(slug=slug).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+            self.slug = slug
+        super().save(*args, **kwargs)

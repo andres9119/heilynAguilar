@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static humanize %}
+
+{% block title %}{{ articulo.titulo }} | Moda para Dama en Cúcuta | Heilyn Aguilar Store{% endblock %}
+{% block meta_description %}{{ articulo.resumen }}{% endblock %}
+{% block og_title %}{{ articulo.titulo }} | Heilyn Aguilar Store{% endblock %}
+{% block og_description %}{{ articulo.resumen }}{% endblock %}
+{% if articulo.imagen %}{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{{ articulo.imagen.url }}{% endblock %}{% endif %}
+{% block canonical %}{{ request.scheme }}://{{ request.get_host }}{% url 'blog_detalle' articulo.slug %}{% endblock %}
+
+{% block content %}
+<article class="container py-5 mt-5" style="max-width:800px;">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb" style="font-size:0.75rem; letter-spacing:1px;">
+            <li class="breadcrumb-item"><a href="{% url 'inicio' %}" class="text-decoration-none text-muted">INICIO</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'blog_lista' %}" class="text-decoration-none text-muted">BLOG</a></li>
+            <li class="breadcrumb-item active text-dark" aria-current="page">{{ articulo.titulo|upper }}</li>
+        </ol>
+    </nav>
+
+    <h1 class="display-5 fw-bold mb-3" style="font-family:var(--ha-serif);">{{ articulo.titulo }}</h1>
+    <div class="ha-card-cat mb-4">{{ articulo.fecha_publicacion|date:"d M Y" }} • Cúcuta, Norte de Santander</div>
+
+    {% if articulo.imagen %}
+    <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }} - Ropa para dama en Cúcuta" class="w-100 mb-4" style="border-radius:16px; max-height:420px; object-fit:cover;">
+    {% endif %}
+
+    <div class="ha-blog-content" style="font-size:1.05rem; line-height:1.8; color:rgba(0,0,0,0.7);">
+        {{ articulo.contenido|linebreaks }}
+    </div>
+
+    <div class="mt-5 pt-4 border-top">
+        <a href="https://wa.me/573123080861" target="_blank" rel="noopener noreferrer" class="ha-btn ha-btn-dark">
+            <i class="fab fa-whatsapp"></i> Asesoría y compras por WhatsApp
+        </a>
+        <a href="{% url 'inicio' %}#tienda" class="ha-btn ha-btn-outline">Ver colección</a>
+    </div>
+</article>
+{% endblock %}

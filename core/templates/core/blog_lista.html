@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static humanize %}
+
+{% block title %}Blog de Moda para Dama en Cúcuta | Heilyn Aguilar Store{% endblock %}
+{% block meta_description %}Tips, tendencias y guías de moda para mujer en Cúcuta. Aprende a armar tus outfits con bodys, corsets y denim de Heilyn Aguilar Store.{% endblock %}
+
+{% block content %}
+<div class="container py-5 mt-5" style="max-width:1000px;">
+    <div class="mb-5 text-center">
+        <div class="ha-label">Guías y tendencias</div>
+        <h1 class="ha-title" style="font-size:34px;">Moda para Dama en Cúcuta</h1>
+        <p class="ha-lead" style="max-width:600px; margin:0 auto;">Consejos para armar looks con tu estilo y aprovechar el clima de Cúcuta.</p>
+    </div>
+
+    <div class="row g-4">
+        {% for articulo in articulos %}
+        <div class="col-md-6">
+            <article class="ha-card h-100">
+                <div class="ha-card-media">
+                    <a href="{% url 'blog_detalle' articulo.slug %}">
+                        {% if articulo.imagen %}
+                        <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }} - Moda para dama en Cúcuta" loading="lazy" style="width:100%; height:240px; object-fit:cover;">
+                        {% else %}
+                        <div class="ha-card-noimg"><i class="fas fa-blog"></i></div>
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="ha-card-body">
+                    <div class="ha-card-cat">{{ articulo.fecha_publicacion|date:"d M Y" }}</div>
+                    <h2 class="ha-card-name h5"><a href="{% url 'blog_detalle' articulo.slug %}" class="text-decoration-none text-dark">{{ articulo.titulo }}</a></h2>
+                    <p class="text-muted small mb-3">{{ articulo.resumen|truncatechars:90 }}</p>
+                    <a href="{% url 'blog_detalle' articulo.slug %}" class="ha-btn ha-btn-outline" style="font-size:0.75rem;">Leer más →</a>
+                </div>
+            </article>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <p style="font-family:var(--ha-serif); font-style:italic;">Pronto publicaremos nuestras guías de moda.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

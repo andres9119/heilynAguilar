@@ -1,12 +1,13 @@
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 from inventario.models import Producto
+from .models import ArticuloBlog
 
 class StaticViewSitemap(Sitemap):
     changefreq = 'daily'
 
     def items(self):
-        return ['inicio', 'contacto', 'politicas', 'terminos', 'faq', 'devoluciones', 'nosotros', 'beneficios', 'tallas']
+        return ['inicio', 'contacto', 'politicas', 'terminos', 'faq', 'devoluciones', 'nosotros', 'beneficios', 'tallas', 'blog_lista']
 
     def location(self, item):
         return reverse(item)
@@ -32,3 +33,16 @@ class ProductSitemap(Sitemap):
 
     def location(self, obj):
         return reverse('detalle_producto', args=[obj.slug])
+
+class BlogSitemap(Sitemap):
+    changefreq = "weekly"
+    priority = 0.6
+
+    def items(self):
+        return ArticuloBlog.objects.filter(activo=True)
+
+    def lastmod(self, obj):
+        return obj.fecha_publicacion
+
+    def location(self, obj):
+        return reverse('blog_detalle', args=[obj.slug])

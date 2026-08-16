@@ -12,8 +12,8 @@
             <div class="ha-hero-copy">
                 <div class="ha-eyebrow"><span class="ha-eyebrow-line"></span> <span>Nueva Colección</span> <i
                         class="fas fa-wand-magic-sparkles ha-gold"></i></div>
-                <h1 class="ha-hero-title">OUTFITS <em class="ha-italic">EN TENDENCIA</em></h1>
-                <p class="ha-hero-sub">Diseñamos prendas que resaltan las curvas latinas con texturas premium y tallajes impecables. Exclusividad garantizada.</p>
+                <h1 class="ha-hero-title">ROPA PARA DAMA <em class="ha-italic">EN CÚCUTA</em></h1>
+                <p class="ha-hero-sub">Ropa para dama en Cúcuta: bodys, corsets y outfits en tendencia que moldean tu silueta. Tienda virtual con tallaje latino y envíos a todo Colombia en 24-48h.</p>
                 <div class="ha-hero-cta">
                     <a href="#tienda" class="ha-btn ha-btn-dark">Ver colección</a>
                     <a href="https://wa.me/573123080861" target="_blank" rel="noopener noreferrer" class="ha-btn ha-btn-outline">Hablar con asesora</a>
@@ -124,7 +124,7 @@
                     <div class="ha-card-media">
                         <a href="{% url 'detalle_producto' producto.slug %}">
                             {% if producto.imagen %}
-                            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" loading="lazy">
+<img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }} - Ropa para dama en Cúcuta" loading="lazy">
                             {% else %}
                             <div class="ha-card-noimg"><i class="fas fa-image"></i></div>
                             {% endif %}
@@ -346,7 +346,10 @@
     <div class="ha-container" style="max-width:1000px;">
         <h2 class="ha-title" style="font-size:28px; line-height:1.2; margin-bottom:16px;">Tu mejor opción en Moda para Dama en Cúcuta</h2>
         <p style="font-size:1.05rem; line-height:1.8; color:rgba(0,0,0,0.65);">
-            En <strong>Heilyn Aguilar Store</strong> entendemos que buscas el mejor <strong>outfit para mujer en Cúcuta</strong>. Somos una <strong>tienda virtual</strong> comprometida con la elegancia y la modernidad. Nuestra colección de <strong>moda para dama en Cúcuta</strong> incluye desde blusas sofisticadas hasta jeans denim premium, diseñados para resaltar tu estilo único. Disfruta de la comodidad de comprar online con envíos rápidos a todo Colombia y la seguridad que solo una marca líder te puede ofrecer.
+            En <strong>Heilyn Aguilar Store</strong> entendemos que buscas la mejor <strong>ropa para mujer en Cúcuta</strong>. Somos una <strong>tienda virtual</strong> comprometida con la elegancia y la modernidad. Nuestra colección de <strong>moda para dama en Cúcuta</strong> incluye <strong>bodys</strong>, <strong>corsets</strong>, <strong>tops</strong>, <strong>faldas</strong> y <strong>denim premium</strong>, diseñados para resaltar tu estilo único y tu silueta. Disfruta de la comodidad de <strong>comprar ropa online en Cúcuta</strong> con envíos rápidos a todo Colombia y la seguridad que solo una marca líder te puede ofrecer.
+        </p>
+        <p class="mb-1" style="font-size:1.05rem; line-height:1.8; color:rgba(0,0,0,0.65);">
+            <a href="{% url 'blog_lista' %}" class="text-dark text-decoration-underline">Descubre nuestras guías de outfits para el clima de Cúcuta</a> y arma looks con las prendas que más moldean. Heilyn Aguilar Store: <strong>moda femenina en Cúcuta</strong> que empodera.
         </p>
     </div>
 </section>

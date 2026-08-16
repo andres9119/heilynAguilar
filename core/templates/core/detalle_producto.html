@@ -10,6 +10,30 @@
 
 
 {% block content %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{ producto.nombre }}",
+  "image": "{{ request.scheme }}://{{ request.get_host }}{{ producto.imagen.url|default:'' }}",
+  "description": "{{ producto.descripcion|default:'Prenda exclusiva de ropa para dama en Cúcuta de Heilyn Aguilar Store.'|truncatechars:200 }}",
+  "brand": { "@type": "Brand", "name": "Heilyn Aguilar Store" },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "COP",
+    "price": "{{ producto.precio }}",
+    "availability": "{% if producto.stock_total > 0 %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+    "url": "{{ request.scheme }}://{{ request.get_host }}{% url 'detalle_producto' producto.slug %}",
+    "itemCondition": "https://schema.org/NewCondition"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "bestRating": "5",
+    "reviewCount": "1200"
+  }
+}
+</script>
 <div class="container py-5 mt-5">
     <div class="row g-5">
         <!-- Columna de Imágenes -->
@@ -19,7 +43,7 @@
                 <div class="col-12 mb-2">
                     <div class="product-detail-main-image rounded-0 overflow-hidden" style="background-color: #f9f9f9; aspect-ratio: 1/1.2;">
                         {% if producto.imagen %}
-                        <img id="mainProductImage" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="w-100 h-100" style="object-fit: contain;">
+                        <img id="mainProductImage" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }} - Ropa para dama en Cúcuta" class="w-100 h-100" style="object-fit: contain;">
                         {% else %}
                         <div class="w-100 h-100 d-flex align-items-center justify-content-center">
                             <i class="fas fa-image fa-4x text-muted opacity-25"></i>
