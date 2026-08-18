@@ -139,7 +139,7 @@
     <!-- Fuentes (Inter + Playfair) autoalojadas -->
     <link rel="stylesheet" href="{% static 'fonts/fonts.css' %}">
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="{% static 'css/mejorada.css' %}?v=20260817b">
+    <link rel="stylesheet" href="{% static 'css/mejorada.css' %}?v=20260817c">
 </head>
 
 <body class="ha-theme">
@@ -155,7 +155,10 @@
         <div class="ha-container ha-header-inner">
             <div class="d-flex align-items-center" style="gap:40px;">
                 <button class="ha-burger" id="haBurger" aria-label="Menú"><i class="fas fa-bars"></i></button>
-                <a class="ha-logo" href="{% url 'inicio' %}">HEILYN AGUILAR</a>
+                <a class="ha-logo" href="{% url 'inicio' %}">
+                    <img src="{% static 'img/productos/logo-marca.webp' %}" alt="Logo By Heilyn Aguilar" class="ha-logo-img">
+                    <span>ByHeilynAguilar</span>
+                </a>
                 <nav class="ha-nav" aria-label="Principal">
                     <a href="{% url 'inicio' %}">Inicio</a>
                     <a href="{% url 'inicio' %}#tienda">Colección</a>
@@ -180,7 +183,10 @@
     <div class="ha-mobile-menu" id="haMobileMenu">
         <div class="ha-mobile-panel">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <span class="ha-logo" style="font-size:18px;">HEILYN AGUILAR</span>
+                <span class="ha-logo">
+                    <img src="{% static 'img/productos/logo-marca.webp' %}" alt="Logo By Heilyn Aguilar" class="ha-logo-img">
+                    <span>ByHeilynAguilar</span>
+                </span>
                 <button class="ha-modal-close" id="haMobileClose" aria-label="Cerrar"><i class="fas fa-times"></i></button>
             </div>
             <a href="{% url 'inicio' %}">Inicio</a>

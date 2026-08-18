@@ -117,12 +117,22 @@ h1, h2, h3, h4, h5, h6, .ha-serif {
 }
 .ha-logo {
   font-family: var(--ha-serif);
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 700;
   letter-spacing: 0.12em;
   line-height: 1;
   color: var(--ha-ink);
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+.ha-logo-img {
+  width: auto;
+  height: 38px;
+  display: block;
+  flex-shrink: 0;
 }
 @media (min-width: 768px) { .ha-logo { font-size: 24px; } }
 .ha-logo:hover { color: var(--ha-ink); }
