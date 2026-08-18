@@ -46,6 +46,11 @@ class ArticuloBlog(models.Model):
         verbose_name = "Artículo de Blog"
         verbose_name_plural = "Artículos de Blog"
 
+    @property
+    def tiempo_lectura(self):
+        palabras = len(self.contenido.split())
+        return max(1, round(palabras / 200))
+
     def __str__(self):
         return self.titulo
 

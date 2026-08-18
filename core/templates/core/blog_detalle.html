@@ -9,7 +9,7 @@
 {% block canonical %}{{ request.scheme }}://{{ request.get_host }}{% url 'blog_detalle' articulo.slug %}{% endblock %}
 
 {% block content %}
-<article class="container py-5 mt-5" style="max-width:800px;">
+<article class="container py-5 mt-5 ha-blog-single">
     <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb" style="font-size:0.75rem; letter-spacing:1px;">
             <li class="breadcrumb-item"><a href="{% url 'inicio' %}" class="text-decoration-none text-muted">INICIO</a></li>
@@ -18,22 +18,39 @@
         </ol>
     </nav>
 
-    <h1 class="display-5 fw-bold mb-3" style="font-family:var(--ha-serif);">{{ articulo.titulo }}</h1>
-    <div class="ha-card-cat mb-4">{{ articulo.fecha_publicacion|date:"d M Y" }} • Cúcuta, Norte de Santander</div>
+    <div class="ha-blog-heading">
+        <div class="ha-label">Heilyn Aguilar Store</div>
+        <h1 class="display-5 fw-bold mb-3" style="font-family:var(--ha-serif);">{{ articulo.titulo }}</h1>
+        <div class="ha-blog-meta mb-4">
+            <span>{{ articulo.fecha_publicacion|date:"d M Y" }}</span>
+            <span class="ha-blog-dot"></span>
+            <span>{{ articulo.tiempo_lectura }} min de lectura</span>
+            <span class="ha-blog-dot"></span>
+            <span>Cúcuta, Norte de Santander</span>
+        </div>
+    </div>
 
-    {% if articulo.imagen %}
-    <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }} - Ropa para dama en Cúcuta" class="w-100 mb-4" style="border-radius:16px; max-height:420px; object-fit:cover;">
-    {% endif %}
+    <div class="ha-blog-hero">
+        {% if articulo.imagen %}
+        <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }} - Ropa para dama en Cúcuta" width="800" height="1080" loading="eager">
+        {% else %}
+        <div class="ha-blog-noimg"><i class="fas fa-blog"></i></div>
+        {% endif %}
+    </div>
 
-    <div class="ha-blog-content" style="font-size:1.05rem; line-height:1.8; color:rgba(0,0,0,0.7);">
+    <div class="ha-blog-content" style="font-size:1.05rem; line-height:1.85; color:rgba(0,0,0,0.72);">
         {{ articulo.contenido|linebreaks }}
     </div>
 
-    <div class="mt-5 pt-4 border-top">
-        <a href="https://wa.me/573123080861" target="_blank" rel="noopener noreferrer" class="ha-btn ha-btn-dark">
-            <i class="fab fa-whatsapp"></i> Asesoría y compras por WhatsApp
-        </a>
-        <a href="{% url 'inicio' %}#tienda" class="ha-btn ha-btn-outline">Ver colección</a>
+    <div class="ha-blog-cta mt-5">
+        <h3 class="ha-blog-cta-title">¿Te gustó esta guía?</h3>
+        <p class="ha-blog-cta-text">Armemos tu outfit ideal. Escríbenos y te asesoramos con tallas, colores y envíos en Cúcuta.</p>
+        <div class="d-flex flex-wrap gap-2 justify-content-center">
+            <a href="https://wa.me/573123080861" target="_blank" rel="noopener noreferrer" class="ha-btn ha-btn-dark">
+                <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
+            </a>
+            <a href="{% url 'inicio' %}#tienda" class="ha-btn ha-btn-outline">Ver colección</a>
+        </div>
     </div>
 </article>
 {% endblock %}

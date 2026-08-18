@@ -5,39 +5,68 @@
 {% block meta_description %}Tips, tendencias y guías de moda para mujer en Cúcuta. Aprende a armar tus outfits con bodys, corsets y denim de Heilyn Aguilar Store.{% endblock %}
 
 {% block content %}
-<div class="container py-5 mt-5" style="max-width:1000px;">
-    <div class="mb-5 text-center">
+<div class="container py-5 mt-5 ha-blog-list">
+    <div class="ha-blog-head text-center mb-5">
         <div class="ha-label">Guías y tendencias</div>
         <h1 class="ha-title" style="font-size:34px;">Moda para Dama en Cúcuta</h1>
-        <p class="ha-lead" style="max-width:600px; margin:0 auto;">Consejos para armar looks con tu estilo y aprovechar el clima de Cúcuta.</p>
+        <p class="ha-lead" style="max-width:560px; margin:0 auto;">Consejos para armar looks con tu estilo y aprovechar el clima de Cúcuta.</p>
     </div>
 
+    {% if articulos %}
+    {% with articulos.0 as destacado %}
+    <a href="{% url 'blog_detalle' destacado.slug %}" class="ha-blog-featured text-decoration-none">
+        <div class="ha-blog-media">
+            {% if destacado.imagen %}
+            <img src="{{ destacado.imagen.url }}" alt="{{ destacado.titulo }} - Moda para dama en Cúcuta" loading="eager">
+            {% else %}
+            <div class="ha-blog-noimg"><i class="fas fa-blog"></i></div>
+            {% endif %}
+        </div>
+        <div class="ha-blog-featured-body">
+            <div class="ha-blog-tag-static">Recomendado</div>
+            <h2 class="ha-blog-featured-title">{{ destacado.titulo }}</h2>
+            <p class="ha-blog-featured-excerpt text-muted">{{ destacado.resumen|truncatechars:140 }}</p>
+            <div class="ha-blog-meta">
+                <span>{{ destacado.fecha_publicacion|date:"d M Y" }}</span>
+                <span class="ha-blog-dot"></span>
+                <span>{{ destacado.tiempo_lectura }} min de lectura</span>
+            </div>
+            <span class="ha-blog-link">Leer artículo <i class="fas fa-arrow-right"></i></span>
+        </div>
+    </a>
+    {% endwith %}
+
     <div class="row g-4">
-        {% for articulo in articulos %}
-        <div class="col-md-6">
-            <article class="ha-card h-100">
-                <div class="ha-card-media">
-                    <a href="{% url 'blog_detalle' articulo.slug %}">
+        {% for articulo in articulos|slice:"1:" %}
+        <div class="col-md-6 col-lg-4">
+            <article class="ha-blog-card h-100">
+                <div class="ha-blog-media">
+                    <a href="{% url 'blog_detalle' articulo.slug %}" aria-label="{{ articulo.titulo }}">
                         {% if articulo.imagen %}
-                        <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }} - Moda para dama en Cúcuta" loading="lazy" style="width:100%; height:240px; object-fit:cover;">
+                        <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }} - Moda para dama en Cúcuta" loading="lazy">
                         {% else %}
-                        <div class="ha-card-noimg"><i class="fas fa-blog"></i></div>
+                        <div class="ha-blog-noimg"><i class="fas fa-blog"></i></div>
                         {% endif %}
                     </a>
                 </div>
-                <div class="ha-card-body">
-                    <div class="ha-card-cat">{{ articulo.fecha_publicacion|date:"d M Y" }}</div>
-                    <h2 class="ha-card-name h5"><a href="{% url 'blog_detalle' articulo.slug %}" class="text-decoration-none text-dark">{{ articulo.titulo }}</a></h2>
-                    <p class="text-muted small mb-3">{{ articulo.resumen|truncatechars:90 }}</p>
-                    <a href="{% url 'blog_detalle' articulo.slug %}" class="ha-btn ha-btn-outline" style="font-size:0.75rem;">Leer más →</a>
+                <div class="ha-blog-body">
+                    <div class="ha-blog-meta">
+                        <span>{{ articulo.fecha_publicacion|date:"d M Y" }}</span>
+                        <span class="ha-blog-dot"></span>
+                        <span>{{ articulo.tiempo_lectura }} min</span>
+                    </div>
+                    <h3 class="ha-blog-title"><a href="{% url 'blog_detalle' articulo.slug %}" class="text-decoration-none">{{ articulo.titulo }}</a></h3>
+                    <p class="text-muted small mb-3">{{ articulo.resumen|truncatechars:95 }}</p>
+                    <a href="{% url 'blog_detalle' articulo.slug %}" class="ha-blog-link mt-auto">Leer artículo <i class="fas fa-arrow-right"></i></a>
                 </div>
             </article>
         </div>
-        {% empty %}
-        <div class="col-12 text-center py-5">
-            <p style="font-family:var(--ha-serif); font-style:italic;">Pronto publicaremos nuestras guías de moda.</p>
-        </div>
         {% endfor %}
     </div>
+    {% else %}
+    <div class="text-center py-5">
+        <p style="font-family:var(--ha-serif); font-style:italic;">Pronto publicaremos nuestras guías de moda.</p>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}
