@@ -279,6 +279,13 @@ El LCP (hero) ya se sirve con variante `_627.webp` + `srcset`, eliminando el war
 - **H1 del hero** (`inicio.html`): quitado el `<em class="ha-italic">EN CÚCUTA</em>` → título uniforme (el italic solo estaba a peso 400 y se veía desigual contra el 500 del título).
 - **Contacto/NAP**: número de ventas WhatsApp = `573123080861`; Nequi `312 308 0861`. Usar siempre estos (no inventar teléfonos en plantillas).
 
+### ✅ Rediseño visual del blog (ago 2026)
+- **Lista (`blog_lista.html`)**: contenedor amplio `max-width:1140px`. La primera entrada queda **destacada** a ancho completo (imagen vertical izquierda + texto grande, clase `.ha-blog-featured`); el resto en grid de 3 columnas (`.ha-blog-card`). Imágenes en **ratio vertical 3/4** con `object-fit:cover` y zoom on-hover (pensado para imágenes cargadas verticalmente). Meta: fecha + minutos de lectura.
+- **Detalle (`blog_detalle.html`)**: contenedor `max-width:1120px`, texto `.ha-blog-content` a **980px** (antes 760, se veía estrecho). Hero en **ratio vertical 4/5 centrado y acotado a 780px** para no recortar imágenes verticales ni verse gigante. Drop cap dorado en el primer párrafo + caja CTA `.ha-blog-cta` con fondo crema.
+- **Modelo**: propiedad `tiempo_lectura` en `ArticuloBlog` (len/contenido.split()/200, min 1). Sin migración (es property).
+- **CSS**: nuevas clases `.ha-blog-*` al final de `mejorada.css`.
+- **Versiones de static**: el `?v=` en el link de `mejorada.css` en `base.html` se incrementa manualmente (ej. `20260817c`) cada vez que cambia el CSS, para saltar la cache `immutable` de Cloudflare. ⚠️ Mantener este hábito.
+
 ### 🟡 Google Business Profile (ago 2026)
 - **Creado y publicado** como "byheilynaguilar" (dashboard "Tu negocio en Google"). Ya enlaza web, Instagram (10.8k) y blog.
 - Tareas pendientes de mayor impacto: **subir fotos**, **conseguir las primeras reseñas** (formulario por WhatsApp), **configurar seguimiento de conversiones**.
